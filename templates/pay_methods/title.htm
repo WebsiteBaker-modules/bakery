@@ -1,0 +1,36 @@
+
+<h2 class="mod_bakery_h_f">
+	<img src="{WB_URL}/modules/bakery/images/checkout_steps/step_2.png" alt="{TXT_TAC_AND_PAY_METHOD}" />
+	{TXT_TAC_AND_PAY_METHOD}
+</h2>
+<p id="txt_js_agree" style="display: none;">{TXT_JS_AGREE}</p>
+
+<form action="{SETTING_CONTINUE_URL}" method="post">
+<input type="hidden" name="summary" value="true" />
+
+<table width="98%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td colspan="2">
+			<hr class="mod_bakery_hr_f" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="mod_bakery_agree_tac_f" id="agree_tac">
+			 <input type="{TAC_INPUT_TYPE}" name="agree" id="agree" value="yes" />
+			 {TAC_LINK}
+		</td>
+	</tr>
+	<tr style="display: {DISPLAY_CUST_MSG};">
+		<td colspan="2">
+			<hr class="mod_bakery_hr_f" />
+			<p class="mod_bakery_cust_msg_f">{TXT_ENTER_CUST_MSG}:</p>
+			<textarea name="cust_msg" class="mod_bakery_cust_msg_ta_f">{CUST_MSG}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<hr class="mod_bakery_hr_f" />
+			<p class="mod_bakery_pay_method_f">{TXT_PAY_METHOD}:</p>
+		</td>
+	</tr>
+	<tr>

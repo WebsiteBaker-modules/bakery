@@ -1,0 +1,461 @@
+/*
+  Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
+  Copyright (C) 2007 - 2015, Christoph Marti
+
+  LICENCE TERMS:
+  This module is free software. You can redistribute it and/or modify it 
+  under the terms of the GNU General Public License - version 2 or later, 
+  as published by the Free Software Foundation: http://www.gnu.org/licenses/gpl.html.
+
+  DISCLAIMER:
+  This module is distributed in the hope that it will be useful, 
+  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+  GNU General Public License for more details.
+*/
+
+
+/* Backend Stylesheet Module Bakery */
+/* ******************************** */
+
+/*
+NOTE:
+Modify the HTML of the main page and the item page in the layout section of the Bakery page settings.
+Modify the HTML of the invoice template in the layout section of the Bakery payment methods > select invoice.
+Modify the CSS of the main page and the item page in the frontend stylesheet.
+Modify the CSS of the invoice template and the view order in this stylesheet.
+*/
+
+
+
+/* INVOICE PRINT */
+
+/* General */
+#invoice {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #000000;
+	margin: 0px;
+	background-color: #FFFFFF;
+	padding: 20px;
+	text-align: left;
+	vertical-align: top;
+}
+#button {
+	margin-bottom: 25px;
+}
+#invoice hr {
+	margin: 0;
+	border: 0;
+	border-top: 1px solid #A0A0A0;
+	height: 1px;
+}
+#invoice h1 {
+	text-align: left;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+#invoice h2 {
+	font-size: 15px;
+	margin: 5px 0px 5px 0px;
+	float: left;
+}
+#invoice .mod_bakery_logo_b {
+	text-align: center;
+}
+#invoice .mod_bakery_shop_address_b {
+	text-align: center;
+	letter-spacing: 0.3em;
+}
+#invoice .mod_bakery_cust_address_b {
+
+}
+#invoice p.mod_bakery_invoice_no_b {
+	font-size: 11px;
+	text-align: right;
+	margin-right: 19px;
+}
+#invoice table.mod_bakery_invoice_no_b {
+	width: 45%;
+	float: right;
+	margin-bottom: 20px;
+	border: none;
+	font-size: 12px;
+}
+#invoice table.mod_bakery_invoice_no_b td:first-child {
+	font-weight: bold;
+	padding-right: 12px;
+}
+#invoice .mod_bakery_thank_you_b {
+	font-size: 15px;
+	margin: 5px 0px 5px 0px;
+}
+#invoice .mod_bakery_pay_invoice_b {
+	font-size: 15px;
+	margin: 5px 0px 5px 0px;
+}
+#invoice .mod_bakery_bank_account_b {
+	font-size: 12px;
+	margin-left: 20px;
+}
+
+
+
+
+/* VIEW ORDER */
+
+/* General */
+#order table {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	border: 1px dotted #BCBCBC;
+	margin: 0 auto;
+}
+#order hr {
+	margin: 0;
+	border: 0;
+	border-top: 1px dotted #BCBCBC;
+	height: 1px;
+}
+#order .mod_bakery_order_b {
+	font-weight: bold;
+	margin-left: 12px;
+}
+#order .mod_bakery_address_b {
+	font-weight: bold;
+}
+#order .mod_bakery_tax_no_b {
+	font-weight: bold;
+}
+
+
+
+
+/* INVOICE PRINT and VIEW ORDER */
+
+/* Error */
+.mod_bakery_error_b {
+	width: 260px;
+	margin: 150px auto;
+	padding: 15px 0;
+	text-align: center;
+	color: red;
+	border: solid 1px red;
+	background-color: #FFDCD9;
+	background-image: url(images/error.gif);
+	background-position: 15px center;
+	background-repeat: no-repeat;
+}
+	
+/* INVOICE table header */
+.mod_bakery_invoice_th_sku_b {
+	text-align: left;
+}
+.mod_bakery_invoice_th_name_b {
+	text-align: center;
+}
+.mod_bakery_invoice_th_quantity_b {
+	text-align: right;
+}
+.mod_bakery_invoice_th_price_b {
+	text-align: right;
+}
+.mod_bakery_invoice_th_shipping_b {
+	text-align: right;
+}
+.mod_bakery_invoice_th_tax_rate_b {
+	text-align: right;
+}
+.mod_bakery_invoice_th_sum_b {
+	text-align: right;
+}
+
+/* INVOICE table body */
+.mod_bakery_invoice_td_sku_b {
+	text-align: left;
+	width: 10%;
+}
+.mod_bakery_invoice_td_name_b {
+	text-align: center;
+}
+.mod_bakery_invoice_td_quantity_b {
+	text-align: right;
+	width: 12%;
+}
+.mod_bakery_invoice_td_price_b {
+	text-align: right;
+	width: 12%;
+}
+.mod_bakery_invoice_td_shipping_b {
+	text-align: right;
+	width: 12%;
+}
+.mod_bakery_invoice_td_tax_rate_b {
+	text-align: right;
+	width: 5%;
+}
+.mod_bakery_invoice_td_sum_b {
+	text-align: right;
+	width: 20%;
+}
+
+/* INVOICE table details */
+.mod_bakery_invoice_currency_b {
+	font-size: 9px;
+	font-weight: normal;
+}
+.mod_bakery_invoice_tax_rate_b {
+	font-size: 9px;
+	font-weight: normal;
+}
+.mod_bakery_invoice_item_b {
+	font-weight: bold;
+}
+.mod_bakery_invoice_subtotal_b {
+	text-align: right;
+	font-weight: bold;
+	line-height: 200%;
+}
+.mod_bakery_invoice_shipping_b {
+	text-align: right;
+	font-weight: bold;
+	line-height: 75%;
+}
+.mod_bakery_invoice_free_shipping_b {
+	text-align: right;
+	font-weight: bold;
+	line-height: 75%;
+	color: #FF0000;
+}
+.mod_bakery_invoice_tax_b {
+	text-align: right;
+	font-weight: bold;
+	line-height: 75%;
+}
+.mod_bakery_invoice_total_b {
+	text-align: right;
+	font-weight: bold;
+	line-height: 300%;
+}
+
+@media print {
+	#button {
+		display: none;
+	}
+}
+
+
+
+
+/* GENERAL */
+
+/* Modify items navigation buttons */
+#mod_bakery_modify_b {
+	background-color: #fbfbfb;
+	background-image: url("images/box_bg.png");
+	background-repeat: repeat-x;
+	background-position: 0 -40px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	padding: 4px;
+	border: solid 1px #bfc9df;
+}
+#mod_bakery_modify_b input {
+	color: #5c6a86;
+	font-size: 10px;
+	font-weight: bold;
+	background-color: #c5cdd6;
+	background-image: url("images/box_bg.png");
+	background-position: 0 -40px;
+	border: solid 1px;
+}
+#mod_bakery_modify_b input:hover {
+	background-image: none;
+}
+
+
+/* Modify items drag&drop table */
+table.mod_bakery_dragndrop_b {
+	background-repeat: repeat-x;
+	margin-bottom: 5px;
+	border: solid 2px #babfca;
+}
+table.mod_bakery_dragndrop_b caption {
+	color: #fff !important;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 160%;
+	background-color: #515d76;
+	background-image: url("images/box_bg.png");
+	background-repeat: repeat-x;
+	text-align: left;
+	margin-top: 8px;
+	padding-top: 4px;
+	padding-left: 10px;
+	height: 35px;
+	border: 1px #515d76;
+}
+table.mod_bakery_dragndrop_b thead td {
+	color: #4c576f;
+	font-weight: bold;
+	background-color: #fff;
+}
+table.mod_bakery_dragndrop_b tbody td {
+	border-bottom: 1px solid #bfc9df;
+}
+table.mod_bakery_dragndrop_b .hilite td {
+	background-color: #DBFBBA !important;
+}
+table.mod_bakery_dragndrop_b thead td,
+table.mod_bakery_dragndrop_b tfoot td {
+	font-size: 11px;
+	background-image: url("images/box_bg.png");
+	background-repeat: repeat-x;
+	background-attachment: scroll;
+	background-position: 0 -40px;
+	border-top: 1px solid #becadb;
+	border-bottom: 1px solid #becadb;
+}
+
+/* Drag&drop specifics */
+table.mod_bakery_dragndrop_b .dragBakeryResult {
+	font-size: 8px;
+	font-family: Courier;
+	text-align: center;
+}
+table.mod_bakery_dragndrop_b .dragdrop_bakery {
+	background-color: #d5dde7;
+	width: 15px;
+}
+table.mod_bakery_dragndrop_b .dragdrop_handle {
+	background-color: #e9eef5;
+	background-image: url("images/dd_grip.png");
+	background-position: center center;
+	cursor: move;
+	padding: 0;
+	width: 20px !important;
+	border-style: solid;
+	border-width: 2px 2px 3px;
+	border-color: #cad2d9 #bac5ce;
+}
+table.mod_bakery_dragndrop_b tr.irow_hover {
+	background-color: #ebf3ff;
+}
+table.mod_bakery_dragndrop_b .move_up,
+table.mod_bakery_dragndrop_b .move_down {
+	width: 16px !important;
+}
+table.mod_bakery_dragndrop_b td.item_id {
+	width: 3%;
+	text-align: right;
+	font-size: 1.6em;
+}
+
+/* Thumb tooltip */
+div.mod_bakery_thumbnail_b {
+	color: #babfca;
+	background-color: #fff;
+	text-align: center;
+	padding: 1px;
+	width: 48px;
+	height: 48px;
+	overflow: hidden;
+	border: solid 2px;
+}
+div.mod_bakery_thumbnail_b img {
+	position: relative;
+	left: 50%;
+	margin-left: -45px;
+}
+p#mod_bakery_preview_b {
+	color: #babfca;
+	background: #fff;
+	display: none;
+	padding: 6px;
+	position: absolute;
+	border: solid 2px;
+	-moz-box-shadow: 5px 5px 11px #585858;
+	-webkit-box-shadow: 5px 5px 11px #585858;
+	box-shadow: 5px 5px 11px #585858;
+}
+
+
+/* General */
+.row_a {
+	
+}
+.row_b {
+	background-color: #EBF3FF;
+}
+.row_a:hover, .row_b:hover {
+	background-color: #E8E8E8;
+}
+.mod_bakery_submit_row_b {
+	background-color: #C1D2EE;
+}
+.mod_bakery_section_header_b {
+	text-align: left;
+	padding: 20px 0 5px 10px;
+	background-color: #C1D2EE;
+}
+.mod_bakery_section_header_b span {
+	font-size: 12px;
+	font-weight: normal;
+}
+.mod_bakery_img_resize_table_b {
+	background-color: #E7F0F6;
+	border: 1px solid #CECECE;
+	margin: 5px;
+}
+.mod_bakery_disabled_b {
+	color: #9D9D9D;
+}
+input[type="submit"], input[type="button"] {
+
+}
+input.mod_bakery_edit_css {
+	width: 200px;
+	float: right;
+	clear: both;
+}
+
+
+
+
+/* PLACEHOLDERS USED IN THE BAKERY TEMPLATES (help.php) */
+
+#mod_bakery_placeholders_b {
+	border-collapse: collapse;
+}
+.mod_bakery_placeholders_header_b {
+	border: none;
+	background-color: #C1D2EE;
+}
+#mod_bakery_placeholders_b th {
+	background-color: #DBEBF2;
+	border: 1px solid #E1E1E1;
+}
+#mod_bakery_placeholders_b td {
+	border: 1px solid #E1E1E1;
+}
+.mod_bakery_placeholders_column_b {
+	background-color: #ECF3F7;
+}
+.mod_bakery_placeholders_localisation_b {
+	color: #0000FF;
+}
+.mod_bakery_placeholders_general_settings_b {
+	color: #008000;
+}
+.mod_bakery_placeholders_page_settings_b {
+	color: #804000;
+}
+.mod_bakery_placeholders_customer_b {
+	color: #FF0000;
+}
+.mod_bakery_placeholders_items_b {
+	color: #FF6600;
+}
+.mod_bakery_placeholders_page_b {
+	color: #FF0099;
+}

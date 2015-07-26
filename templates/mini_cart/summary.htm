@@ -1,0 +1,22 @@
+
+<!-- On none Bakery pages the Bakery stylesheet is not included -->
+<!-- For valid html code use your wb main stylesheet to style MiniCart -->
+<!-- If you do not bother about valid code use css @import to include the Bakery stylesheet: -->
+<!--
+<style type="text/css" media="screen">
+	@import url({WB_URL}/modules/bakery/frontend.css);
+</style>
+-->
+
+<div id="mod_bakery_mc_div_f">
+<h2 class="mod_bakery_mc_h2_cart_f">{TXT_CART}</h2>
+	<p class="mod_bakery_mc_p_orderid_f">{TXT_ORDER_ID}: <span class="mod_bakery_mc_orderid_f">{ORDER_ID}</span></p>
+	<p class="mod_bakery_mc_p_summary_f">
+		<span class="mod_bakery_mc_quantity_f">{QUANTITY_SUM}</span> {TXT_ITEMS}
+		<br />
+		{TXT_SUM}: {SHOP_CURRENCY} <span class="mod_bakery_mc_total_f">{TOTAL}</span>
+		<br />
+		<span class="mod_bakery_mc_p_excl_f">({TXT_EXCL_SHIPPING})</span>
+	</p>			
+	<a href="{CONTINUE_URL}?view_cart=yes">{TXT_VIEW_CART}</a>
+</div>

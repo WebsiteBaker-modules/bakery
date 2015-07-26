@@ -1,0 +1,113 @@
+<!-- BEGIN main_block -->
+
+<!-- BEGIN cust_country_block -->
+<tr>
+	<td class="mod_bakery_form_label_f">{TXT_CUST_COUNTRY}</td>
+	<td>
+		<select name="cust_country" class="mod_bakery_form_input_f" onchange="javascript: mod_bakery_toggle_state_f('{SELECT_SHOP_COUNTRY}', 'cust', 1);">{COUNTRY_OPTIONS}
+		</select>
+	</td>
+</tr>
+<!-- END cust_country_block -->
+
+<!-- BEGIN cust_state_block -->
+<tr id="cust_state_select" style="display: none;">
+	<td class="mod_bakery_form_label_f">{TXT_CUST_STATE}</td>
+	<td>
+		<select name="cust_state" class="mod_bakery_form_input_f" onchange="javascript: mod_bakery_synchro_cust_state_f()">{STATE_OPTIONS}
+		</select>
+	</td>
+</tr>
+<!-- END cust_state_block -->
+
+<!-- BEGIN cust_textfields_block -->
+<tr id="{TR_ID}">
+	<td class="mod_bakery_form_label_f">{LABEL}</td>
+	<td><input type="text" class="{CSS_ERROR_CLASS}mod_bakery_form_input_f" name="{NAME}" value="{VALUE}" maxlength="{MAXLENGTH}" /></td>
+</tr>
+<!-- END cust_textfields_block -->
+
+<!-- BEGIN cust_button_block -->
+<tr>
+	<td colspan="2" style="text-align: right">
+		<p style="margin-top: 10px">
+			<input type="submit" name="save_form" class="mod_bakery_bt_order_f" value="{TXT_SELECT_PAYMENT_METHOD}" />
+		</p>
+	</td>
+</tr>
+<!-- END cust_button_block -->
+
+<!-- BEGIN cust_buttons_block -->
+<tr>
+	<td colspan="2">
+		<p style="margin-top: 10px; float: left;">
+			<input type="submit" name="add_ship_form" class="mod_bakery_bt_add_ship_form_f" value="{TXT_ADD_SHIP_FORM}" />
+		</p>
+		<p style="margin-top: 10px; float: right;">
+			<input type="submit" name="save_form" class="mod_bakery_bt_order_f" value="{TXT_SELECT_PAYMENT_METHOD}" />
+		</p>
+	</td>
+</tr>
+<!-- END cust_buttons_block -->
+
+<!-- BEGIN ship_title_block -->
+<tr>
+	<td colspan="2">
+		<p class="mod_bakery_form_p_f">{TXT_FILL_IN_SHIP_ADDRESS}:</p>
+	</td>
+</tr>
+<!-- END ship_title_block -->
+
+<!-- BEGIN ship_country_block -->
+<tr>
+	<td class="mod_bakery_form_label_f">{TXT_CUST_COUNTRY}</td>
+	<td>
+		<select name="ship_country" class="mod_bakery_form_input_f" onchange="javascript: mod_bakery_toggle_state_f('{SELECT_SHOP_COUNTRY}', 'ship', 1);">{COUNTRY_OPTIONS}
+		</select>
+	</td>
+</tr>
+<!-- END ship_country_block -->
+
+<!-- BEGIN ship_state_block -->
+<tr id="ship_state_select" style="display: none;">
+	<td class="mod_bakery_form_label_f">{TXT_CUST_STATE}</td>
+	<td>
+		<select name="ship_state" class="mod_bakery_form_input_f" onchange="javascript: mod_bakery_synchro_ship_state_f()">{STATE_OPTIONS}
+		</select>
+	</td>
+</tr>
+<!-- END ship_state_block -->
+
+<!-- BEGIN ship_textfields_block -->
+<tr id="{TR_ID}">
+	<td class="mod_bakery_form_label_f">{LABEL}</td>
+	<td><input type="text" class="{CSS_ERROR_CLASS}mod_bakery_form_input_f" name="{NAME}" value="{VALUE}" maxlength="{MAXLENGTH}" /></td>
+</tr>
+<!-- END ship_textfields_block -->
+
+<!-- BEGIN ship_buttons_block -->
+<tr>
+	<td colspan="2">
+		<p style="margin-top: 10px; float: left;">
+			<input type="submit" name="hide_ship_form" class="mod_bakery_bt_add_ship_form_f" value="{TXT_HIDE_SHIP_FORM}" />
+		</p>
+		<p style="margin-top: 10px; float: right;">
+			<input type="submit" name="save_form" class="mod_bakery_bt_order_f" value="{TXT_SELECT_PAYMENT_METHOD}" />
+		</p>
+	</td>
+</tr>
+<!-- END ship_buttons_block -->
+
+<!-- BEGIN ship_button_block -->
+<tr>
+	<td colspan="2" style="text-align: right">
+		<p style="margin-top: 10px">
+			<input type="submit" name="save_form" class="mod_bakery_bt_order_f" value="{TXT_SELECT_PAYMENT_METHOD}" />
+		</p>
+	</td>
+</tr>
+<!-- END ship_button_block -->
+
+</table>
+</form>
+<!-- END main_block -->

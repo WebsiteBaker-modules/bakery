@@ -1,0 +1,11 @@
+
+<tr>
+	<td class="mod_bakery_cart_td_thumb_f"><a href="{LINK}"><img src="{THUMB_URL}" alt="{NAME}" width="{THUMB_WIDTH}" height="{THUMB_HEIGHT}" border="0" /></a></td>
+	<td class="mod_bakery_cart_td_sku_f">{SKU}</td>
+	<td class="mod_bakery_cart_td_name_f"><span class="mod_bakery_cart_item_f">{NAME}</span><br />{ATTRIBUTE}</td>
+	<td class="mod_bakery_cart_td_quantity_f"><input type="text" name="quantity[{ITEM_ID}][{ATTRIBUTES}]" value="{QUANTITY}" id="id_{ITEM_ID}_{ATTRIBUTES}" style="text-align: right" size="4" />
+		<a href="#" onclick="javascript: mod_bakery_delete_item_f('{ITEM_ID}_{ATTRIBUTES}');"> <img src="{WB_URL}/modules/bakery/images/delete.gif" alt="{TEXT_DELETE}" title="{TEXT_DELETE}" /></a></td>
+	<td class="mod_bakery_cart_td_price_f">{PRICE}</td>
+	<td class="mod_bakery_cart_td_shipping_f" style="display: {DISPLAY_SHIPPING}">{SHIPPING}</td>
+	<td class="mod_bakery_cart_td_sum_f">{TOTAL}</td>
+</tr>

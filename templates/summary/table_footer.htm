@@ -1,0 +1,51 @@
+
+	<tr>
+		<td colspan="{COLSPAN_L}"><hr class="mod_bakery_hr_f" /></td>
+	</tr>
+	<tr>
+		<td colspan="{COLSPAN_M}" class="mod_bakery_cart_subtotal_f">{TXT_SUBTOTAL}</td>
+		<td style="text-align: right">{SETTING_SHOP_CURRENCY}&nbsp;{ORDER_SUBTOTAL}</td>
+	</tr>
+	<tr>
+		<td colspan="{COLSPAN_M}" class="{CSS_CLASS_CART_SHIPPING}">{TXT_SHIPPING_COST}</td>
+		<td style="text-align: right">{SETTING_SHOP_CURRENCY}&nbsp;{SHIPPING}</td>
+	</tr>
+	<tr style="display: {DISPLAY_TAX}">
+		<td colspan="{COLSPAN_M}" class="mod_bakery_cart_tax_f">{TXT_INCL} {TAX_RATE} {TXT_TAX}</td>
+		<td style="text-align: right">{SETTING_SHOP_CURRENCY}&nbsp;{SALES_TAX}</td>
+	</tr>
+	<tr>
+		<td colspan="{COLSPAN_L}"><hr class="mod_bakery_hr_f" /></td>
+	</tr>
+	<tr>
+		<td colspan="{COLSPAN_M}" class="mod_bakery_cart_total_f">{TXT_TOTAL}</td>
+		<td style="text-align: right">{SETTING_SHOP_CURRENCY}&nbsp;{ORDER_TOTAL}</td></tr>
+	<tr>
+		<td colspan="{COLSPAN_L}"><hr class="mod_bakery_hr_f" /></td>
+	</tr>
+	<tr>
+		<td height="30" colspan="{COLSPAN_L}" align="right">
+			<form action="{CHECKOUT_URL}" method="post">
+			<input type="submit" name="checkout" class="mod_bakery_bt_buy_f" value="{TXT_BUY}" />
+			{PAY_GATEWAY_DATA}
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="{COLSPAN_L}"><hr class="mod_bakery_hr_f" /></td>
+	</tr>
+	<tr>
+		<td height="30" colspan="{COLSPAN_L}" align="left">
+			<form action="{SETTING_CONTINUE_URL}" method="post">
+			<input type="submit" name="continue_shopping" class="mod_bakery_bt_continue_f" value="{TXT_CONTINUE_SHOPPING}" /> 
+			&nbsp;&nbsp;&nbsp;
+			<input type="submit" name="cancel_order" class="mod_bakery_bt_cancel
+			_f" value="{TXT_CANCEL_ORDER}" onclick="javascript: return confirm('{TXT_JS_CONFIRM}')" />
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="{COLSPAN_L}"><hr class="mod_bakery_hr_f" /></td>
+	</tr>
+	</table>
+</div>
