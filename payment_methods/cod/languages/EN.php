@@ -30,7 +30,7 @@ $MOD_BAKERY[$payment_method]['TXT_ADDITIONAL_CHARGES_1'] = 'Please note addition
 $MOD_BAKERY[$payment_method]['TXT_ADDITIONAL_CHARGES_2'] = '</b> to be collected.';
 $MOD_BAKERY[$payment_method]['TXT_PAY'] = 'I will pay cash on delivery';
 
-// USED BY FILE bakery/view.php
+// USED BY FILE bakery/view_confirmation.php
 $MOD_BAKERY[$payment_method]['TXT_SUCCESS'] = 'We will email you an order confirmation.';
 $MOD_BAKERY[$payment_method]['TXT_SHIPMENT'] = 'We will ship your order as soon as possible.';
 

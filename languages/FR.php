@@ -82,6 +82,7 @@ $MOD_BAKERY['TXT_PAYMENT_METHOD'] = 'M&eacute;thode de Paiement';
 $MOD_BAKERY['TXT_SELECT_PAYMENT_METHOD'] = 'Veuillez choisir une M&eacute;thode de Paiement';
 $MOD_BAKERY['TXT_SELECT_PAYMENT_METHODS'] = 'S&eacute;lectionner les M&eacute;thodes de Paiement';
 $MOD_BAKERY['TXT_PAYMENT_METHOD_COD'] = 'Contre Remboursement';
+$MOD_BAKERY['TXT_PAYMENT_METHOD_BOPIS'] = 'L&apos;enl&eacute;vement d&eacute;part boutique';
 $MOD_BAKERY['TXT_PAYMENT_METHOD_ADVANCE'] = 'Paiement anticip&eacute;';
 $MOD_BAKERY['TXT_PAYMENT_METHOD_INVOICE'] = 'Facture';
 $MOD_BAKERY['TXT_PAYMENT_METHOD_PAYMENT_NETWORK'] = 'SOFORT Banking';

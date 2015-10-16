@@ -22,6 +22,9 @@ if (defined('WB_PATH') == false) {
 	exit("Cannot access this file directly"); 
 }
 
+// Get some default values
+require_once(WB_PATH.'/modules/bakery/config.php');
+
 
 // SHOW OVERVIEW PAGE
 // ******************
@@ -162,10 +165,10 @@ if ($num_items > 0) {
 				$thumb_file = str_replace(".png", ".jpg", $image_file);
 
 				// Prepare thumb and image directory pathes and urls
-				$thumb_dir = WB_PATH.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$item_id.'/';
-				$img_dir   = WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id.'/';
-				$thumb_url = WB_URL.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$item_id.'/';
-				$img_url   = WB_URL.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id.'/';
+				$thumb_dir = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
+				$img_dir   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
+				$thumb_url = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
+				$img_url   = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
 
 				// Make array of all item thumbs and images
 				if (file_exists($thumb_dir.$thumb_file) && file_exists($img_dir.$image_file)) {

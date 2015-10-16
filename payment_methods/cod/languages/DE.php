@@ -30,7 +30,7 @@ $MOD_BAKERY[$payment_method]['TXT_ADDITIONAL_CHARGES_1'] = 'Bitte beachten Sie, 
 $MOD_BAKERY[$payment_method]['TXT_ADDITIONAL_CHARGES_2'] = '</b> anfallen.';
 $MOD_BAKERY[$payment_method]['TXT_PAY'] = 'Ich bezahle per Nachnahme';
 
-// USED BY FILE bakery/view.php
+// USED BY FILE bakery/view_confirmation.php
 $MOD_BAKERY[$payment_method]['TXT_SUCCESS'] = 'Sie erhalten von uns eine E-Mail mit der Auftragsbest&auml;tigung.';
 $MOD_BAKERY[$payment_method]['TXT_SHIPMENT'] = 'Die gew&uuml;nschten Artikel senden wir Ihnen unverz&uuml;glich zu.';
 

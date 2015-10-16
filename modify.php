@@ -36,6 +36,8 @@ if (LANGUAGE_LOADED) {
     }
 }
 
+// Get some default values
+require_once(WB_PATH.'/modules/bakery/config.php');
 // Include WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
@@ -127,7 +129,7 @@ if ($query_items->numRows() > 0) {
 			$main_image = FALSE;
 			$main_image = $database->get_one("SELECT `filename` FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '{$post['item_id']}' AND `active` = '1' ORDER BY `position` ASC LIMIT 1");
 			$main_thumb     = str_replace(".png", ".jpg", $main_image);
-			$main_thumb_url = WB_URL.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$post['item_id'].'/'.$main_thumb;
+			$main_thumb_url = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$post['item_id'].'/'.$main_thumb;
 		
 		?>
 		<tr id="row_<?php echo $post['item_id']; ?>" class="irow">

@@ -439,6 +439,10 @@ for ($i = 1; $i <= sizeof($items); $i++) {
 	$shipping_array[] = $items[$i]['shipping'];
 }
 $shipping_sum = array_sum($shipping_array);
+// Set shipping to 0 if customer buys online and picks it up in store (bopis)
+if ($payment_method == 'bopis') {
+	$shipping_sum = 0;
+}
 // Check if we have to display a tax rate column in the invoice
 $num_of_tax_rates = count(array_unique($f_tax_rate_array));
 
@@ -676,6 +680,11 @@ if ($order_subtotal >= $setting_free_shipping) {
 	if ($setting_tax_rate_shipping != 0) {
 		$f_tax_rate_array[] = number_format($setting_tax_rate_shipping, 1);	
 	}
+}
+
+// Set shipping to 0 if customer buys online and picks it up in store (bopis)
+if ($payment_method == 'bopis') {
+	$shipping = 0;
 }
 
 // Format shipping for display

@@ -381,6 +381,9 @@ Modify the CSS of the invoice template and the view order in the backend stylesh
 .mod_bakery_bt_pay_cod_f {
 	width: 98%;
 }
+.mod_bakery_bt_pay_bopis_f {
+	width: 98%;
+}
 .mod_bakery_bt_pay_advance_f {
 	width: 98%;
 }

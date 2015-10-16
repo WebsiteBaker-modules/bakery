@@ -45,7 +45,6 @@ if (isset($blanks)) {
 	$error_bg = $blanks;
 	extract($_POST);
 	include('view_form.php');
-	echo $end_of_wrapper;  // End of bakery wrapper
 	return;
 }
 
@@ -155,7 +154,6 @@ if (@is_array($errors)) {
 	}
 	$form_error .= '<br />'.$MOD_BAKERY['ERR_INVAL_TRY_AGAIN'];
 	include('view_form.php');
-	echo $end_of_wrapper;  // End of bakery wrapper
 	return;
 }
 

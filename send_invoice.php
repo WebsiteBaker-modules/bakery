@@ -39,7 +39,7 @@ if (!isset($_GET['page_id']) OR !isset($_GET['section_id']) OR !isset($_GET['ord
 // Check if user is authenticated to view this page
 $admin = new admin('', '', false, false);
 if ($admin->get_page_permission($page_id, $action='admin') === false) {
-	// User allowed to view this page
+	// User not allowed to view this page
 	die($MESSAGE['ADMIN_INSUFFICIENT_PRIVELLIGES']);
 }
 
@@ -84,10 +84,10 @@ if ($query_customer->numRows() > 0) {
 		$cust_name            = $invoice_array[3];
 
 		// Chop off phone number and email from address
-		$invoice_address      = explode('<br /><br />', $invoice_array[4])[0];
-		/* $invoice_address      = $invoice_address[0]; */
-		$invoice_cust_address = explode('<br /><br />', $invoice_array[5])[0];
-		/* $invoice_cust_address = $invoice_cust_address[0]; */
+		$invoice_address      = explode('<br /><br />', $invoice_array[4]);
+		$invoice_address      = $invoice_address[0];
+		$invoice_cust_address = explode('<br /><br />', $invoice_array[5]);
+		$invoice_cust_address = $invoice_cust_address[0];
 
 		$invoice_ship_address = $invoice_array[6];
 		$cust_email           = $invoice_array[7];

@@ -275,7 +275,7 @@ $directories = array(
 
 // Try and make the directories
 foreach ($directories as $directory) {
-	$directory_path = WB_PATH.MEDIA_DIRECTORY.'/bakery'.$directory;
+	$directory_path = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.$directory;
 	make_dir($directory_path);
 
 	// Add index.php files if not existing yet
@@ -301,11 +301,11 @@ foreach ($images as $img_id  => $image) {
 		// Thumbs use .jpg extension only
 		$thumb_file = str_replace (".png", ".jpg", $img_file);
 		// Try unlinking image and thumb
-		if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id.'/'.$img_file)) {
-			unlink(WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id.'/'.$img_file);
+		if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$img_file)) {
+			unlink(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$img_file);
 		}
-		if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$item_id.'/'.$thumb_file)) {
-			unlink(WB_PATH.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$item_id.'/'.$thumb_file);
+		if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$thumb_file)) {
+			unlink(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$thumb_file);
 		}
 		// Delete image in database
 		$database->query("DELETE FROM ".TABLE_PREFIX."mod_bakery_images WHERE `img_id` = '$img_id'");
@@ -338,7 +338,7 @@ for ($i = 0; $i < $num_images; $i++) {
 		$fileext    = strtolower($fileext);
 		
 		// Path to the new file
-		$new_file = WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id.'/'.$filename.'.'.$fileext;
+		$new_file = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$filename.'.'.$fileext;
 
 		// Make sure the image is a jpg or png file
 		if (!($fileext == 'jpg' || $fileext == 'jpeg' || $fileext == 'png')) {
@@ -370,7 +370,7 @@ for ($i = 0; $i < $num_images; $i++) {
 		if ($resize != 0) {
 		
 			// Thumbnail destination
-			$thumb_destination = WB_PATH.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$item_id.'/'.$filename.'.jpg';
+			$thumb_destination = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$filename.'.jpg';
 			
 			// Check thumbnail type
 			if ($fileext == 'png') {
@@ -386,7 +386,7 @@ for ($i = 0; $i < $num_images; $i++) {
 		if ($imgresize == 'yes' && file_exists($new_file)) {
 	
 			// Image destination
-			$img_destination = WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id.'/'.$filename.'.jpg';
+			$img_destination = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$filename.'.jpg';
 
 			// Check image type
 			if (($fileext == 'png')) {
@@ -394,8 +394,8 @@ for ($i = 0; $i < $num_images; $i++) {
 					// After resizing change file extension from png to jpg
 					$fileext = 'jpg';
 					// Try unlinking png image not used any more
-					if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id.'/'.$filename.'.png')) {
-						unlink(WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id.'/'.$filename.'.png');
+					if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$filename.'.png')) {
+						unlink(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$filename.'.png');
 					}
 				}
 			} else {
@@ -531,12 +531,12 @@ require(WB_PATH."/index.php");
 	}
 
 	// Prepare pathes to the source image and thumb directories
-	$img_source_dir   = WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$orig_item_id;
-	$thumb_source_dir = WB_PATH.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$orig_item_id;
+	$img_source_dir   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$orig_item_id;
+	$thumb_source_dir = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$orig_item_id;
 
 	// Make sure the target directories exist
-	make_dir(WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id);
-	make_dir(WB_PATH.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$item_id);
+	make_dir(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id);
+	make_dir(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id);
 		
 	// Check if the image and thumb source directories exist
 	if (is_dir($img_source_dir) && is_dir($thumb_source_dir)) {
@@ -552,9 +552,9 @@ require(WB_PATH."/index.php");
 
 			// Pathes to the image/thumb source and destination respectively
 			$img_source        = $img_source_dir.'/'.$image_file;
-			$img_destination   = WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id.'/'.$image_file;
+			$img_destination   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$image_file;
 			$thumb_source      = $thumb_source_dir.'/'.$thumb_file;
-			$thumb_destination = WB_PATH.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$item_id.'/'.$thumb_file;
+			$thumb_destination = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$thumb_file;
 
 			// Try duplicating image and thumb
 			if (file_exists($img_source)) {

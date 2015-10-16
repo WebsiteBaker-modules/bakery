@@ -25,6 +25,19 @@
  
 	DEVELOPMENT HISTORY:
 
+   v0.7.4  (Christoph Marti; 10/16/2015)
+	 + Added payment method "Buy online, pick up in store" (bopis)
+	   If customer selects bopis shipping is set to 0
+	 + [config.php] Added configurable name for the media subfolder that contains the Bakery images and thumbs
+	   (requested by sky writer)
+	 + [languages/states/CA.php] Fixed typo in "British Columbia" (thanks to sky writer)
+
+   v1.7.3  (Christoph Marti; 10/06/2015)
+	 + [send_invoice.php - line 87] Fixed a parse error that was raised running newer php versions (reported by sabo-!)
+	 + [save_form.php] Fixed double closing wrapper </div> if address form reports an error (reported by sky writer)
+	 + Added Mollie payment plugin (API version) for Bakery 1.7.x (credits to Ruud - Dev4me)
+	   http://www.dev4me.nl/modules-snippets/opensource/bakery-betaal-plugin-voor-mollie
+
    v1.7.2  (Christoph Marti; 05/04/2015)
 	 + [languages/states/GB.php] Updated GB countries list
 	 + Bugfix: Fixed some PHP include pathes using full path: WB_PATH.'/modules/bakery/'
@@ -33,7 +46,7 @@
 	   db function returned NULL instead of 0
 	 + [save_item.php] Bugfix: Under certain circumstances false images have been deleted (reported by Boudi)
 	   http://forum.websitebaker.org/index.php/topic,28198.msg196712.html#msg196712
-	 + Added a button to the order page that makes is possible to send the customer invoice as an html email
+	 + Added a button to the order page that makes it possible to send the customer invoice as an html email
 	   Makes use of the Premailer api to bring css inline (http://premailer.dialect.ca/api)
 	   (thanks to marmot, jacobi22 and dbs)
 
@@ -657,7 +670,7 @@
 $module_directory   = 'bakery';
 $module_name        = 'Bakery';
 $module_function    = 'page';
-$module_version     = '1.72';
+$module_version     = '1.74';
 $module_platform    = '2.7';
 $module_author      = 'Christoph Marti';
 $module_license     = 'GNU General Public License';

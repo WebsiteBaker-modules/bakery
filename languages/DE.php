@@ -81,6 +81,7 @@ $MOD_BAKERY['TXT_PAYMENT_METHOD'] = 'Zahlungsmethode';
 $MOD_BAKERY['TXT_SELECT_PAYMENT_METHOD'] = 'Zahlungsart ausw&auml;hlen';
 $MOD_BAKERY['TXT_SELECT_PAYMENT_METHODS'] = 'Zahlungsmethoden ausw&auml;hlen';
 $MOD_BAKERY['TXT_PAYMENT_METHOD_COD'] = 'Nachnahme';
+$MOD_BAKERY['TXT_PAYMENT_METHOD_BOPIS'] = 'Abholung im Ladengesch&auml;ft';
 $MOD_BAKERY['TXT_PAYMENT_METHOD_ADVANCE'] = 'Vorauszahlung';
 $MOD_BAKERY['TXT_PAYMENT_METHOD_INVOICE'] = 'Rechnung';
 $MOD_BAKERY['TXT_PAYMENT_METHOD_PAYMENT_NETWORK'] = 'SOFORT &Uuml;berweisung';

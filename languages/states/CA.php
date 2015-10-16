@@ -34,7 +34,7 @@
 // Modify the state list to fit your needs by deleting lines or changing the lines order
 
 $MOD_BAKERY['TXT_STATE_CODE'][1] = 'AB'; $MOD_BAKERY['TXT_STATE_NAME'][1] = 'Alberta';
-$MOD_BAKERY['TXT_STATE_CODE'][] = 'BC'; $MOD_BAKERY['TXT_STATE_NAME'][] = 'British Columnbia';
+$MOD_BAKERY['TXT_STATE_CODE'][] = 'BC'; $MOD_BAKERY['TXT_STATE_NAME'][] = 'British Columbia';
 $MOD_BAKERY['TXT_STATE_CODE'][] = 'MB'; $MOD_BAKERY['TXT_STATE_NAME'][] = 'Manitoba';
 $MOD_BAKERY['TXT_STATE_CODE'][] = 'NB'; $MOD_BAKERY['TXT_STATE_NAME'][] = 'New Brunswick';
 $MOD_BAKERY['TXT_STATE_CODE'][] = 'NL'; $MOD_BAKERY['TXT_STATE_NAME'][] = 'Newfoundland and Labrador';

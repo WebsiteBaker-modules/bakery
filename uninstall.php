@@ -22,6 +22,9 @@ if (defined('WB_PATH') == false) {
 	exit("Cannot access this file directly"); 
 }
 
+// Get some default values
+require_once(WB_PATH.'/modules/bakery/config.php');
+
 // Get module pages directory from general setting table
 $query_general_settings = $database->query("SELECT pages_directory FROM ".TABLE_PREFIX."mod_bakery_general_settings");
 $general_settings       = $query_general_settings->fetchRow();
@@ -49,7 +52,7 @@ if (is_dir($directory)) {
 	rm_full_dir($directory);
 }
 
-$directory = WB_PATH.MEDIA_DIRECTORY.'/bakery';
+$directory = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir;
 if (is_dir($directory)) {
 	rm_full_dir($directory);
 }

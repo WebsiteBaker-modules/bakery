@@ -28,7 +28,7 @@ $MOD_BAKERY[$payment_method]['TXT_TITLE'] = 'Vorauszahlung';
 $MOD_BAKERY[$payment_method]['TXT_ACCOUNT'] = 'Bezahlen Sie Ihre Bestellung im Voraus auf unser Konto.';
 $MOD_BAKERY[$payment_method]['TXT_PAY'] = 'Ich bezahle per Vorauszahlung';
 
-// USED BY FILE bakery/view.php
+// USED BY FILE bakery/view_confirmation.php
 $MOD_BAKERY[$payment_method]['TXT_SUCCESS'] = 'Sie erhalten von uns eine E-Mail mit der Auftragsbest&auml;tigung und den Zahlungsinformationen.';
 $MOD_BAKERY[$payment_method]['TXT_SHIPMENT'] = 'Sobald Ihre Zahlung bei uns eingegangen ist, werden wir Ihnen die gew&uuml;nschten Artikel unverz&uuml;glich zusenden.';
 

@@ -163,10 +163,10 @@ if ($query_item->numRows() > 0) {
 	$image     = '';
 
 	// Prepare thumb and image directory pathes and urls
-	$thumb_dir = WB_PATH.MEDIA_DIRECTORY.'/bakery/thumbs/item'.ITEM_ID.'/';
-	$img_dir   = WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.ITEM_ID.'/';
-	$thumb_url = WB_URL.MEDIA_DIRECTORY.'/bakery/thumbs/item'.ITEM_ID.'/';
-	$img_url   = WB_URL.MEDIA_DIRECTORY.'/bakery/images/item'.ITEM_ID.'/';
+	$thumb_dir = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.ITEM_ID.'/';
+	$img_dir   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.ITEM_ID.'/';
+	$thumb_url = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.ITEM_ID.'/';
+	$img_url   = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.ITEM_ID.'/';
 
 	// Get image data from db
 	$query_image = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '".ITEM_ID."' AND `active` = '1' ORDER BY position ASC");

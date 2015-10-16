@@ -336,8 +336,8 @@ if ($show_item_mover) {
 	$main_img = '<b>'.$MOD_BAKERY['TXT_MAIN_IMAGE'].'</b><br />';
 
 	// Prepare image and thumb directory pathes and urls
-	$img_url   = WB_URL.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id.'/';
-	$thumb_url = WB_URL.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$item_id.'/';
+	$img_url   = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
+	$thumb_url = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
 
 	// Get image top position for this item
 	$top_img = $database->get_one("SELECT MAX(`position`) FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '$item_id'");

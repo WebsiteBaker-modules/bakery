@@ -30,7 +30,7 @@ $MOD_BAKERY[$payment_method]['TXT_ADDITIONAL_CHARGES_1'] = 'Let op, er zijn extr
 $MOD_BAKERY[$payment_method]['TXT_ADDITIONAL_CHARGES_2'] = '</b> bovenop de verzendkosten.';
 $MOD_BAKERY[$payment_method]['TXT_PAY'] = 'Ik betaal contant bij aflevering';
 
-// USED BY FILE bakery/view.php
+// USED BY FILE bakery/view_confirmation.php
 $MOD_BAKERY[$payment_method]['TXT_SUCCESS'] = 'U ontvangt per email een bevestiging van uw bestelling.';
 $MOD_BAKERY[$payment_method]['TXT_SHIPMENT'] = 'Uw bestelling wordt zo spoedig mogelijk verzonden.';
 

@@ -84,6 +84,7 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
 				// If needed replace payment method names by localisations
 				switch ($directory) {
 					case 'cod': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_COD']; break;
+					case 'bopis': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_BOPIS']; break;
 					case 'advance': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_ADVANCE']; break;
 					case 'invoice': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_INVOICE']; break;
 					case 'payment-network': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_PAYMENT_NETWORK']; break;
@@ -156,6 +157,7 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
 		// If needed replace payment method names by localisations
 		switch ($payment_method) {
 			case 'cod': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_COD']; break;
+			case 'bopis': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_BOPIS']; break;
 			case 'advance': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_ADVANCE']; break;
 			case 'invoice': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_INVOICE']; break;
 			case 'payment-network': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_PAYMENT_NETWORK']; break;

@@ -63,6 +63,10 @@ $link_length = 24;
 // IMAGES AND THUMBNAILS (BACKEND)
 // *******************************
 
+// Name of the media subfolder that contains the Bakery images and thumbs
+// No more than a proper directory name - no leading nor trailing slash
+$img_dir = 'bakery'; 
+
 // Selectable thumbnail default sizes (modify page settings)
 $default_thumb_sizes['40']  = '40x40px';
 $default_thumb_sizes['50']  = '50x50px';

@@ -29,6 +29,8 @@ if (!isset($_GET['item_id']) OR !is_numeric($_GET['item_id'])) {
 // Include WB admin wrapper script and WB functions
 $update_when_modified = true; // Tells script to update when this page was last updated
 require(WB_PATH.'/modules/admin.php');
+// Get some default values
+require_once(WB_PATH.'/modules/bakery/config.php');
 // Include WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
@@ -46,8 +48,8 @@ if (is_writable(WB_PATH.PAGES_DIRECTORY.$get_details['link'].PAGE_EXTENSION)) {
 }
 
 // Delete any images if they exists
-$image = WB_PATH.MEDIA_DIRECTORY.'/bakery/images/item'.$item_id;
-$thumb = WB_PATH.MEDIA_DIRECTORY.'/bakery/thumbs/item'.$item_id;
+$image = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id;
+$thumb = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id;
 if (is_dir($image)) { rm_full_dir($image); }
 if (is_dir($thumb)) { rm_full_dir($thumb); }
 
