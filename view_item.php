@@ -163,10 +163,10 @@ if ($query_item->numRows() > 0) {
 	$image     = '';
 
 	// Prepare thumb and image directory pathes and urls
-	$thumb_dir = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.ITEM_ID.'/';
-	$img_dir   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.ITEM_ID.'/';
-	$thumb_url = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.ITEM_ID.'/';
-	$img_url   = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.ITEM_ID.'/';
+	$thumb_path = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.ITEM_ID.'/';
+	$img_path   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.ITEM_ID.'/';
+	$thumb_url  = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.ITEM_ID.'/';
+	$img_url    = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.ITEM_ID.'/';
 
 	// Get image data from db
 	$query_image = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '".ITEM_ID."' AND `active` = '1' ORDER BY position ASC");
@@ -193,7 +193,7 @@ if ($query_item->numRows() > 0) {
 			$img_id   = empty($item_attribute) ? '' : 'mod_bakery_img_attr'.$item_attribute.'_f';
 
 			// Make array of all item thumbs and images
-			if (file_exists($thumb_dir.$thumb_file) && file_exists($img_dir.$image_file)) {
+			if (file_exists($thumb_path.$thumb_file) && file_exists($img_path.$image_file)) {
 				// If needed add lightbox2 link to the thumb/image...
 				if ($setting_lightbox2 == "detail" || $setting_lightbox2 == "all") {
 					$prepend = "<a href='".$img_url.$image_file."' rel='lightbox[image_".ITEM_ID."]' title='".$img_title."'><img src='";

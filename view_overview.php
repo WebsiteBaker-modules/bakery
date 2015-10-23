@@ -165,13 +165,13 @@ if ($num_items > 0) {
 				$thumb_file = str_replace(".png", ".jpg", $image_file);
 
 				// Prepare thumb and image directory pathes and urls
-				$thumb_dir = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
-				$img_dir   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
-				$thumb_url = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
-				$img_url   = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
+				$thumb_path = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
+				$img_path   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
+				$thumb_url  = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
+				$img_url    = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
 
 				// Make array of all item thumbs and images
-				if (file_exists($thumb_dir.$thumb_file) && file_exists($img_dir.$image_file)) {
+				if (file_exists($thumb_path.$thumb_file) && file_exists($img_path.$image_file)) {
 					// If needed add lightbox2 link to the thumb/image...
 					if ($setting_lightbox2 == "overview" || $setting_lightbox2 == "all") {
 						$thumb_prepend = "<a href='".$img_url.$image_file."' rel='lightbox[image_".$item_id."]' title='".$img_title."'><img src='";

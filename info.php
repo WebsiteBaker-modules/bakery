@@ -25,6 +25,10 @@
  
 	DEVELOPMENT HISTORY:
 
+   v0.7.5  (Christoph Marti; 10/20/2015)
+	 + [view_item.php, view_overview.php] Fixed a duplicate assignment to the $img_dir var
+	   that scrambled the image urls (reported by ra-wi, thanks to jacobi22)
+
    v0.7.4  (Christoph Marti; 10/16/2015)
 	 + Added payment method "Buy online, pick up in store" (bopis)
 	   If customer selects bopis shipping is set to 0
@@ -670,7 +674,7 @@
 $module_directory   = 'bakery';
 $module_name        = 'Bakery';
 $module_function    = 'page';
-$module_version     = '1.74';
+$module_version     = '1.75';
 $module_platform    = '2.7';
 $module_author      = 'Christoph Marti';
 $module_license     = 'GNU General Public License';

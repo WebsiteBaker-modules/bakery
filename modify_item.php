@@ -335,7 +335,7 @@ if ($show_item_mover) {
 	$no_image = true;
 	$main_img = '<b>'.$MOD_BAKERY['TXT_MAIN_IMAGE'].'</b><br />';
 
-	// Prepare image and thumb directory pathes and urls
+	// Prepare image and thumb directory urls
 	$img_url   = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
 	$thumb_url = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
 
