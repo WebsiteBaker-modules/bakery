@@ -37,7 +37,7 @@ $query_page_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_baker
 $fetch_page_settings = $query_page_settings->fetchRow();
 
 // Set raw html <'s and >'s to be replaced by friendly html code
-$raw = array('<', '>');
+$raw      = array('<', '>');
 $friendly = array('&lt;', '&gt;');
 
 // Get list of all module bakery pages and prepare <select>
@@ -71,11 +71,11 @@ if ($get_pages->numRows() > 0) {
 			$can_modify = false;
 		}
 		// Options
-		$continue_url = WB_URL.PAGES_DIRECTORY.$page['link'].PAGE_EXTENSION;
-		$continue_url_select .= "<option value='{$page['page_id']}'";
+		$continue_url         = WB_URL.PAGES_DIRECTORY.$page['link'].PAGE_EXTENSION;
+		$continue_url_select .= '<option value="'.$page['page_id'].'"';
 		$continue_url_select .= $cur_continue_url == $page['page_id'] ? ' selected="selected"' : '';
 		$continue_url_select .= $can_modify == false ? " disabled='disabled' style='color: #aaa;'" : '';
-		$continue_url_select .= ">$continue_url</option>\n";	
+		$continue_url_select .= '>'.$continue_url.'</option>'."\n";	
 	}
 	$continue_url_select .= "</select>";
 }
@@ -90,7 +90,7 @@ if ($get_pages->numRows() > 0) {
 
 <table cellpadding="2" cellspacing="0" border="0" align="center" width="98%">
 	<tr>
-		<td colspan="3"><strong><?php echo $MOD_BAKERY['TXT_PAGE_SETTINGS']; ?></strong></td>
+		<td colspan="3"><h2><?php echo $MOD_BAKERY['TXT_PAGE_SETTINGS']; ?></h2></td>
 	</tr>
 
 

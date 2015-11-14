@@ -24,6 +24,7 @@
 $url = parse_url(WB_URL);
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'SOFORT Banking';
 $MOD_BAKERY[$payment_method]['TXT_USER_ID'] = 'Klant nummer';
 $MOD_BAKERY[$payment_method]['TXT_PROJECT_ID'] = 'Project nummer';
 $MOD_BAKERY[$payment_method]['TXT_PROJECT_PW'] = 'Project wachtwoord';

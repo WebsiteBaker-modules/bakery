@@ -131,12 +131,12 @@ $moved = false;
 if ($old_section_id != $new_section_id && $action == 'move') {
 	// Get new page and section ids
 	$query_sections = $database->query("SELECT page_id FROM ".TABLE_PREFIX."sections WHERE section_id = '$new_section_id'");
-	$sections   = $query_sections->fetchRow();
-	$page_id    = $sections['page_id'];
-	$section_id = $new_section_id;
+	$sections       = $query_sections->fetchRow();
+	$page_id        = $sections['page_id'];
+	$section_id     = $new_section_id;
 	// Get new order position
-	$position   = $item_order ->get_new($section_id);
-	$moved      = true;
+	$position       = $item_order ->get_new($section_id);
+	$moved          = true;
 }
 
 
@@ -298,14 +298,20 @@ header('Location: ../');
 foreach ($images as $img_id  => $image) {
 	if ($image['delete_image'] !== false) {
 		$img_file = $image['delete_image'];
-		// Thumbs use .jpg extension only
-		$thumb_file = str_replace (".png", ".jpg", $img_file);
-		// Try unlinking image and thumb
+
+		// Try unlinking image
 		if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$img_file)) {
 			unlink(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$img_file);
 		}
-		if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$thumb_file)) {
-			unlink(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$thumb_file);
+		// Try unlinking thumb
+		if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$img_file)) {
+			unlink(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$img_file);
+		} else {
+			// Check if png image has a jpg thumb (version < 1.7.6 used jpg thumbs only)
+			$img_file = str_replace('.png', '.jpg', $img_file);
+			if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$img_file)) {
+				unlink(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$img_file);
+			}
 		}
 		// Delete image in database
 		$database->query("DELETE FROM ".TABLE_PREFIX."mod_bakery_images WHERE `img_id` = '$img_id'");
@@ -365,12 +371,11 @@ for ($i = 0; $i < $num_images; $i++) {
 		move_uploaded_file($_FILES['image']['tmp_name'][$i], $new_file);
 		change_mode($new_file);
 
-
 		// Check if we need to create a thumb
 		if ($resize != 0) {
 		
 			// Thumbnail destination
-			$thumb_destination = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$filename.'.jpg';
+			$thumb_destination = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$filename.'.'.$fileext;
 			
 			// Check thumbnail type
 			if ($fileext == 'png') {
@@ -384,20 +389,13 @@ for ($i = 0; $i < $num_images; $i++) {
 
 		// Check if we need to resize the image
 		if ($imgresize == 'yes' && file_exists($new_file)) {
-	
+
 			// Image destination
-			$img_destination = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$filename.'.jpg';
+			$img_destination = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$filename.'.'.$fileext;
 
 			// Check image type
-			if (($fileext == 'png')) {
-				if (resizePNG($new_file, $img_destination, $maxwidth, $maxheight)) {
-					// After resizing change file extension from png to jpg
-					$fileext = 'jpg';
-					// Try unlinking png image not used any more
-					if (file_exists(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$filename.'.png')) {
-						unlink(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$filename.'.png');
-					}
-				}
+			if ($fileext == 'png') {
+				resizePNG($new_file, $img_destination, $maxwidth, $maxheight);
 			} else {
 				resizeJPEG($new_file, $maxwidth, $maxheight, $quality);
 			}
@@ -535,26 +533,59 @@ require(WB_PATH."/index.php");
 	$thumb_source_dir = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$orig_item_id;
 
 	// Make sure the target directories exist
-	make_dir(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id);
-	make_dir(WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id);
-		
+	$img_destination_dir   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id;
+	$thumb_destination_dir = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id;
+	make_dir($img_destination_dir);
+	make_dir($thumb_destination_dir);
+
+	// Add index.php file to the image directory
+	if (!is_file($img_destination_dir.'/index.php')) {
+		$content = ''.
+"<?php
+
+header('Location: ../');
+
+?>";
+		$handle = fopen($img_destination_dir.'/index.php', 'w');
+		fwrite($handle, $content);
+		fclose($handle);
+		change_mode($img_destination_dir.'/index.php', 'file');
+	}
+	// Add index.php file to the thumb directory
+	if (!is_file($thumb_destination_dir.'/index.php')) {
+		$content = ''.
+"<?php
+
+header('Location: ../');
+
+?>";
+		$handle = fopen($thumb_destination_dir.'/index.php', 'w');
+		fwrite($handle, $content);
+		fclose($handle);
+		change_mode($thumb_destination_dir.'/index.php', 'file');
+	}
+
 	// Check if the image and thumb source directories exist
 	if (is_dir($img_source_dir) && is_dir($thumb_source_dir)) {
 		// Open the image directory then loop through its contents
 		$dir = dir($img_source_dir);
 		while (false !== $image_file = $dir->read()) {
 			// Skip index file and pointers
-			if (strpos($image_file, '.php') !== false || substr($image_file, 0, 1) == ".") {
+			if (strpos($image_file, '.php') !== false || substr($image_file, 0, 1) == '.') {
 				continue;
 			}
-			// Thumbs use .jpg extension only
-			$thumb_file = str_replace (".png", ".jpg", $image_file);
 
-			// Pathes to the image/thumb source and destination respectively
-			$img_source        = $img_source_dir.'/'.$image_file;
-			$img_destination   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$image_file;
-			$thumb_source      = $thumb_source_dir.'/'.$thumb_file;
-			$thumb_destination = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$thumb_file;
+			// Path to the image source and destination
+			$img_source      = $img_source_dir.'/'.$image_file;
+			$img_destination = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/'.$image_file;
+
+			// Check if png image has a jpg thumb (version < 1.7.6 used jpg thumbs only)
+			if (!file_exists($thumb_source_dir.'/'.$image_file)) {
+				$image_file = str_replace('.png', '.jpg', $image_file);
+			}
+			// Path to the thumb source and destination
+			$thumb_source      = $thumb_source_dir.'/'.$image_file;
+			$thumb_destination = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/'.$image_file;
 
 			// Try duplicating image and thumb
 			if (file_exists($img_source)) {
@@ -586,7 +617,7 @@ if ($file_type_error || !empty($errors)) {
 		$error_msg = $MESSAGE['GENERIC_FILE_TYPES'].' .jpg / .jpeg / .png<br />';
 	}
 	if (!empty($errors)) {
-		$error_msg .= implode("<br />", $errors);
+		$error_msg .= implode('<br />', $errors);
 	}
 }
 

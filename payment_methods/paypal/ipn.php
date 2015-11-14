@@ -29,7 +29,7 @@
 // Log requests into 'ipn.log' in the same directory
 // Especially useful if you encounter network errors or other intermittent problems with IPN (validation)
 // Set this to 'false' once you go live or do not require logging
-$active   = false;        // IPN on = true, IPN off = false
+$active   = true;        // IPN on = true, IPN off = false
 $debug    = false;       // Enable debug mode
 $sandbox  = false;       // Use paypal sandbox
 $delay    = false;       // Delay IPN respond to push up PDT

@@ -125,12 +125,22 @@ if ($query_items->numRows() > 0) {
 
 		// LOOP ITEMS
 		while ($post = $query_items->fetchRow()):
+
+			// Prepare thumb path and url
+			$thumb_path = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$post['item_id'].'/';
+			$thumb_url  = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$post['item_id'].'/';
+
 			// Get main thumb (image with position == 1)
 			$main_image = FALSE;
 			$main_image = $database->get_one("SELECT `filename` FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '{$post['item_id']}' AND `active` = '1' ORDER BY `position` ASC LIMIT 1");
-			$main_thumb     = str_replace(".png", ".jpg", $main_image);
-			$main_thumb_url = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$post['item_id'].'/'.$main_thumb;
-		
+
+			// Check if png image has a jpg thumb (version < 1.7.6 used jpg thumbs only)
+			$main_thumb = $main_image;
+			if (!file_exists($thumb_path.$main_thumb)) {
+				$main_thumb = str_replace('.png', '.jpg', $main_thumb);
+			}
+			$main_thumb_url = $thumb_url.$main_thumb;
+
 		?>
 		<tr id="row_<?php echo $post['item_id']; ?>" class="irow">
 			<td class="dragdrop_bakery"></td>

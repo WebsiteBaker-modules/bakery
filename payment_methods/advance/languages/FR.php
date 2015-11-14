@@ -21,7 +21,7 @@
 // ******************************
 
 // SETTINGS - USED BY BACKEND
-
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Paiement anticip&eacute;';
 
 // USED BY FILE bakery/payment_methods/advance/gateway.php
 $MOD_BAKERY[$payment_method]['TXT_TITLE'] = 'Paiement anticip&eacute;';

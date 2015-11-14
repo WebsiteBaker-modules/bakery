@@ -21,6 +21,7 @@
 // **********************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Rechnung';
 $MOD_BAKERY[$payment_method]['TXT_BANK_ACCOUNT'] = 'Shop Bankkonto';
 $MOD_BAKERY[$payment_method]['TXT_INVOICE_TEMPLATE'] = 'Rechnungstemplate';
 $MOD_BAKERY[$payment_method]['TXT_INVOICE_ALERT'] = '1. Zahlungserinnerung nach';

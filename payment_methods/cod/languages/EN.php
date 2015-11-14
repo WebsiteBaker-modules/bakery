@@ -21,6 +21,7 @@
 // ***************************************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Cash on Delivery';
 $MOD_BAKERY[$payment_method]['TXT_CHARGES'] = 'CoD Charges<br />(without currency code)';
 
 // USED BY FILE bakery/payment_methods/cod/gateway.php

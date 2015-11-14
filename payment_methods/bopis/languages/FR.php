@@ -21,7 +21,7 @@
 // ******************************
 
 // SETTINGS - USED BY BACKEND
-
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'L&apos;enl&eacute;vement d&eacute;part boutique';
 
 // USED BY FILE bakery/payment_methods/bopis/gateway.php
 $MOD_BAKERY[$payment_method]['TXT_TITLE'] = 'L&apos;enl&eacute;vement d&eacute;part boutique';

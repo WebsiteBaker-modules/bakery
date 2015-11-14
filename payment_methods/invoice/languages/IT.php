@@ -21,6 +21,7 @@
 // **********************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Fattura';
 $MOD_BAKERY[$payment_method]['TXT_BANK_ACCOUNT'] = 'Conto Bancario Negozio';
 $MOD_BAKERY[$payment_method]['TXT_INVOICE_TEMPLATE'] = 'Modello Fattura';
 $MOD_BAKERY[$payment_method]['TXT_INVOICE_ALERT'] = '1. Notifica Sollecito dopo';

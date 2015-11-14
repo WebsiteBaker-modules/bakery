@@ -53,7 +53,7 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
 
 <table cellpadding="2" cellspacing="0" border="0" align="center" width="98%">
 	<tr>
-		<td colspan="5"><strong><?php echo $MOD_BAKERY['TXT_SELECT_PAYMENT_METHODS']; ?></strong></td>
+		<td colspan="5"><h2><?php echo $MOD_BAKERY['TXT_SELECT_PAYMENT_METHODS']; ?></h2></td>
 	</tr>
 	<tr valign="top">
 	  <td align="right"><?php echo $MOD_BAKERY['TXT_PAYMENT_METHODS']; ?>:</td>
@@ -62,8 +62,12 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
 
 
 
-		// LOAD ALL PAYMENT METHODS/GATEWAYS, DISPLAY CHECKBOXES AND GENERATE DROP DOWN MENU
+		// LOAD ALL PAYMENT METHODS, DISPLAY CHECKBOXES AND GENERATE A DROP DOWN MENU
+		// **************************************************************************
+
+		// Initialize vars
 		$select_payment_method = '';
+		$payment_method_title  = '';
 		
 		// Get content of payment methods table
 		$query_payment_methods = $database->query("SELECT pm_id, active, directory, name FROM ".TABLE_PREFIX."mod_bakery_payment_methods ORDER BY pm_id ASC");
@@ -71,64 +75,94 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
 			// Generate html table with checkboxes
 			$i = 0;
 			$num_col = 3;
-			echo "<table cellpadding='0' cellspacing='0' border='0' align='left' width='90%'>\n";
+			echo '<table cellpadding="0" cellspacing="0" border="0" align="left" width="90%">'."\n";
 			echo "\t\t\t<tr>\n";
 			// Loop through payment methods
-			while($fetch_payment_methods = $query_payment_methods->fetchRow()) {
+			while ($fetch_payment_methods = $query_payment_methods->fetchRow()) {
 				$fetch_payment_methods = array_map('stripslashes', $fetch_payment_methods);
-				$pm_id = $fetch_payment_methods['pm_id'];
-				$active = $fetch_payment_methods['active'];
+				$pm_id     = $fetch_payment_methods['pm_id'];
+				$active    = $fetch_payment_methods['active'];
 				$directory = $fetch_payment_methods['directory'];
-				$name = $fetch_payment_methods['name'];
-				
-				// If needed replace payment method names by localisations
-				switch ($directory) {
-					case 'cod': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_COD']; break;
-					case 'bopis': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_BOPIS']; break;
-					case 'advance': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_ADVANCE']; break;
-					case 'invoice': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_INVOICE']; break;
-					case 'payment-network': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_PAYMENT_NETWORK']; break;
+				$name      = $fetch_payment_methods['name'];
+
+
+
+				// Get localized payment method name or fall back to english version
+				unset($MOD_BAKERY[$payment_method]);
+				$payment_method_name = $name;
+				$no_include = true;
+
+				// Look for payment method language files
+				if (LANGUAGE_LOADED) {
+
+					// Default english
+					if (file_exists(WB_PATH.'/modules/bakery/payment_methods/'.$directory.'/languages/EN.php')) {
+						include_once(WB_PATH.'/modules/bakery/payment_methods/'.$directory.'/languages/EN.php');
+						$no_include = false;
+					}
+					// Current language
+				    if (file_exists(WB_PATH.'/modules/bakery/payment_methods/'.$directory.'/languages/'.LANGUAGE.'.php')) {
+						include_once(WB_PATH.'/modules/bakery/payment_methods/'.$directory.'/languages/'.LANGUAGE.'.php');
+						$no_include = false;
+					}
+					// Warning if no language file has been found at all and skip this method 
+					// Probably the payment method directory is missing
+					if ($no_include) {
+						echo '<p style="color: red;"><b>Failed to include language files.</b><br />The payment method &quot;'.$name.'&quot; is not available. Make sure the requested payment method directory and associated files exist on your server.</p>';
+						continue;
+					}
+					if (!empty($MOD_BAKERY[$payment_method]['TXT_NAME'])) {
+						$payment_method_name = $MOD_BAKERY[$payment_method]['TXT_NAME'];
+					}
+					elseif (!empty($MOD_BAKERY[$payment_method]['TXT_TITLE'])) {
+						$payment_method_name = $MOD_BAKERY[$payment_method]['TXT_TITLE'];
+					}
 				}
 
-				// Generate checkboxes
-				echo "\t\t\t\t<td><input type='checkbox' name='payment_methods[$pm_id]' id='payment_method_$pm_id' value='$directory'";
+
+
+				// Generate table of checkboxes
+				echo "\t\t\t\t".'<td><input type="checkbox" name="payment_methods['.$pm_id.']" id="payment_method_'.$pm_id.'" value="'.$directory.'"';
 				if ($active) {
 					echo ' checked="checked"';
 				}
-				echo "><label for='payment_method_$pm_id'>$name</label>\n";
-				
+				echo '><label for="payment_method_'.$pm_id.'">'.$payment_method_name.'</label>'."\n";
+
 				// Echo hidden fields for all payment methods
-				echo "\t\t\t\t<input type='hidden' name='all_payment_methods[]' value='$pm_id' /></td>\n";
-				
+				echo "\t\t\t\t".'<input type="hidden" name="all_payment_methods[]" value="'.$pm_id.'" /></td>'."\n";
+
 				// End of table row
 				$i++;
 				if (!($i % $num_col)) {
 					echo "\t\t\t</tr><tr>\n";
 				}
-				
+
 				// Generate select options for modifying payment methods
-				$select_payment_method .= "<option value='$directory'";
+				$select_payment_method .= '<option value="'.$directory.'"';
 				if ($payment_method == $directory) {
 					$select_payment_method .= ' selected="selected"';
+					$payment_method_title   = $payment_method_name;
 				}
-				$select_payment_method .= ">$name</option>\n";
+				$select_payment_method .= '>'.$payment_method_name.'</option>'."\n";
 			}
-			
+
 			// Complete table with empty cells if needed
-			while($i % $num_col) {
+			while ($i % $num_col) {
 				echo "\t\t\t\t<td>&nbsp;</td>\n";
 				$i++;
 			}
-		} ?>
+		}
+		?>
 			</tr>
 		</table>
 	  </td>
     </tr>
+
 	<tr valign="bottom">
-	  <td colspan="5" height="32"><strong><?php echo $TEXT['MODIFY'].' '.$MOD_BAKERY['TXT_PAYMENT_METHOD']; ?></strong></td>
+	  <td colspan="5" height="65" valign="bottom"><h2><?php echo $TEXT['MODIFY'].' '.$MOD_BAKERY['TXT_PAYMENT_METHOD'].' &laquo;'.$payment_method_title; ?>&raquo;</h2></td>
     </tr>
 	<tr>
-	  <td width="30%" align="right"><?php echo $TEXT['PLEASE_SELECT']; ?>:</td>
+	  <td width="30%" align="right"><strong><?php echo $TEXT['PLEASE_SELECT']; ?>:</strong></td>
 	  <td colspan="4">
 		<select name='modify_payment_method' style='width: 98%' onchange='mod_bakery_select_payment_method_b()'>
 			<?php echo $select_payment_method; ?>
@@ -138,41 +172,30 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
 
 
 
-	// LOAD ALL PAYMENT METHODS/GATEWAYS, GENERATE DROP DOWN MENU AND TEXTAREAS FOR MODIFICATION
+
+	// CURRENT PAYMENT METHOD SETTINGS
+	// *******************************
 	
 	// Get data of current payment method for modification
-	$no_setting = true;
+	$no_setting    = true;
 	$setting_table = '';
-	$setting_info = '';
+	$setting_info  = '';
+	unset($MOD_BAKERY[$payment_method]);
 	$query_payment_methods = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_payment_methods WHERE directory = '$payment_method' LIMIT 1");
 	if ($query_payment_methods->numRows() > 0) {
 		$fetch_payment_methods = $query_payment_methods->fetchRow();
 		$fetch_payment_methods = array_map('stripslashes', $fetch_payment_methods);
-		$name = $fetch_payment_methods['name'];
-		$cust_email_subject = $fetch_payment_methods['cust_email_subject'];
-		$cust_email_body = $fetch_payment_methods['cust_email_body'];
-		$shop_email_subject = $fetch_payment_methods['shop_email_subject'];
-		$shop_email_body = $fetch_payment_methods['shop_email_body'];
-
-		// If needed replace payment method names by localisations
-		switch ($payment_method) {
-			case 'cod': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_COD']; break;
-			case 'bopis': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_BOPIS']; break;
-			case 'advance': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_ADVANCE']; break;
-			case 'invoice': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_INVOICE']; break;
-			case 'payment-network': $name = $MOD_BAKERY['TXT_PAYMENT_METHOD_PAYMENT_NETWORK']; break;
-		}
+		$cust_email_subject    = $fetch_payment_methods['cust_email_subject'];
+		$cust_email_body       = $fetch_payment_methods['cust_email_body'];
+		$shop_email_subject    = $fetch_payment_methods['shop_email_subject'];
+		$shop_email_body       = $fetch_payment_methods['shop_email_body'];
 
 		// Look for payment method language file
 		if (LANGUAGE_LOADED) {
-			if (file_exists(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/EN.php')) {
-				include(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/EN.php');
-			} else {
-				echo "<p style='color: red;'><b>Failed to include language file...</b><br />The payment method &quot;$name&quot; is not avaiable. Make sure the requested payment method directory and associated files exist on your server.</p>";
-			}
-			if (file_exists(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/'.LANGUAGE.'.php')) {
-				include(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/'.LANGUAGE.'.php');
-			}
+		    include(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/EN.php');
+		    if (file_exists(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/'.LANGUAGE.'.php')) {
+		        include(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/'.LANGUAGE.'.php');
+		    }
 		}
 
 		// Generate textareas
@@ -182,60 +205,60 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
 			$value = $fetch_payment_methods['value_'.$i];
 			if ($field != '' && $field != 'invoice_template' && $field != 'invoice_alert' && $field != 'reminder_alert' ) {
 				$no_setting = false;
-				$setting_table .= "<tr>";
-				$setting_table .= "<td width='30%' align='right' valign='top'>{$MOD_BAKERY[$payment_method][$txt_index]}:</td>";
-				$setting_table .= "<td colspan='4'>";
-				$setting_table .= "<textarea name='update[value_$i]' rows='3' style='width: 98%;'>$value</textarea></td>";
-				$setting_table .= "</tr>";
+				$setting_table .= '<tr>';
+				$setting_table .= '<td width="30%" align="right" valign="top">'.$MOD_BAKERY[$payment_method][$txt_index].':</td>';
+				$setting_table .= '<td colspan="4">';
+				$setting_table .= '<textarea name="update[value_'.$i.']" rows="3" style="width: 98%;">'.$value.'</textarea></td>';
+				$setting_table .= '</tr>';
 			}
 
 			// Special input fields for the invoice and reminder alert 
 			elseif ($field == 'invoice_alert' || $field == 'reminder_alert') {
-				$setting_table .= "<tr>
-	  <td width='30%' align='right'>{$MOD_BAKERY[$payment_method][$txt_index]}:</td>
-	  <td colspan='4'>
-		<input type='text' maxlength='3' name='update[value_$i]' style='width: 30px; text-align: right;' value='$value' /> {$MOD_BAKERY['TXT_DAYS']}</td>
-	</tr>";
+				$setting_table .= '<tr>
+	  <td width="30%" align="right">'.$MOD_BAKERY[$payment_method][$txt_index].':</td>
+	  <td colspan="4">
+		<input type="text" maxlength="3" name="update[value_'.$i.']" style="width: 30px; text-align: right;" value="'.$value.'" /> '.$MOD_BAKERY['TXT_DAYS'].'</td>
+	</tr>';
 			}
 
 			// Special textarea for invoice template
 			elseif ($field == 'invoice_template') {
-				$setting_table .= "<tr valign='bottom'>
-	  <td width='30%' height='32' align='right'><strong>{$MOD_BAKERY['TXT_LAYOUT']} {$MOD_BAKERY['TXT_SETTINGS']}:</strong></td>
-	  <td height='32' colspan='4'><input type='button' value='{$MENU['HELP']}' onclick=\"javascript: window.location = '".WB_URL."/modules/bakery/help.php?page_id=$page_id&section_id=$section_id#invoice';\" style='width: 100px;' /></td>
+				$setting_table .= '<tr valign="bottom">
+	  <td width="30%" height="32" align="right"><strong>'.$MOD_BAKERY['TXT_LAYOUT'].' '.$MOD_BAKERY['TXT_SETTINGS'].':</strong></td>
+	  <td height="32" colspan="4"><input type="button" value="'.$MENU['HELP'].'" onclick="javascript: window.location = \''.WB_URL.'/modules/bakery/help.php?page_id='.$page_id.'&section_id='.$section_id.'#invoice\';" style="width: 100px;" /></td>
 	</tr>
 	<tr>
-	  <td width='30%' align='right' valign='top'>{$MOD_BAKERY[$payment_method]['TXT_INVOICE_TEMPLATE']}:</td>
-	  <td colspan='4'>
-		<textarea name='update[value_4]' style='width: 98%; height: 100px;'>$value</textarea></td>
-	</tr>";
+	  <td width="30%" align="right" valign="top">'.$MOD_BAKERY[$payment_method]['TXT_INVOICE_TEMPLATE'].':</td>
+	  <td colspan="4">
+		<textarea name="update[value_4]" style="width: 98%; height: 100px;">'.$value.'</textarea></td>
+	</tr>';
 			}
 		}
-		
+
 		// If no payment method setting has been set
 		$setting_info = $no_setting ? $MOD_BAKERY['TXT_NO_PAYMENT_METHOD_SETTING'] : "&nbsp;";
 	}
 
 	// Show payment method header
-	echo "<tr valign='bottom'>";
-	echo "<td width='30%' height='32' align='right'><strong>$name {$MOD_BAKERY['TXT_SETTINGS']}:</strong></td>";
-	echo "<td height='32' colspan='4'>$setting_info</td>";
-	echo "</tr>";
+	echo '<tr valign="bottom">';
+	echo '<td width="30%" height="32" align="right"><strong>'.$MOD_BAKERY['TXT_SETTINGS'].':</strong></td>';
+	echo '<td height="32" colspan="4">'.$setting_info.'</td>';
+	echo '</tr>';
 
 	// Show payment method textareas
 	echo $setting_table;
 	
 	// Show payment method notice if exists
 	if (isset($MOD_BAKERY[$payment_method]['TXT_NOTICE']) && $MOD_BAKERY[$payment_method]['TXT_NOTICE'] != '') {
-		echo "<tr valign='top'>";
-		echo "<td width='30%' height='32' align='right'><strong>$name {$MOD_BAKERY['TXT_NOTICE']}:</strong></td>";
-		echo "<td height='32' colspan='4'><p style='width: 97%; margin: 0; padding: 3px; border: solid 1px #FFD700; background-color: #FFFFDD;'>{$MOD_BAKERY[$payment_method]['TXT_NOTICE']}</p></td>";
-		echo "</tr>";
+		echo '<tr valign="top">';
+		echo '<td width="30%" height="32" align="right"><strong>'.$MOD_BAKERY['TXT_NOTICE'].':</strong></td>';
+		echo '<td height="32" colspan="4"><p style="width: 97%; margin: 0; padding: 3px; border: solid 1px #FFD700; background-color: #FFFFDD;">'.$MOD_BAKERY[$payment_method]['TXT_NOTICE'].'</p></td>';
+		echo '</tr>';
 	}
 	
 	// Emails to customer and shop ?>
 	<tr valign="bottom">
-	  <td width="30%" height="32" align="right"><strong><?php echo $name." ".$MOD_BAKERY['TXT_EMAIL']; ?>:</strong></td>
+	  <td width="30%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_EMAIL']; ?>:</strong></td>
 	  <td height="32" colspan="4"><input type="button" value="<?php echo $MENU['HELP']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/bakery/help.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&payment_method=<?php echo $payment_method; ?>#email';" style="width: 100px;" /></td>
     </tr>
 

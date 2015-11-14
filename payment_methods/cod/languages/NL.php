@@ -21,6 +21,7 @@
 // ***************************************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Rembours';
 $MOD_BAKERY[$payment_method]['TXT_CHARGES'] = 'Rembours kosten<br />(zonder valuta code)';
 
 // USED BY FILE bakery/payment_methods/cod/gateway.php

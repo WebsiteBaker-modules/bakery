@@ -21,6 +21,7 @@
 // *********************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'PayPal';
 $MOD_BAKERY[$payment_method]['TXT_EMAIL'] = 'PayPal E-Mail';
 $MOD_BAKERY[$payment_method]['TXT_PAGE'] = 'Benutzerdefinierte Zahlungsseite';
 $MOD_BAKERY[$payment_method]['TXT_AUTH_TOKEN'] = 'Identit&auml;tstoken';

@@ -335,9 +335,10 @@ if ($show_item_mover) {
 	$no_image = true;
 	$main_img = '<b>'.$MOD_BAKERY['TXT_MAIN_IMAGE'].'</b><br />';
 
-	// Prepare image and thumb directory urls
-	$img_url   = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
-	$thumb_url = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
+	// Prepare image / thumb url and thumb path
+	$img_url    = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
+	$thumb_url  = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
+	$thumb_path = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
 
 	// Get image top position for this item
 	$top_img = $database->get_one("SELECT MAX(`position`) FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '$item_id'");
@@ -352,6 +353,12 @@ if ($show_item_mover) {
 			$image_file = $image['filename'];
 			$image['delete_image'] = 0;
 
+			// Check if png image has a jpg thumb (version < 1.7.6 used jpg thumbs only)
+			$thumb_file = $image_file;
+			if (!file_exists($thumb_path.$thumb_file)) {
+				$thumb_file = str_replace('.png', '.jpg', $thumb_file);
+			}
+
 			// Use session image data if user has been sent back to complete form		
 			if (isset($fetch_item['images'])) {
 				$image['title']             = $fetch_item['images'][$img_id]['title'];
@@ -362,9 +369,6 @@ if ($show_item_mover) {
 				$image['delete_image']      = $fetch_item['images'][$img_id]['delete_image'];
 			}
 
-			// Thumbs use .jpg extension only
-			$thumb_file = str_replace(".png", ".jpg", $image_file);
-
 			// Get items attributes
 			$query_items_attributes = $database->query("SELECT a.attribute_name, a.attribute_id FROM ".TABLE_PREFIX."mod_bakery_options o INNER JOIN ".TABLE_PREFIX."mod_bakery_attributes a ON o.option_id = a.option_id INNER JOIN ".TABLE_PREFIX."mod_bakery_item_attributes ia ON a.attribute_id = ia.attribute_id WHERE ia.item_id = '$item_id' ORDER BY o.option_name, LENGTH(a.attribute_name), a.attribute_name ASC");
 
@@ -372,8 +376,8 @@ if ($show_item_mover) {
 			$option_select = '<option value=""></option>'."\n";
 			if ($query_items_attributes->numRows() > 0) {
 				while ($attribute = $query_items_attributes->fetchRow()) {
-					$attribute = array_map('stripslashes', $attribute);
-					$selected = $image['item_attribute_id'] == $attribute['attribute_id'] ? ' selected="selected"' : '';
+					$attribute      = array_map('stripslashes', $attribute);
+					$selected       = $image['item_attribute_id'] == $attribute['attribute_id'] ? ' selected="selected"' : '';
 					$option_select .= "\t\t\t".'<option value="'.$attribute['attribute_id'].'"'.$selected.'>'.$attribute['attribute_name']."</option>\n";
 				}
 			}

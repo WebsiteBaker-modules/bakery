@@ -24,6 +24,7 @@
 $url = parse_url(WB_URL);
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'SOFORT &Uuml;berweisung';
 $MOD_BAKERY[$payment_method]['TXT_USER_ID'] = 'Kundennummer';
 $MOD_BAKERY[$payment_method]['TXT_PROJECT_ID'] = 'Projektnummer';
 $MOD_BAKERY[$payment_method]['TXT_PROJECT_PW'] = 'Projekt Passwort';

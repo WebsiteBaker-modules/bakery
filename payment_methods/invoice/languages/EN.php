@@ -21,6 +21,7 @@
 // **********************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Invoice';
 $MOD_BAKERY[$payment_method]['TXT_BANK_ACCOUNT'] = 'Shop Bank Account';
 $MOD_BAKERY[$payment_method]['TXT_INVOICE_TEMPLATE'] = 'Invoice Template';
 $MOD_BAKERY[$payment_method]['TXT_INVOICE_ALERT'] = '1. Reminder Alert after';

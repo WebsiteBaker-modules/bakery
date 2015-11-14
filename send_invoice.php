@@ -113,22 +113,14 @@ if ($query_customer->numRows() > 0) {
 		$submitted_method     = $customer['submitted'];
 		$transaction_status   = $customer['transaction_status'];
 
-		// Get the payment method name as text string
-		switch ($submitted_method) {
-			case 'paypal':
-				$submitted_methods = 'PayPal';
-				break;
-			case 'invoice':
-				$submitted_methods = $MOD_BAKERY['TXT_PAYMENT_METHOD_INVOICE'];
-				break;
-			case 'cod':
-				$submitted_methods = $MOD_BAKERY['TXT_PAYMENT_METHOD_COD'];
-				break;
-			case 'payment-network':
-				$submitted_methods = $MOD_BAKERY['TXT_PAYMENT_METHOD_PAYMENT_NETWORK'];
-				break;
-			default:
-				$submitted_methods = $MOD_BAKERY['TXT_PAYMENT_METHOD_ADVANCE'];
+		// Get payment method name other than the internal identifier
+		$payment_method = $submitted_method;
+		// Look for payment method language file
+		if (LANGUAGE_LOADED) {
+		    include_once(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/EN.php');
+		    if (file_exists(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/'.LANGUAGE.'.php')) {
+		        include_once(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/'.LANGUAGE.'.php');
+		    }
 		}
 
 		// Email subject
@@ -138,7 +130,7 @@ if ($query_customer->numRows() > 0) {
 
 		// Replace invoice placeholders by values
 		$vars = array('[WB_URL]', '[ORDER_ID]', '[INVOICE_ID]', '[SHOP_NAME]', '[BANK_ACCOUNT]', '[CUSTOMER_NAME]', '[ADDRESS]', '[CUST_ADDRESS]', '[SHIPPING_ADDRESS]', '[CUST_EMAIL]', '[ITEM_LIST]', '[ORDER_DATE]', '[CURRENT_DATE]', '[TITLE]', '[DISPLAY_INVOICE]', '[DISPLAY_DELIVERY_NOTE]', '[DISPLAY_REMINDER]', '[CUST_TAX_NO]', '[PAYMENT_METHOD]');
-		$values = array(WB_URL, $order_id, $invoice_id, $shop_name, $bank_account, $cust_name, $invoice_address, $invoice_cust_address, $invoice_ship_address, $cust_email, $html_item_list, $order_date, $current_date, $title, $display_invoice, $display_delivery_note, $display_reminder, $cust_tax_no, $submitted_methods);
+		$values = array(WB_URL, $order_id, $invoice_id, $shop_name, $bank_account, $cust_name, $invoice_address, $invoice_cust_address, $invoice_ship_address, $cust_email, $html_item_list, $order_date, $current_date, $title, $display_invoice, $display_delivery_note, $display_reminder, $cust_tax_no, $MOD_BAKERY[$payment_method]['TXT_NAME']);
 		$invoice = str_replace($vars, $values, $invoice_template);
 
 		// Reset header image to a max width
@@ -181,7 +173,7 @@ if ($query_customer->numRows() > 0) {
 		// @link http://premailer.dialect.ca/api
 		// @link https://gist.github.com/barock19/1591053
 		require_once('library/premailer.php');
-		$pre            = Premailer::html($html);
+		$pre = Premailer::html($html);
 		// $html  = $pre['html'];
 		// $plain = $pre['plain'];
 

@@ -35,7 +35,7 @@ if (LANGUAGE_LOADED) {
 // Set default values for page settings
 
 // Shop
-$page_offline = "no";
+$page_offline = 'no';
 $offline_text = $MOD_BAKERY['ERR_OFFLINE_TEXT'];
 $continue_url = $page_id;
 

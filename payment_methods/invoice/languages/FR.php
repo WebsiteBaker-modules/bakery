@@ -21,6 +21,7 @@
 // **********************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Facture';
 $MOD_BAKERY[$payment_method]['TXT_BANK_ACCOUNT'] = 'Compte Bancaire de la Boutique';
 $MOD_BAKERY[$payment_method]['TXT_INVOICE_TEMPLATE'] = 'Mod&egrave;le de la Facture';
 $MOD_BAKERY[$payment_method]['TXT_INVOICE_ALERT'] = '1. Alerte de Relance apr&eacute;s';

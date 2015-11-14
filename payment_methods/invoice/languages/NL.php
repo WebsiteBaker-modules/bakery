@@ -21,6 +21,7 @@
 // **********************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Factuur';
 $MOD_BAKERY[$payment_method]['TXT_BANK_ACCOUNT'] = 'Winkel Bankrekening';
 $MOD_BAKERY[$payment_method]['TXT_INVOICE_TEMPLATE'] = 'Factuur Template';
 $MOD_BAKERY[$payment_method]['TXT_INVOICE_ALERT'] = '1. Reminder Alert after';

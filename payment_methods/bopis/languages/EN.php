@@ -21,7 +21,7 @@
 // ******************************
 
 // SETTINGS - USED BY BACKEND
-
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Buy online, pick up in store';
 
 // USED BY FILE bakery/payment_methods/bopis/gateway.php
 $MOD_BAKERY[$payment_method]['TXT_TITLE'] = 'Buy online, pick up in store';

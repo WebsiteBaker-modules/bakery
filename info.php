@@ -25,11 +25,19 @@
  
 	DEVELOPMENT HISTORY:
 
-   v0.7.5  (Christoph Marti; 10/20/2015)
+   v1.7.6  (Christoph Marti; 11/13/2015)
+	 + Improved localisation of payment method names
+	 + [save_form.php] Added special chars to the address form regexp
+	   first_name: dot (.), last_name: hyphen (-), street: comma  (,), phone: slash (/) (reported by paulchen)
+	 + Improved image resizing: png images will no longer be changed to jpg images.
+	   png images and thumbs now will be saved as png images (reported by svsanchez)
+	 + [payment_methods/paypal/ipn.php] Bugfix: Set ipn to active (reported by paulchen)
+
+   v1.7.5  (Christoph Marti; 10/20/2015)
 	 + [view_item.php, view_overview.php] Fixed a duplicate assignment to the $img_dir var
 	   that scrambled the image urls (reported by ra-wi, thanks to jacobi22)
 
-   v0.7.4  (Christoph Marti; 10/16/2015)
+   v1.7.4  (Christoph Marti; 10/16/2015)
 	 + Added payment method "Buy online, pick up in store" (bopis)
 	   If customer selects bopis shipping is set to 0
 	 + [config.php] Added configurable name for the media subfolder that contains the Bakery images and thumbs
@@ -674,7 +682,7 @@
 $module_directory   = 'bakery';
 $module_name        = 'Bakery';
 $module_function    = 'page';
-$module_version     = '1.75';
+$module_version     = '1.76';
 $module_platform    = '2.7';
 $module_author      = 'Christoph Marti';
 $module_license     = 'GNU General Public License';

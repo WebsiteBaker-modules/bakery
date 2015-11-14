@@ -70,14 +70,14 @@ foreach ($_POST as $field => $value) {
 		}
 
 		if (strpos($field, 'first_name') !== false) {
-			if (!preg_match('#^[A-Za-z'.$add_chars.' -]{1,50}$#', $value)) {
+			if (!preg_match('#^[A-Za-z'.$add_chars.'. -]{1,50}$#', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_NAME'];
 			}
 		}
 
 		if (strpos($field, 'last_name') !== false) {
-			if (!preg_match('#^[A-Za-z'.$add_chars.' -\']{1,50}$#', $value)) {
+			if (!preg_match('#^[A-Za-z'.$add_chars.' \'-]{1,50}$#', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_NAME'];
 			}
@@ -94,7 +94,7 @@ foreach ($_POST as $field => $value) {
 		}
 
 		if (strpos($field, 'street') !== false) {
-			if (!preg_match('#^[A-Za-z0-9.'.$add_chars.' -]{1,50}$#', $value)) {
+			if (!preg_match('#^[A-Za-z0-9.'.$add_chars.', -]{1,50}$#', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_STREET'];
 			}
@@ -136,7 +136,7 @@ foreach ($_POST as $field => $value) {
 		}
 
 		if (strpos($field, 'phone') !== false) {
-			if (!preg_match('#^[0-9)(xX +.-]{7,20}$#', $value)) {
+			if (!preg_match('#^[0-9)(xX +.-/]{7,20}$#', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_PHONE'];
 			}

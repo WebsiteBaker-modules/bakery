@@ -137,7 +137,7 @@ if ($query_page_settings->numRows() > 0) {
 // Get continue url
 $query_continue_url = $database->query("SELECT p.link FROM ".TABLE_PREFIX."pages p INNER JOIN ".TABLE_PREFIX."mod_bakery_page_settings ps ON p.page_id = ps.page_id WHERE p.page_id = ps.continue_url AND ps.section_id = '$section_id'");
 if ($query_continue_url->numRows() > 0) {
-	$fetch_continue_url = $query_continue_url->fetchRow();
+	$fetch_continue_url   = $query_continue_url->fetchRow();
 	$setting_continue_url = WB_URL.PAGES_DIRECTORY.stripslashes($fetch_continue_url['link']).PAGE_EXTENSION;
 }
 

@@ -107,6 +107,8 @@ if ($query_customer->numRows() > 0) {
 		$cust_tax_no = !empty($invoice_array[15]) ? $invoice_array[15] : ' &#8212; ';
 		// Change frontend classes (eg. mod_bakery_anything_f) to backend classes (eg. mod_bakery_anything_b)
 		$invoice_array[8] = str_replace("_f'", "_b'", $invoice_array[8]);
+		// Chop off the time part
+		// $invoice_array[9] = strstr($invoice_array[9], ', ', true);
 		// Current date
 		$today = @date(DEFAULT_DATE_FORMAT);
 		// Invoice id

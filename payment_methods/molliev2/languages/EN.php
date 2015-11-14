@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2012, Christoph Marti
+  Copyright (C) 2015, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -21,6 +21,7 @@
 // *********************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Mollie';
 $MOD_BAKERY[$payment_method]['TXT_PARTNER_ID'] = 'Mollie API Key';
 
 // USED BY FILE bakery/payment_methods/mollie/processor.php
@@ -28,7 +29,7 @@ $MOD_BAKERY[$payment_method]['TXT_TITLE'] = 'Mollie online payments';
 $MOD_BAKERY[$payment_method]['TXT_PAY_ONLINE_1'] = 'Our paymentprovider Mollie allows you to use several different payment methods.';
 $MOD_BAKERY[$payment_method]['TXT_PAY_ONLINE_2'] = 'You will enter the secure page of our payment provider.';
 $MOD_BAKERY[$payment_method]['TXT_SECURE'] = 'Choose your payment method.';
-$MOD_BAKERY[$payment_method]['TXT_CONFIRMATION_NOTICE'] = 'After succesfull payment you will receive an email with our order confirmation.';
+$MOD_BAKERY[$payment_method]['TXT_CONFIRMATION_NOTICE'] = 'After successful payment you will receive an email with our order confirmation.';
 $MOD_BAKERY[$payment_method]['TXT_PAY'] = 'I pay online using Mollie';
 $MOD_BAKERY[$payment_method]['TXT_REDIRECT'] = 'You are transfered to the secure website of Mollie.';
 $MOD_BAKERY[$payment_method]['TXT_REDIRECT_NOW'] = 'Go to mollie';
@@ -68,7 +69,7 @@ $MOD_BAKERY[$payment_method]['EMAIL_BODY_SHOP'] = 'Dear [SHOP_NAME] Administrato
 
 NEW ORDER AT [SHOP_NAME]:
 	Order #: [ORDER_ID]
-	Payment method: Mollie (iDEAL)
+	Payment method: Mollie
 
 Shipping address:
 [ADDRESS]

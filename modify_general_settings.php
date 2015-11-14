@@ -74,7 +74,7 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.stripslashes($fetch_
 
 <table cellpadding="2" cellspacing="0" border="0" align="center" width="98%">
 	<tr>
-		<td colspan="5"><strong><?php echo $MOD_BAKERY['TXT_GENERAL_SETTINGS']; ?></strong></td>
+		<td colspan="5"><h2><?php echo $MOD_BAKERY['TXT_GENERAL_SETTINGS']; ?></h2></td>
 	</tr>
 
 

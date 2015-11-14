@@ -132,13 +132,25 @@ if ($query_customer->numRows() > 0) {
 				<?php
 				// Show payment method icons
 				$payment_method = $costumer['submitted'];
-				// Include payment method info file
-				$info_file_path = WB_PATH."/modules/bakery/payment_methods/$payment_method/info.php";
-				include($info_file_path);
-				// Replace 'cod', 'advance' and 'invoice' by localisations
-				$payment_method_name = $payment_method == "cod" ? $MOD_BAKERY['TXT_PAYMENT_METHOD_COD'] : $payment_method_name;
-				$payment_method_name = $payment_method == "advance" ? $MOD_BAKERY['TXT_PAYMENT_METHOD_ADVANCE'] : $payment_method_name;
-				$payment_method_name = $payment_method == "invoice" ? $MOD_BAKERY['TXT_PAYMENT_METHOD_INVOICE'] : $payment_method_name;
+
+				// Get localized payment method name or fall back to the internal identifier
+				$payment_method_name = $payment_method;
+				// Look for payment method language file
+				if (LANGUAGE_LOADED) {
+					if (empty($MOD_BAKERY[$payment_method]['TXT_TITLE'])) {
+					    include_once(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/EN.php');
+					    if (file_exists(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/'.LANGUAGE.'.php')) {
+					        include_once(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/languages/'.LANGUAGE.'.php');
+					    }
+					}
+					if (empty($MOD_BAKERY[$payment_method]['TXT_NAME'])) {
+						$payment_method_name = $MOD_BAKERY[$payment_method]['TXT_TITLE'];
+					}
+					else {
+						$payment_method_name = $MOD_BAKERY[$payment_method]['TXT_NAME'];
+					}
+				}
+
 				// Show icon
 				echo "<img src='".WB_URL."/modules/bakery/payment_methods/$payment_method/icon.png' alt='$payment_method_name' title='$payment_method_name' border='0' />";
 

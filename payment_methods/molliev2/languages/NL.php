@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2012, Christoph Marti
+  Copyright (C) 2015, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -21,6 +21,7 @@
 // *********************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Mollie';
 $MOD_BAKERY[$payment_method]['TXT_PARTNER_ID'] = 'Mollie API Key';
 
 // USED BY FILE bakery/payment_methods/mollie/processor.php
@@ -69,7 +70,7 @@ $MOD_BAKERY[$payment_method]['EMAIL_BODY_SHOP'] = 'Geachte [SHOP_NAME] Administr
 
 NIEUWE BESTELLING BIJ [SHOP_NAME]:
 	Bestelling #: [ORDER_ID]
-	Betaal methode: Mollie (iDEAL)
+	Betaal methode: Mollie
 
 Aflever adres:
 [ADDRESS]

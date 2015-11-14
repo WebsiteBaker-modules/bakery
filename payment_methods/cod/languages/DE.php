@@ -21,6 +21,7 @@
 // ***************************************
 
 // SETTINGS - USED BY BACKEND
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Nachnahme';
 $MOD_BAKERY[$payment_method]['TXT_CHARGES'] = 'Nachnahmegeb&uuml;hren<br />(ohne W&auml;hrungscode)';
 
 // USED BY FILE bakery/payment_methods/cod/gateway.php
