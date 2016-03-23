@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -39,7 +39,7 @@ $tpl->debug = 0;
 // **********
 
 // If cart is empty, show an error message and a "continue shopping" button
-$sql_result1 = $database->query("SELECT * FROM " .TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
+$sql_result1 = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
 $n_row = $sql_result1->numRows();
 if ($n_row < 1) {
 	// Show empty cart error message using template file

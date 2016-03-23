@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System Website Baker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
   FR version by quinto
 
   LICENCE TERMS:
@@ -220,6 +220,8 @@ $MOD_BAKERY['TXT_STATUS_REMINDER'] = 'Rappel';
 $MOD_BAKERY['TXT_STATUS_PAID'] = 'pay&eacute;e';
 $MOD_BAKERY['TXT_STATUS_ARCHIVE'] = 'archive';
 $MOD_BAKERY['TXT_STATUS_ARCHIVED'] = 'archiv&eacute;e';
+$MOD_BAKERY['TXT_STATUS_CANCEL'] = 'annuler';
+$MOD_BAKERY['TXT_STATUS_CANCELED'] = 'annul&eacute;';
 
 $MOD_BAKERY['TXT_PRINT'] = 'Imprimer';
 $MOD_BAKERY['TXT_INVOICE'] = 'Facture';

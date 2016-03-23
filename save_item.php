@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -28,6 +28,7 @@ if (!isset($_POST['item_id']) OR !is_numeric($_POST['item_id'])) {
 // Includes
 require('../../config.php');
 require(WB_PATH.'/modules/bakery/resize_img.php');
+require(WB_PATH.'/modules/bakery/pngthumb.php');
 // Get some default values
 require_once(WB_PATH.'/modules/bakery/config.php');
 // Include WB functions file
@@ -379,7 +380,7 @@ for ($i = 0; $i < $num_images; $i++) {
 			
 			// Check thumbnail type
 			if ($fileext == 'png') {
-				resizePNG($new_file, $thumb_destination, $resize, $resize);
+				make_thumb_png($new_file, $thumb_destination, $resize);
 			} else {
 				make_thumb($new_file, $thumb_destination, $resize);
 			}
@@ -519,7 +520,7 @@ require(WB_PATH."/index.php");
 
 	// IMAGE AND THUMBNAIL
 
-	// Dublicate image data in the db
+	// Duplicate image data in the db
 	$query_images = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_images WHERE item_id = '$orig_item_id'");
 	if ($query_images->numRows() > 0) {
 		while ($image = $query_images->fetchRow()) {

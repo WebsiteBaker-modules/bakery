@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -37,17 +37,9 @@ if ($setting_lightbox2 == "overview" || $setting_lightbox2 == "all") {
 	<script type="text/javascript" src="<?php echo WB_URL; ?>/modules/bakery/lightbox2/js/lightbox.js"></script>
 	<script type="text/javascript">
 	//  Lightbox2 options
-	$(function () {
-	    var lightbox, options;
-	    options = new LightboxOptions;
-
-	    options.fileLoadingImage = '<?php echo WB_URL; ?>/modules/bakery/lightbox2/images/loading.gif';
-	    options.fileCloseImage   = '<?php echo WB_URL; ?>/modules/bakery/lightbox2/images/close.png';
-	    options.labelImage       = '<?php echo $MOD_BAKERY['TXT_IMAGE']; ?>';
-	    options.labelOf          = '<?php echo $TEXT['OF']; ?>';
-
-	    return lightbox          = new Lightbox(options);
-	});
+	lightbox.option({
+		'albumLabel': '<?php echo $MOD_BAKERY['TXT_IMAGE']; ?> %1 <?php echo $TEXT['OF']; ?> %2'
+	})
 	</script>
 	<?php
 }
@@ -148,6 +140,12 @@ if ($num_items > 0) {
 		$thumb     = '';
 		$image     = '';
 
+		// Prepare thumb and image directory pathes and urls
+		$thumb_path = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
+		$img_path   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
+		$thumb_url  = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
+		$img_url    = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
+
 		// Get image data from db
 		$query_image = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '$item_id' AND `active` = '1' ORDER BY position ASC");
 		if ($query_image->numRows() > 0) {
@@ -161,14 +159,11 @@ if ($num_items > 0) {
 				$img_title      = $image['title'];
 				$img_caption    = $image['caption'];
 
-				// Thumbs use .jpg extension only
-				$thumb_file = str_replace(".png", ".jpg", $image_file);
-
-				// Prepare thumb and image directory pathes and urls
-				$thumb_path = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
-				$img_path   = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
-				$thumb_url  = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
-				$img_url    = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.$item_id.'/';
+				// Check if png image has a jpg thumb (version < 1.7.6 used jpg thumbs only)
+				$thumb_file = $image_file;
+				if (!file_exists($thumb_path.$thumb_file)) {
+					$thumb_file = str_replace('.png', '.jpg', $thumb_file);
+				}
 
 				// Make array of all item thumbs and images
 				if (file_exists($thumb_path.$thumb_file) && file_exists($img_path.$image_file)) {
@@ -224,7 +219,7 @@ if ($num_items > 0) {
 						$attributes = array_map('stripslashes', $attributes);
 						// Make attribute select
 						$attributes['operator'] = $attributes['operator'] == "=" ? '' : $attributes['operator'];
-						$ia_price = ", ".$setting_shop_currency." ".$attributes['operator'].$attributes['price'];
+						$ia_price = ", ".$setting_shop_currency.' '.$attributes['operator'].$attributes['price'];
 						$ia_price = $attributes['price'] == 0 ? '' : $ia_price;
 						$option_select .= "<option value='{$attributes['attribute_id']}'>{$attributes['attribute_name']}$ia_price</option>\n";
 					}

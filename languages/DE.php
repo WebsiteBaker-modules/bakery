@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -219,6 +219,8 @@ $MOD_BAKERY['TXT_STATUS_REMINDER'] = 'Zahlungserinnerung';
 $MOD_BAKERY['TXT_STATUS_PAID'] = 'bezahlt';
 $MOD_BAKERY['TXT_STATUS_ARCHIVE'] = 'archivieren';
 $MOD_BAKERY['TXT_STATUS_ARCHIVED'] = 'archiviert';
+$MOD_BAKERY['TXT_STATUS_CANCEL'] = 'stornieren';
+$MOD_BAKERY['TXT_STATUS_CANCELED'] = 'storniert';
 
 $MOD_BAKERY['TXT_PRINT'] = 'Drucken';
 $MOD_BAKERY['TXT_INVOICE'] = 'Rechnung';
@@ -273,7 +275,7 @@ $MOD_BAKERY['ERR_EMAIL_NOT_SENT'] = 'Die E-Mail konnte nicht an Sie versandt wer
 
 // MODUL BAKERY JAVASCRIPT MESSAGES (Important: Do not remove \n !)
 $MOD_BAKERY['TXT_JS_CONFIRM'] = 'M\u00F6chten Sie Ihre Bestellung wirklich abbrechen?';
-$MOD_BAKERY['TXT_JS_AGREE'] = 'Wir k&ouml;nnen Ihre Bestellung nur ausf&uuml;hren, wenn Sie unsere AGB akzeptieren. Danke f&uuml;r Ihr Verst&auml;ndnis!';
+$MOD_BAKERY['TXT_JS_AGREE'] = 'Wir k\u00F6nnen Ihre Bestellung nur ausf\u00FChren, wenn Sie unsere AGB akzeptieren. Danke f\u00FCr Ihr Verst\u00E4ndnis!';
 $MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Bitte geben Sie die Pr\u00FCfziffer ein!';
 $MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'Die eingegebene Pr\u00FCfziffer stimmt nicht \u00FCberein.\nBitte \u00FCberpr\u00FCfen Sie Ihre Eingabe!';
 $MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = 'M\u00F6chten Sie diese Rechnung per E-Mail an den Kunden senden?';

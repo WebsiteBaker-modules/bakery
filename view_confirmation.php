@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -182,7 +182,7 @@ if (is_string($payment_status) && is_string($payment_method)) {
 			// If customer has not sent a message then display 'none'
 			$cust_msg = empty($cust_msg) ? "\t".$TEXT['NONE'] : $cust_msg;
 
-			// Replace placeholders by values in the email body 
+			// Replace placeholders by values in the email body
 			$vars = array('[ORDER_ID]', '[SHOP_NAME]', '[BANK_ACCOUNT]', '[TRANSACTION_STATUS]', '[CUSTOMER_NAME]', '[ADDRESS]', '[CUST_ADDRESS]', '[SHIPPING_ADDRESS]', '[CUST_EMAIL]', '[ITEM_LIST]', '[CUST_TAX_NO]', '[CUST_MSG]');
 			$values = array($order_id, $setting_shop_name, $bank_account, $transaction_status_notice, $cust_name, $address, $cust_address, $ship_address, $cust_email, $item_list, $cust_tax_no, $cust_msg);
 		
@@ -209,7 +209,7 @@ if (is_string($payment_status) && is_string($payment_method)) {
 		if (!isset($no_confirmation)) {
 
 			// Show confirmation using template file
-			if ($payment_status == "success") {
+			if ($payment_status == 'success') {
 				$tpl->set_file('success', 'success.htm');
 				$tpl->set_var(array(
 					'TXT_SUCCESS'			=>	$MOD_BAKERY[$payment_method]['TXT_SUCCESS'],

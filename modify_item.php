@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -316,7 +316,7 @@ if ($show_item_mover) {
 
 // Title and table header
 ?>
-<a name="images"><h2>2. <?php echo $MOD_BAKERY['TXT_ITEM']." ".$MOD_BAKERY['TXT_IMAGES']; ?></h2></a>
+<a name="images"><h2>2. <?php echo $MOD_BAKERY['TXT_ITEM'].' '.$MOD_BAKERY['TXT_IMAGES']; ?></h2></a>
 <table cellpadding="4" cellspacing="0" border="0" width="98%" align="center">
 	<tr height="38" valign="bottom" class="mod_bakery_submit_row_b">
 	  <th width="8%" align="left"><span style="margin-left: 5px;"><?php echo $MOD_BAKERY['TXT_PREVIEW']; ?></span></th>
@@ -387,7 +387,7 @@ if ($show_item_mover) {
 			?>
 
 		<tr class="row_<?php echo $row; ?>">
-		  <td><a href="<?php echo $img_url.$image_file; ?>" target="_blank"><img src="<?php echo $thumb_url.$thumb_file; ?>" alt="<?php echo $MOD_BAKERY['TXT_IMAGE']." ".$image_file; ?>" title="<?php echo $image_file; ?>" height="40" border="0" /></a>
+		  <td><a href="<?php echo $img_url.$image_file; ?>" target="_blank"><img src="<?php echo $thumb_url.$thumb_file; ?>" alt="<?php echo $MOD_BAKERY['TXT_IMAGE'].' '.$image_file; ?>" title="<?php echo $image_file; ?>" height="40" border="0" /></a>
 		  </td>
 		  <td>
 		  	<?php echo $main_img; ?>
@@ -446,7 +446,7 @@ if ($show_item_mover) {
 <?php
 // Image upload
 ?>
-<a name="images"><h2>3. <?php echo $TEXT['ADD']." ".$MOD_BAKERY['TXT_IMAGES']; ?></h2></a>
+<a name="images"><h2>3. <?php echo $TEXT['ADD'].' '.$MOD_BAKERY['TXT_IMAGES']; ?></h2></a>
 <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">	
 	<tr align="left" valign="top">
 		<td>
@@ -457,7 +457,7 @@ if ($show_item_mover) {
 				<tr>
 					<th colspan="2">
 						<input type="checkbox" name="imgresize" id="imgresize" value="yes"<?php echo $fetch_item['imgresize'] == 'yes' ? ' checked="checked"' : ''; ?> />
-						<label for="imgresize"><strong><?php echo $MOD_BAKERY['TXT_IMAGE']." ".$TEXT['RESIZE']; ?></strong></label>
+						<label for="imgresize"><strong><?php echo $MOD_BAKERY['TXT_IMAGE'].' '.$TEXT['RESIZE']; ?></strong></label>
 					</th>
 				</tr>				
 				<tr>
@@ -562,16 +562,16 @@ if ($query_items_attributes->numRows() > 0) {
 		?>
 	<tr class="row_<?php echo $row; ?>" height="20">
 	  <td align="left"><span style="margin-left: 5px;"><?php echo $option['option_name'].": ".$option['attribute_name']; ?></span></td>
-	  <td align="right"><?php echo $option['operator']." ".$fetch_settings['shop_currency']." ".$option['price']; ?></td>
+	  <td align="right"><?php echo $option['operator'].' '.$fetch_settings['shop_currency'].' '.$option['price']; ?></td>
 	  <td>&nbsp;</td>
 	  <td align="center" width="22">
 		<a href="<?php echo WB_URL; ?>/modules/bakery/modify_item.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;item_id=<?php echo $item_id; ?>&amp;attribute_id=<?php echo $option['attribute_id']; ?>#options" title="<?php echo $TEXT['MODIFY']; ?>">
-			<img src="<?php echo THEME_URL; ?>/images/modify_16.png" alt="<?php echo $TEXT['MODIFY']." ".$MOD_BAKERY['TXT_OPTION_NAME']; ?>" border="0" />
+			<img src="<?php echo THEME_URL; ?>/images/modify_16.png" alt="<?php echo $TEXT['MODIFY'].' '.$MOD_BAKERY['TXT_OPTION_NAME']; ?>" border="0" />
 		</a>
 	  </td>
 	  <td align="left" width="22">
 		<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/bakery/delete_item_attribute.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&item_id=<?php echo $item_id; ?>&attribute_id=<?php echo $option['attribute_id'] ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-			<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="<?php echo $TEXT['DELETE']." ".$MOD_BAKERY['TXT_OPTION_NAME']; ?>" />
+			<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="<?php echo $TEXT['DELETE'].' '.$MOD_BAKERY['TXT_OPTION_NAME']; ?>" />
 		</a>
 	  </td>
 	</tr>

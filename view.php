@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -90,7 +90,7 @@ if ($query_general_settings->numRows() > 0) {
 	$setting_shipping_abroad   = stripslashes($fetch_general_settings['shipping_abroad']);
 	$setting_shipping_zone     = stripslashes($fetch_general_settings['shipping_zone']);
 	$setting_zone_countries    = explode(",", stripslashes($fetch_general_settings['zone_countries']));  // make array
-	$setting_shipping_d_a      = $setting_shipping_domestic."/".$setting_shipping_abroad;
+	$setting_shipping_d_a      = $setting_shipping_domestic.'/'.$setting_shipping_abroad;
 }
 
 // Get payment method settings
@@ -183,25 +183,25 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 	// Check order id
 	if (!isset($_SESSION['bakery']['order_id']) || ($_SESSION['bakery']['order_id'] == '')) {
 		$mktime = @mktime();
-		$database->query("INSERT INTO " .TABLE_PREFIX."mod_bakery_customer (order_date) VALUES ('$mktime')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_customer (order_date) VALUES ('$mktime')");
 		$order_id = $database->get_one("SELECT LAST_INSERT_ID()");
 		$_SESSION['bakery']['order_id'] = $order_id;
-		
+
 		// Delete db records of not submitted orders older than 1 hour
 		$outdate = $mktime - (60 * 60 * 1);
-		$query_outdated_orders = $database->query("SELECT order_id FROM " .TABLE_PREFIX."mod_bakery_customer WHERE order_date < $outdate AND submitted = 'no'");
+		$query_outdated_orders = $database->query("SELECT order_id FROM ".TABLE_PREFIX."mod_bakery_customer WHERE order_date < $outdate AND submitted = 'no'");
 		if ($query_outdated_orders->numRows() > 0) {
 			while ($outdated_orders = $query_outdated_orders->fetchRow()) {
 				$outdated_order_id = stripslashes($outdated_orders['order_id']);
 
 				// First put not sold items back to stock...
-				$query_order = $database->query("SELECT item_id, quantity FROM " .TABLE_PREFIX."mod_bakery_order WHERE order_id = '$outdated_order_id'");
+				$query_order = $database->query("SELECT item_id, quantity FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$outdated_order_id'");
 				if ($query_order->numRows() > 0) {
 					while ($order = $query_order->fetchRow()) {
 						$item_id = stripslashes($order['item_id']);
 						$quantity = stripslashes($order['quantity']);
 						// Query item stock
-						$query_items = $database->query("SELECT stock FROM " .TABLE_PREFIX."mod_bakery_items WHERE item_id = '$item_id'");
+						$query_items = $database->query("SELECT stock FROM ".TABLE_PREFIX."mod_bakery_items WHERE item_id = '$item_id'");
 						$item = $query_items->fetchRow();
 						$stock = stripslashes($item['stock']);
 						// Only use stock admin if stock is not blank
@@ -213,8 +213,8 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 				}
 				
 				// ...then delete not submitted orders
-				$database->query("DELETE FROM " .TABLE_PREFIX."mod_bakery_customer WHERE order_id = '$outdated_order_id' AND submitted = 'no'");
-				$database->query("DELETE FROM " .TABLE_PREFIX."mod_bakery_order WHERE order_id = '$outdated_order_id'");
+				$database->query("DELETE FROM ".TABLE_PREFIX."mod_bakery_customer WHERE order_id = '$outdated_order_id' AND submitted = 'no'");
+				$database->query("DELETE FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$outdated_order_id'");
 			}
 		}			
 	}
@@ -230,7 +230,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 	if (isset($_POST['add_to_cart']) && ($_POST['add_to_cart'] != '')) {
 		
 		// Get item ID and quantity ( -> $value)
-		$sql_result1 = $database->query("SELECT * FROM " .TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
+		$sql_result1 = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
 		
 		foreach ($_POST as $field => $value) {
 			// Error message if quantity < 1
@@ -259,7 +259,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 				}
 				
 				// Get item price, sku, stock and tax_rate
-				$sql_result2 = $database->query("SELECT title, price, sku, stock, tax_rate FROM " .TABLE_PREFIX."mod_bakery_items WHERE item_id = '$item_id'");
+				$sql_result2 = $database->query("SELECT title, price, sku, stock, tax_rate FROM ".TABLE_PREFIX."mod_bakery_items WHERE item_id = '$item_id'");
 				$row2     = $sql_result2->fetchRow();
 				$row2     = array_map('stripslashes', $row2);
 				$title    = $row2['title'];
@@ -298,7 +298,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 				}
 				// Insert ordered item data into db
 				if ($quantity > 0) {
-					$database->query("INSERT INTO " .TABLE_PREFIX."mod_bakery_order (order_id, item_id, attributes, sku, quantity, price, tax_rate) VALUES ('$order_id', '$item_id', '$attributes', '$sku', '$quantity', '$price', '$tax_rate')");
+					$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_order (order_id, item_id, attributes, sku, quantity, price, tax_rate) VALUES ('$order_id', '$item_id', '$attributes', '$sku', '$quantity', '$price', '$tax_rate')");
 				}
 			}
 		}
@@ -329,7 +329,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 				$quantity = abs(strip_tags($quantity));
 
 				// Query item stock
-				$query_items = $database->query("SELECT title, stock FROM " .TABLE_PREFIX."mod_bakery_items WHERE item_id = '$item_id'");
+				$query_items = $database->query("SELECT title, stock FROM ".TABLE_PREFIX."mod_bakery_items WHERE item_id = '$item_id'");
 				$item = $query_items->fetchRow();
 				$title = stripslashes($item['title']);
 				$stock = stripslashes($item['stock']);
@@ -341,7 +341,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 
 						// Case: Allow out of stock orders
 						// Query current item quantity 
-						$query_order = $database->query("SELECT quantity FROM " .TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id' AND item_id = '$item_id' AND attributes = '$attributes'");
+						$query_order = $database->query("SELECT quantity FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id' AND item_id = '$item_id' AND attributes = '$attributes'");
 						$order = $query_order->fetchRow();
 						$quantity_current = stripslashes($order['quantity']);
 						// Calculate difference
@@ -358,7 +358,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 					} else {
 						// Case: No out of stock orders
 						// Query current item quantity 
-						$query_order = $database->query("SELECT quantity FROM " .TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id' AND item_id = '$item_id' AND attributes = '$attributes'");
+						$query_order = $database->query("SELECT quantity FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id' AND item_id = '$item_id' AND attributes = '$attributes'");
 						$order = $query_order->fetchRow();
 						$quantity_current = stripslashes($order['quantity']);
 						// Calculate difference
@@ -382,7 +382,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 					}
 				}
 				// Update item order quantity
-				$database->query("UPDATE " .TABLE_PREFIX."mod_bakery_order SET quantity = '$quantity' WHERE order_id = '$order_id' AND item_id = '$item_id' AND attributes = '$attributes'");
+				$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_order SET quantity = '$quantity' WHERE order_id = '$order_id' AND item_id = '$item_id' AND attributes = '$attributes'");
 			}
 		}
 
@@ -392,7 +392,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 		}
 
 		// Delete ordered items with quantity 0
-		$database->query("DELETE FROM " .TABLE_PREFIX."mod_bakery_order WHERE quantity = '0' AND order_id = '$order_id'");
+		$database->query("DELETE FROM ".TABLE_PREFIX."mod_bakery_order WHERE quantity = '0' AND order_id = '$order_id'");
 		
 		// Enable success message to show in view_cart.php
 		$cart_success = true;
@@ -463,13 +463,13 @@ elseif (isset($_POST['cancel_order']) && isset($_SESSION['bakery']['order_id']) 
 	// Get order id
 	$order_id = $_SESSION['bakery']['order_id'];
 	// First put not sold items back to stock...
-	$query_order = $database->query("SELECT item_id, quantity FROM " .TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
+	$query_order = $database->query("SELECT item_id, quantity FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
 	if ($query_order->numRows() > 0) {
 		while ($order = $query_order->fetchRow()) {
 			$item_id = stripslashes($order['item_id']);
 			$quantity = stripslashes($order['quantity']);
 			// Query item stock
-			$query_items = $database->query("SELECT stock FROM " .TABLE_PREFIX."mod_bakery_items WHERE item_id = '$item_id'");
+			$query_items = $database->query("SELECT stock FROM ".TABLE_PREFIX."mod_bakery_items WHERE item_id = '$item_id'");
 			$item = $query_items->fetchRow();
 			$stock = stripslashes($item['stock']);
 			// Only use stock admin if stock is not blank
@@ -481,8 +481,8 @@ elseif (isset($_POST['cancel_order']) && isset($_SESSION['bakery']['order_id']) 
 	}
 
 	// Delete the db records not needed any more
-	$database->query("DELETE FROM " .TABLE_PREFIX."mod_bakery_customer WHERE order_id='$order_id' AND submitted='no'");
-	$database->query("DELETE FROM " .TABLE_PREFIX."mod_bakery_order WHERE order_id='$order_id'");
+	$database->query("DELETE FROM ".TABLE_PREFIX."mod_bakery_customer WHERE order_id='$order_id' AND submitted='no'");
+	$database->query("DELETE FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id='$order_id'");
 
 	// Clean up the session array
 	unset($_SESSION['bakery']);

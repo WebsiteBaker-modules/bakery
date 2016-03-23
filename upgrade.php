@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -47,9 +47,9 @@ echo'
 
 
 
-// ****************************************
-// BAKERY UPGRADE STARTING FROM VERSION 0.7 
-// ****************************************
+// *****************************************
+// BAKERY UPGRADE STARTING FROM VERSION 0.70 
+// *****************************************
 
 // Get new modul version from modul info file
 $info_file = WB_PATH.'/modules/bakery/info.php';
@@ -74,13 +74,13 @@ if ($module_version >= $new_module_version) {
 
 
 
-// UPGRADE TO VERSION 0.7 
-// **********************
+// UPGRADE TO VERSION 0.70 
+// ***********************
 
-if ($module_version < 0.7) {
+if ($module_version < 0.70) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 0.7:</h3>';
+	echo'<h3>Upgrading to version 0.70:</h3>';
 
 	// Get ITEMS table to see what needs to be created
 	$itemstable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_items`");
@@ -110,7 +110,7 @@ if ($module_version < 0.7) {
 	$customertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer`");
 	$num_customers = $customertable->numRows();
 	if ($num_customers == 0) {
-		$database->query("INSERT INTO " .TABLE_PREFIX."mod_bakery_customer (order_id) VALUES ('0')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_customer (order_id) VALUES ('0')");
 	}
 	$customertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer`");
 	$customer = $customertable->fetchRow();
@@ -139,7 +139,7 @@ if ($module_version < 0.7) {
 	$ordertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_order`");
 	$num_orders = $ordertable->numRows();
 	if ($num_orders == 0) {
-		$database->query("INSERT INTO " .TABLE_PREFIX."mod_bakery_order (order_id) VALUES ('0')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_order (order_id) VALUES ('0')");
 	}
 	$ordertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_order`");
 	$order = $ordertable->fetchRow();
@@ -370,13 +370,13 @@ if ($module_version < 0.7) {
 
 
 
-// UPGRADE TO VERSION 0.8 
-// **********************
+// UPGRADE TO VERSION 0.80 
+// ***********************
 
-if ($module_version < 0.8) {
+if ($module_version < 0.80) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 0.8:</h3>';
+	echo'<h3>Upgrading to version 0.80:</h3>';
 
 	// Get ITEMS table to see what needs to be created
 	$itemstable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_items`");
@@ -398,7 +398,7 @@ if ($module_version < 0.8) {
 	$customertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer`");
 	$num_customers = $customertable->numRows();
 	if ($num_customers == 0) {
-		$database->query("INSERT INTO " .TABLE_PREFIX."mod_bakery_customer (order_id) VALUES ('0')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_customer (order_id) VALUES ('0')");
 	}
 	$customertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer`");
 	$customer = $customertable->fetchRow();
@@ -426,7 +426,7 @@ if ($module_version < 0.8) {
 	$ordertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_order`");
 	$num_orders = $ordertable->numRows();
 	if ($num_orders == 0) {
-		$database->query("INSERT INTO " .TABLE_PREFIX."mod_bakery_order (order_id) VALUES ('0')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_order (order_id) VALUES ('0')");
 	}
 	$ordertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_order`");
 	$order = $ordertable->fetchRow();
@@ -523,13 +523,13 @@ if ($module_version < 0.8) {
 	
 
 	
-// UPGRADE TO VERSION 0.8.1 
+// UPGRADE TO VERSION 0.81 
 // ************************
 
 if ($module_version < 0.81) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 0.8.1:</h3>';
+	echo'<h3>Upgrading to version 0.81:</h3>';
 	
 	// Get SETTINGS table to see what needs to be changed
 	$settingstable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_page_settings`");
@@ -547,13 +547,13 @@ if ($module_version < 0.81) {
 	
 
 	
-// UPGRADE TO VERSION 0.8.3
+// UPGRADE TO VERSION 0.83
 // ************************
 
 if ($module_version < 0.83) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 0.8.3:</h3>';
+	echo'<h3>Upgrading to version 0.83:</h3>';
 	
 	// Get SETTINGS table to see what needs to be changed
 	$settingstable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_general_settings`");
@@ -571,13 +571,13 @@ if ($module_version < 0.83) {
 	
 
 	
-// UPGRADE TO VERSION 0.9
-// ************************
+// UPGRADE TO VERSION 0.90
+// ***********************
 
-if ($module_version < 0.9) {
+if ($module_version < 0.90) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 0.9:</h3>';
+	echo'<h3>Upgrading to version 0.90:</h3>';
 
 
 
@@ -639,7 +639,7 @@ if ($module_version < 0.9) {
 	$itemstable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_items`");
 	$num_items = $itemstable->numRows();
 	if ($num_items == 0) {
-		$database->query("INSERT INTO " .TABLE_PREFIX."mod_bakery_items (item_id) VALUES ('0')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_items (item_id) VALUES ('0')");
 	}
 
 	// Get ITEMS table to see what needs to be added
@@ -658,7 +658,7 @@ if ($module_version < 0.9) {
 	$customertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer`");
 	$num_customers = $customertable->numRows();
 	if ($num_customers == 0) {
-		$database->query("INSERT INTO " .TABLE_PREFIX."mod_bakery_customer (order_id) VALUES ('0')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_customer (order_id) VALUES ('0')");
 	}
 
 	// Get CUSTOMER table to see what needs to be changed
@@ -732,7 +732,7 @@ if ($module_version < 0.9) {
 	$ordertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_order`");
 	$num_order = $ordertable->numRows();
 	if ($num_order == 0) {
-		$database->query("INSERT INTO " .TABLE_PREFIX."mod_bakery_order (order_id) VALUES ('0')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_order (order_id) VALUES ('0')");
 	}
 
 	// Get ORDER table to see what needs to be added
@@ -828,13 +828,13 @@ if ($module_version < 0.9) {
 
 
 
-// UPGRADE TO VERSION 0.9.6
-// ************************
+// UPGRADE TO VERSION 0.96
+// ***********************
 
 if ($module_version < 0.96) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 0.9.6:</h3>';
+	echo'<h3>Upgrading to version 0.96:</h3>';
 	
 	// Get SETTINGS table to see what needs to be changed
 	$settingstable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_general_settings`");
@@ -865,13 +865,13 @@ if ($module_version < 0.96) {
 	
 
 	
-// UPGRADE TO VERSION 0.9.7
-// ************************
+// UPGRADE TO VERSION 0.97
+// ***********************
 
 if ($module_version < 0.97) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 0.9.7:</h3>';
+	echo'<h3>Upgrading to version 0.97:</h3>';
 	
 	// Get SETTINGS table to see what needs to be changed
 	$settingstable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_general_settings`");
@@ -964,13 +964,13 @@ if ($module_version < 0.97) {
 
 
 
-// UPGRADE TO VERSION 1.1
-// **********************
+// UPGRADE TO VERSION 1.10
+// ***********************
 
-if ($module_version < 1.1) {
+if ($module_version < 1.10) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 1.1:</h3>';
+	echo'<h3>Upgrading to version 1.10:</h3>';
 
 
 	// Add new fields to the general settings table
@@ -1124,7 +1124,7 @@ if ($module_version < 1.1) {
 	$customertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer`");
 	$num_customers = $customertable->numRows();
 	if ($num_customers == 0) {
-		$database->query("INSERT INTO " .TABLE_PREFIX."mod_bakery_customer (order_id) VALUES ('0')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_customer (order_id) VALUES ('0')");
 	}
 	$customertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer`");
 	$customer = $customertable->fetchRow();
@@ -1166,13 +1166,13 @@ if ($module_version < 1.1) {
 
 
 
-// UPGRADE TO VERSION 1.3
-// **********************
+// UPGRADE TO VERSION 1.30
+// ***********************
 
-if ($module_version < 1.3) {
+if ($module_version < 1.30) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 1.3:</h3>';
+	echo'<h3>Upgrading to version 1.30:</h3>';
 
 	// Get ITEMS table to see what needs to be created
 	$itemstable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_items`");
@@ -1206,7 +1206,7 @@ if ($module_version < 1.3) {
 	// General upgrade note
 	echo '
 <div style="margin: 15px 0; padding: 10px 10px 10px 60px; text-align: left; color: red; border: solid 1px red; background-color: #FFDCD9; background-image: url('.WB_URL.'/modules/bakery/images/information.gif); background-position: 15px 15px; background-repeat: no-repeat;">
-	<p style="font-weight: bold;">IMPORTANT UPGRADE NOTE UPGRADING TO v1.3</p>
+	<p style="font-weight: bold;">IMPORTANT UPGRADE NOTE UPGRADING TO v1.30</p>
 	<ul style="padding-left: 20px;">
 		<li style="list-style: square;"><b>Item images</b>: Due to a new way how Bakery handles and stores images you will have to reupload <b>ALL</b> item images using the Bakery backend. Use your backup of the <code>/media/bakery</code> directory. Use speaking image file names since they are used for the image <code>&lt;alt&gt;<code> and </code>&lt;title&gt;</code> tag and shown as the Lightbox2 caption.</li><br />
 		<li style="list-style: square;"><b>Item templates</b>: Use the vars [THUMB], [THUMBS], [IMAGE] and [IMAGES] to display images. Depending on your page settings the images will be linked automatically to the detail page or overlay on the current page using Lightbox2. So there is no more need to link the image in your template.</li>
@@ -1218,13 +1218,13 @@ if ($module_version < 1.3) {
 
 
 
-// UPGRADE TO VERSION 1.4.0
-// ************************
+// UPGRADE TO VERSION 1.40
+// ***********************
 
 if ($module_version < 1.40) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 1.4.0:</h3>';
+	echo'<h3>Upgrading to version 1.40:</h3>';
 
 	// Change PAYMENT METHODS table
 	if ($database->query("UPDATE `".TABLE_PREFIX."mod_bakery_payment_methods` SET `value_4` = `value_2`, `field_4` = `field_2`, `value_2` = '', `field_2` = '' WHERE `directory` = 'invoice' AND `version` = '0.1' LIMIT 1")) {
@@ -1316,13 +1316,13 @@ if ($module_version < 1.40) {
 
 
 
-// UPGRADE TO VERSION 1.5.1
+// UPGRADE TO VERSION 1.51
 // ************************
 
 if ($module_version < 1.51) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 1.5.1:</h3>';
+	echo'<h3>Upgrading to version 1.51:</h3>';
 
 	// Get GENERAL SETTINGS table to see what needs to be created
 	$settingstable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_general_settings`");
@@ -1342,13 +1342,13 @@ if ($module_version < 1.51) {
 
 
 
-// UPGRADE TO VERSION 1.5.5
-// ************************
+// UPGRADE TO VERSION 1.55
+// ***********************
 
 if ($module_version < 1.55) {
 	echo '
 <div style="margin: 15px 0; padding: 10px 10px 10px 60px; text-align: left; color: red; border: solid 1px red; background-color: #FFDCD9; background-image: url('.WB_URL.'/modules/bakery/images/information.gif); background-position: 15px 25px; background-repeat: no-repeat;">
-	<p style="font-weight: bold;">IMPORTANT UPGRADE NOTES UPGRADING TO BAKERY v1.5.5</p>
+	<p style="font-weight: bold;">IMPORTANT UPGRADE NOTES UPGRADING TO BAKERY v1.55</p>
 	<p style="font-weight: bold;">This upgrade note only concerns users of the DIRECTebanking.com / sofort&uuml;berweisung.de payment method.</p>
 	<p style="padding: 5px; border: 1px solid red;">As a new  payment method security feature <strong>DIRECTebanking.com</strong> / <strong>sofort&uuml;berweisung.de</strong> now supports a notification password. This password is used to verify the HTTP response notifications. All users  of this payment method  have to add a notification password otherwise the payment method will not work properly any more. </p>
 	<p>In order to set the notification password</span> follow the steps below:</p>
@@ -1368,13 +1368,13 @@ if ($module_version < 1.55) {
 
 
 
-// UPGRADE TO VERSION 1.6
-// **********************
+// UPGRADE TO VERSION 1.60
+// ***********************
 
 if ($module_version < 1.60) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 1.6.0:</h3>';
+	echo'<h3>Upgrading to version 1.60:</h3>';
 
 	// Get COSTUMER table to see what needs to be changed
 	$customertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer`");
@@ -1412,13 +1412,13 @@ if ($module_version < 1.60) {
 
 
 
-// UPGRADE TO VERSION 1.7
-// **********************
+// UPGRADE TO VERSION 1.70
+// ***********************
 
 if ($module_version < 1.70) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 1.7.0:</h3>';
+	echo'<h3>Upgrading to version 1.70:</h3>';
 
 	// Get COSTUMER table to see what needs to be changed
 	$customertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer`");
@@ -1546,13 +1546,13 @@ else {
 
 
 
-// UPGRADE TO VERSION 1.7.2
+// UPGRADE TO VERSION 1.72
 // ************************
 
 if ($module_version < 1.72) {
 
 	// Titel: Upgrading to
-	echo'<h3>Upgrading to version 1.7.2:</h3>';
+	echo'<h3>Upgrading to version 1.72:</h3>';
 
 	// Get COSTUMER table to see what needs to be changed
 	$customertable = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer`");
@@ -1564,6 +1564,30 @@ if ($module_version < 1.72) {
 				} else { echo '<span class="bad">'.$database->get_error().'</span><br />'; }
 		} else { echo '<span class="ok">Database field sent_invoices exists, update not needed</span><br />'; }
 	}
+}
+
+
+
+
+// UPGRADE TO VERSION 1.76
+// ************************
+
+if ($module_version < 1.76) {
+
+	// Titel: Upgrading to
+	echo'<h3>Upgrading to version 1.76 or later:</h3>';
+
+	echo '
+<div style="margin: 15px 0; padding: 10px 10px 10px 60px; text-align: left; color: red; border: solid 1px red; background-color: #FFDCD9; background-image: url('.WB_URL.'/modules/bakery/images/information.gif); background-position: 15px 25px; background-repeat: no-repeat;">
+	<p style="font-weight: bold;">IMPORTANT UPGRADE NOTES UPGRADING TO BAKERY v1.7.6</p>
+	<p style="padding: 5px; border: 1px solid red;">This version features an improvement in handling item images. On resizing png images will no longer be converted to jpg thumbs.</p>
+	<p>If you are using the module snippets <b>Bakery Anyitems</b> or <b>Bakery Lastitems</b> please upgrade:</p>
+	<ol>
+	  <li style="list-style: decimal;">Upgrade Bakery Anyitems to version <b>0.8</b> or higher.</li>
+	  <li style="list-style: decimal;">Upgrade Bakery Lastitems to version <b>0.7</b> or higher.</li>
+	</ol> 
+</div>
+';
 }
 
 

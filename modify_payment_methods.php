@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -236,7 +236,7 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
 		}
 
 		// If no payment method setting has been set
-		$setting_info = $no_setting ? $MOD_BAKERY['TXT_NO_PAYMENT_METHOD_SETTING'] : "&nbsp;";
+		$setting_info = $no_setting ? $MOD_BAKERY['TXT_NO_PAYMENT_METHOD_SETTING'] : '&nbsp;';
 	}
 
 	// Show payment method header
@@ -263,23 +263,23 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
     </tr>
 
 	<tr>
-		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_EMAIL_SUBJECT']." ".$MOD_BAKERY['TXT_CUSTOMER']; ?>:</td>
+		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_EMAIL_SUBJECT'].' '.$MOD_BAKERY['TXT_CUSTOMER']; ?>:</td>
 		<td colspan="4">
 			<input type="text" name="update[cust_email_subject]" style="width: 98%" value="<?php echo $cust_email_subject; ?>" /></td>
 	</tr>
 	<tr>
-		<td width="30%" align="right" valign="top"><?php echo $MOD_BAKERY['TXT_EMAIL_BODY']." ".$MOD_BAKERY['TXT_CUSTOMER']; ?>:</td>
+		<td width="30%" align="right" valign="top"><?php echo $MOD_BAKERY['TXT_EMAIL_BODY'].' '.$MOD_BAKERY['TXT_CUSTOMER']; ?>:</td>
 		<td colspan="4">
 			<textarea name="update[cust_email_body]" style="width: 98%; height: 80px;"><?php echo $cust_email_body; ?></textarea></td>
 	</tr>
 
 	<tr>
-		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_EMAIL_SUBJECT']." ".$MOD_BAKERY['TXT_SHOP']; ?>:</td>
+		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_EMAIL_SUBJECT'].' '.$MOD_BAKERY['TXT_SHOP']; ?>:</td>
 		<td colspan="4">
 			<input type="text" name="update[shop_email_subject]" style="width: 98%" value="<?php echo $shop_email_subject; ?>" /></td>
 	</tr>
 	<tr>
-		<td width="30%" align="right" valign="top"><?php echo $MOD_BAKERY['TXT_EMAIL_BODY']." ".$MOD_BAKERY['TXT_SHOP']; ?>:</td>
+		<td width="30%" align="right" valign="top"><?php echo $MOD_BAKERY['TXT_EMAIL_BODY'].' '.$MOD_BAKERY['TXT_SHOP']; ?>:</td>
 		<td colspan="4">
 			<textarea name="update[shop_email_body]" style="width: 98%; height: 80px;"><?php echo $shop_email_body; ?></textarea></td>
 	</tr>

@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -73,7 +73,7 @@ foreach ($forms as $form) {
 
 // For logged in user try to get customer data of a previous order from the db...
 if (isset($_SESSION['USER_ID']) && $cust_first_name == '' && $cust_last_name == '' && $cust_street == '' && $cust_city == '' && $cust_state == '' && $cust_zip == '' && $cust_email == '' && $cust_phone == '') {
-	$sql_result = $database->query("SELECT cust_company, cust_first_name, cust_last_name, cust_tax_no, cust_street, cust_city, cust_state, cust_country, cust_zip, cust_email, cust_phone FROM " .TABLE_PREFIX."mod_bakery_customer WHERE user_id = '{$_SESSION['USER_ID']}' ORDER BY order_id DESC LIMIT 1");
+	$sql_result = $database->query("SELECT cust_company, cust_first_name, cust_last_name, cust_tax_no, cust_street, cust_city, cust_state, cust_country, cust_zip, cust_email, cust_phone FROM ".TABLE_PREFIX."mod_bakery_customer WHERE user_id = '{$_SESSION['USER_ID']}' ORDER BY order_id DESC LIMIT 1");
 	$n = $sql_result->numRows();
 	if ($n > 0) {
 		$row = $sql_result->fetchRow();
@@ -84,7 +84,7 @@ if (isset($_SESSION['USER_ID']) && $cust_first_name == '' && $cust_last_name == 
 
 // ...and same for the shipping data
 if (isset($_SESSION['USER_ID']) &&  $ship_first_name == '' && $ship_last_name == '' && $ship_street == '' && $ship_city == '' && $ship_state == '' && $ship_zip == '') {
-	$sql_result = $database->query("SELECT ship_company, ship_first_name, ship_last_name, ship_street, ship_city, ship_state, ship_country, ship_zip FROM " .TABLE_PREFIX."mod_bakery_customer WHERE user_id = '{$_SESSION['USER_ID']}' ORDER BY order_id DESC LIMIT 1");
+	$sql_result = $database->query("SELECT ship_company, ship_first_name, ship_last_name, ship_street, ship_city, ship_state, ship_country, ship_zip FROM ".TABLE_PREFIX."mod_bakery_customer WHERE user_id = '{$_SESSION['USER_ID']}' ORDER BY order_id DESC LIMIT 1");
 	$n = $sql_result->numRows();
 	if ($n > 0) {
 		$row = $sql_result->fetchRow();

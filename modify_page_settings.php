@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -96,7 +96,7 @@ if ($get_pages->numRows() > 0) {
 
 <!-- Shop -->
 	<tr valign="bottom">
-		  <td width="25%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_SHOP']." ".$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
+		  <td width="25%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_SHOP'].' '.$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
 		  <td width="12" height="32" colspan="2">&nbsp;</td>
     </tr>
 	<tr>
@@ -115,7 +115,7 @@ if ($get_pages->numRows() > 0) {
 
 <!-- Layout -->
 	<tr valign="bottom">
-	  <td width="25%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_LAYOUT']." ".$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
+	  <td width="25%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_LAYOUT'].' '.$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
 	  <td height="32" colspan="2"><input type="button" value="<?php echo $MENU['HELP']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/bakery/help.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>';" style="width: 100px;" /></td>
     </tr>
 	<tr>
@@ -166,7 +166,7 @@ if ($get_pages->numRows() > 0) {
 	</tr>
 	<?php if (extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */ ?>
 	<tr>
-		<td width="25%" align="right"><?php echo $MOD_BAKERY['TXT_THUMBNAIL']." ".$TEXT['SIZE']; ?>:</td>
+		<td width="25%" align="right"><?php echo $MOD_BAKERY['TXT_THUMBNAIL'].' '.$TEXT['SIZE']; ?>:</td>
 		<td colspan="2">
 			<select name="resize" style="width: 20%;">
 				<?php

@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -27,7 +27,21 @@ require(WB_PATH.'/modules/admin.php');
 foreach ($_POST['status'] as $order_id => $status) {
 	$status = $admin->add_slashes(strip_tags($status));
 	// ...and update status
-	$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_customer SET status = '$status' WHERE order_id = '$order_id'");
+	$database->query("UPDATE `".TABLE_PREFIX."mod_bakery_customer` SET `status` = '$status' WHERE `order_id` = '$order_id'");
+
+	// If order was canceled put the ordered items back to the stock
+	if ($status == 'canceled') {
+
+		// Get the ordered items and their corresponding quantity
+		$query_ordered_items = $database->query("SELECT `item_id`, `quantity` FROM `".TABLE_PREFIX."mod_bakery_order` WHERE `order_id` = '$order_id'");
+		while ($ordered_items = $query_ordered_items->fetchRow()) {
+			$item_id  = $ordered_items['item_id'];
+			$quantity = $ordered_items['quantity'];
+
+			// Update item quantity
+			$database->query("UPDATE `".TABLE_PREFIX."mod_bakery_items` SET `stock` = `stock` + '$quantity' WHERE `item_id` = '$item_id'");
+		}
+	}
 }
 
 // Check if there is a db error, otherwise say successful

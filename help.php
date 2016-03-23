@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -192,7 +192,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>URL to the current (overview) page</td>
-    <td class="mod_bakery_placeholders_page_b"><?php echo (isset($page['link']) ? WB_URL."<wbr>".PAGES_DIRECTORY.$page['link'].PAGE_EXTENSION : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_page_b"><?php echo (isset($page['link']) ? WB_URL."<wbr>".PAGES_DIRECTORY.$page['link'].PAGE_EXTENSION : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[CURRENCY]</td>
@@ -212,7 +212,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Item modification date</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['modified_when']) ? gmdate(DATE_FORMAT, $item['modified_when']+TIMEZONE) : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['modified_when']) ? gmdate(DATE_FORMAT, $item['modified_when']+TIMEZONE) : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[DESCRIPTION]</td>
@@ -222,7 +222,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Item description</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['description']) ? $item['description'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['description']) ? $item['description'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[DISPLAY_NAME]</td>
@@ -252,7 +252,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>User email</td>
-    <td><?php echo (isset($_SESSION['EMAIL']) ? $_SESSION['EMAIL'] : "&nbsp;"); ?></td>
+    <td><?php echo (isset($_SESSION['EMAIL']) ? $_SESSION['EMAIL'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[FIELD_1]<br />[FIELD_2]<br />[FIELD_3]</td>
@@ -272,7 +272,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Item full description</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['full_desc']) ? $item['full_desc'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['full_desc']) ? $item['full_desc'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[IMAGE]</td>
@@ -303,7 +303,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Item id</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['item_id']) ? $item['item_id'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['item_id']) ? $item['item_id'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[LINK]</td>
@@ -313,7 +313,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>&nbsp;</td>
     <td class="mod_bakery_placeholders_column_b">&nbsp;</td>
     <td>Link to the item (detail)</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['link']) ? WB_URL.PAGES_DIRECTORY."<wbr>".$item['link'].PAGE_EXTENSION : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['link']) ? WB_URL.PAGES_DIRECTORY."<wbr>".$item['link'].PAGE_EXTENSION : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[NEXT]</td>
@@ -384,7 +384,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Page title</td>
-    <td class="mod_bakery_placeholders_page_b"><?php echo (isset($page['page_title']) ? $page['page_title'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_page_b"><?php echo (isset($page['page_title']) ? $page['page_title'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[PREVIOUS]</td>
@@ -424,7 +424,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Item Price</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['price']) ? $item['price'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['price']) ? $item['price'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[SHIPPING]</td>
@@ -434,7 +434,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Item Shipping</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['shipping']) ? $item['shipping'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['shipping']) ? $item['shipping'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[SHIPPING_DOMESTIC]</td>
@@ -444,7 +444,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Shipping domestic</td>
-    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['shipping_domestic']) ? $general_settings['shipping_domestic'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['shipping_domestic']) ? $general_settings['shipping_domestic'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[SHIPPING_ABROAD]</td>
@@ -454,7 +454,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Shipping abroad</td>
-    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['shipping_abroad']) ? $general_settings['shipping_abroad'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['shipping_abroad']) ? $general_settings['shipping_abroad'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[SHIPPING_D_A]</td>
@@ -464,7 +464,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Shipping domestic/abroad</td>
-    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['shipping_domestic']) && isset($general_settings['shipping_abroad']) ? $general_settings['shipping_domestic']."/".$general_settings['shipping_abroad'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['shipping_domestic']) && isset($general_settings['shipping_abroad']) ? $general_settings['shipping_domestic'].'/'.$general_settings['shipping_abroad'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[SHOP_URL]</td>
@@ -474,7 +474,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Continue shopping URL (page setting) = URL to the current (overview) page</td>
-    <td class="mod_bakery_placeholders_page_settings_b"><?php echo (isset($continue_url) ? WB_URL.PAGES_DIRECTORY."<wbr>".$continue_url.PAGE_EXTENSION : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_page_settings_b"><?php echo (isset($continue_url) ? WB_URL.PAGES_DIRECTORY."<wbr>".$continue_url.PAGE_EXTENSION : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[SKU]</td>
@@ -484,7 +484,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Stockkeeping unit, item no or product code</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['sku']) ? $item['sku'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['sku']) ? $item['sku'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[STOCK]</td>
@@ -504,7 +504,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Item Tax Rate</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['tax_rate']) ? $item['tax_rate'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['tax_rate']) ? $item['tax_rate'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[TEXT_OF]</td>
@@ -684,7 +684,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Item modification time</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['modified_when']) ? gmdate(TIME_FORMAT, $item['modified_when']+TIMEZONE) : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['modified_when']) ? gmdate(TIME_FORMAT, $item['modified_when']+TIMEZONE) : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[TITLE]</td>
@@ -694,7 +694,7 @@ if ($general_settings['stock_mode'] == "number") {
     <td>IH</td>
     <td class="mod_bakery_placeholders_column_b">IF</td>
     <td>Item title / Item name</td>
-    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['title']) ? $item['title'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_items_b"><?php echo (isset($item['title']) ? $item['title'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[USERNAME]</td>
@@ -741,39 +741,39 @@ if ($general_settings['stock_mode'] == "number") {
   <tr valign="top">
     <td>[ADDRESS]</td>
     <td colspan="6"><strong>Either</strong> the value of <code>[CUST_ADDRESS]</code> <strong>or</strong> -  if provided by the customer - the value of <code>[SHIPPING_ADDRESS]</code></td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($address) ? $address : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($address) ? $address : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[BANK_ACCOUNT]</td>
     <td colspan="6">Information about the shop bank account (general setting)</td>
-    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['bank_account']) ? $general_settings['bank_account'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['bank_account']) ? $general_settings['bank_account'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[CUST_ADDRESS]</td>
     <td colspan="6">Customer address<br />
       Contains the data of the first part of the Bakery address form: The customer postal address, phone number and email.<br />
       It is the main address and used for billing and - if no shipping address is provided by the customer - for shipping as well.<br />    </td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_address) ? $cust_address : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_address) ? $cust_address : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[CUST_EMAIL]</td>
     <td colspan="6">Customer email address</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_email) ? $cust_email : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_email) ? $cust_email : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[CUST_MSG]</td>
     <td colspan="6">Customers message: Notice written by the customer is sent to the shop admin by email</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_msg) ? $cust_msg : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_msg) ? $cust_msg : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[CUST_TAX_NO]</td>
     <td colspan="6">Customer VAT-No</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_tax_no) ? $cust_tax_no : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_tax_no) ? $cust_tax_no : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[CUSTOMER_NAME]</td>
     <td colspan="6">Customer first and last name</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_name) ? $cust_name : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_name) ? $cust_name : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[ITEM_LIST]</td>
@@ -783,19 +783,19 @@ if ($general_settings['stock_mode'] == "number") {
   <tr valign="top">
     <td>[ORDER_ID]</td>
     <td colspan="6">Order id</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($order_id) ? $order_id : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($order_id) ? $order_id : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[SHIPPING_ADDRESS]</td>
     <td colspan="6">Shipping address<br />
       If  the shipping address differs from the customer address and it is provided by the customer, it contains the data of the second part of the Bakery address form: The shipping postal address.<br />
       It is used for shipping only.<br />    </td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($ship_address) ? $ship_address : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($ship_address) ? $ship_address : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[SHOP_NAME]</td>
     <td colspan="6">Shop name (general setting)</td>
-    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['shop_name']) ? $general_settings['shop_name'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['shop_name']) ? $general_settings['shop_name'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="bottom">
     <td colspan="8" height="30" align="right">
@@ -812,12 +812,12 @@ if ($general_settings['stock_mode'] == "number") {
   <tr valign="top">
     <td>[ADDRESS]</td>
     <td colspan="6"><strong>Either</strong> the value of <code>[CUST_ADDRESS]</code> <strong>or</strong> -  if provided by the customer - the value of <code>[SHIPPING_ADDRESS]</code></td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($invoice_tpl_address) ? $invoice_tpl_address : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($invoice_tpl_address) ? $invoice_tpl_address : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[BANK_ACCOUNT]</td>
     <td colspan="6">Information about the shop bank account (general setting)</td>
-    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['bank_account']) ? $general_settings['bank_account'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['bank_account']) ? $general_settings['bank_account'] : '&nbsp;'); ?></td>
   </tr>
    <tr valign="top">
     <td>[CURRENT_DATE]</td>
@@ -828,22 +828,22 @@ if ($general_settings['stock_mode'] == "number") {
     <td>[CUST_ADDRESS]</td>
     <td colspan="6">Customer address<br />
 Contains the customer postal address of the first part of the  Bakery address form. It is the main address and used for billing and - if no shipping address is provided by the customer - for shipping as well.</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($invoice_tpl_cust_address) ? $invoice_tpl_cust_address : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($invoice_tpl_cust_address) ? $invoice_tpl_cust_address : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[CUST_EMAIL]</td>
     <td colspan="6">Customer email address</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_email) ? $cust_email : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_email) ? $cust_email : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[CUST_TAX_NO]</td>
     <td colspan="6">Customer VAT-No</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_tax_no) ? $cust_tax_no : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_tax_no) ? $cust_tax_no : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[CUSTOMER_NAME]</td>
     <td colspan="6">Customer first and last name</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_name) ? $cust_name : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($cust_name) ? $cust_name : '&nbsp;'); ?></td>
   </tr>
 
   <tr valign="top">
@@ -873,7 +873,7 @@ Invoice and delivery note: &quot;none&quot;</td>
   <tr valign="top">
     <td>[INVOICE_ID]</td>
     <td colspan="6">Consecutive numbering of invoices.<br />Please note: Invoice id usually is not equal order id.</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (!empty($invoice_id) ? $invoice_id : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (!empty($invoice_id) ? $invoice_id : '&nbsp;'); ?></td>
   </tr>
 
   <tr valign="top">
@@ -892,24 +892,24 @@ INVOICE TEMPLATE: EXAMPLE FOR [ITEM_LIST]
   <tr valign="top">
     <td>[ORDER_DATE]</td>
     <td colspan="6">Date and time when customer made his order</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($order_date) ? $order_date : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($order_date) ? $order_date : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[ORDER_ID]</td>
     <td colspan="6">Order id</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($order_id) ? $order_id : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($order_id) ? $order_id : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[SHIPPING_ADDRESS]</td>
     <td colspan="6">Shipping address<br />
 If  the shipping address differs from the customer address and it is provided by the customer, it contains the data of the second part of the Bakery address form: The shipping postal address.<br />
 It is used for shipping only.</td>
-    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($ship_address) ? $ship_address : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_customer_b"><?php echo (isset($ship_address) ? $ship_address : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[SHOP_NAME]</td>
     <td colspan="6">Shop name (general setting)</td>
-    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['shop_name']) ? $general_settings['shop_name'] : "&nbsp;"); ?></td>
+    <td class="mod_bakery_placeholders_general_settings_b"><?php echo (isset($general_settings['shop_name']) ? $general_settings['shop_name'] : '&nbsp;'); ?></td>
   </tr>
   <tr valign="top">
     <td>[TITLE]</td>

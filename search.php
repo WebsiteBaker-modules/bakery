@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
   
   This code is based on wb_searchext_mod_bakery v2.2 by thorn.
   It is adopted to Bakery v0.9 by thorn (thanks to thorn!).
@@ -31,7 +31,7 @@ function bakery_search($func_vars) {
 	$show_thumb   = true;
 	// Show option-attributes?
 	$show_options = true;
-	$divider      = ".";
+	$divider      = '.';
 	$result       = false;
 
 	$table_item     = TABLE_PREFIX."mod_bakery_items";

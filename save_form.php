@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -24,6 +24,14 @@ if (defined('WB_PATH') == false) {
 
 // Get some default values
 require_once(WB_PATH.'/modules/bakery/config.php');
+
+// Look for language file
+if (LANGUAGE_LOADED) {
+    include(WB_PATH.'/modules/bakery/languages/EN.php');
+    if (file_exists(WB_PATH.'/modules/bakery/languages/'.LANGUAGE.'.php')) {
+        include(WB_PATH.'/modules/bakery/languages/'.LANGUAGE.'.php');
+    }
+}
 
 // Clean post array
 $_POST = array_map('strip_tags', $_POST);
@@ -56,6 +64,26 @@ if ($_POST['cust_email'] !== $_POST['cust_confirm_email']) {
 }
 
 
+// Add a charset besides of latin to the address form regexp
+// Makes use of unicode scripts (see http://www.regular-expressions.info/unicode.html#script)
+$us = '';
+if (!empty($MOD_BAKERY['ADD_CHARSET'])) {
+	switch (strtolower($MOD_BAKERY['ADD_CHARSET'])) {
+		case 'cyrillic':
+			$us = '\p{Cyrillic}';
+			break;
+		case 'greek':
+			$us = '\p{Greek}';
+			break;
+		case 'hebrew':
+			$us = '\p{Hebrew}';
+			break;
+		case 'arabic':
+			$us = '\p{Arabic}';
+			break;
+	}
+}
+
 // Check the textfields
 foreach ($_POST as $field => $value) {
 	if ($field != 'pay_methods') {
@@ -63,21 +91,21 @@ foreach ($_POST as $field => $value) {
 		$value  = strip_tags($value);
 
 		if (strpos($field, 'company') !== false) {
-			if (!preg_match('#^[A-Za-z0-9'.$add_chars.' +&-]{0,50}$#', $value)) {
+			if (!preg_match('#^[\p{Latin}'.$us.'0-9+&\s\-]{0,50}$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_NAME'];
 			}
 		}
 
 		if (strpos($field, 'first_name') !== false) {
-			if (!preg_match('#^[A-Za-z'.$add_chars.'. -]{1,50}$#', $value)) {
+			if (!preg_match('#^[\p{Latin}'.$us.'.\s\-]{1,50}$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_NAME'];
 			}
 		}
 
 		if (strpos($field, 'last_name') !== false) {
-			if (!preg_match('#^[A-Za-z'.$add_chars.' \'-]{1,50}$#', $value)) {
+			if (!preg_match('#^[\p{Latin}'.$us.'\s\'\-]{1,50}$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_NAME'];
 			}
@@ -94,49 +122,49 @@ foreach ($_POST as $field => $value) {
 		}
 
 		if (strpos($field, 'street') !== false) {
-			if (!preg_match('#^[A-Za-z0-9.'.$add_chars.', -]{1,50}$#', $value)) {
+			if (!preg_match('#^[\p{Latin}'.$us.'0-9.,\s\-]{1,50}$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_STREET'];
 			}
 		}
 
 		if (strpos($field, 'city') !== false) {
-			if (!preg_match('#[A-Za-z.'.$add_chars.' -]{1,50}#', $value)) {
+			if (!preg_match('#[\p{Latin}'.$us.'.\s\-]{1,50}#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_CITY'];
 			}
 		}
 
 		if (strpos($field, 'state') !== false) {
-			if (!preg_match('#^[A-Za-z0-9.'.$add_chars.' -]{1,50}$#', $value)) {
+			if (!preg_match('#^[\p{Latin}'.$us.'0-9.\s\-]{1,50}$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_STATE'];
 			}
 		}
 
 		if (strpos($field, 'country') !== false) {
-			if (!preg_match('#^[A-Z]{2}$#', $value)) {
+			if (!preg_match('#^[A-Z]{2}$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_COUNTRY'];
 			}
 		}
 
 		if (strpos($field, 'email') !== false) {
-			if (!preg_match('#^.+@.+\..+$#', $value)) {
+			if (!preg_match('#^.+@.+\..+$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_EMAIL'];
 			}
 		}
 
 		if (strpos($field, 'zip') !== false) {
-			if (!preg_match('#^[A-Za-z0-9 -]{4,10}$#', $value)) {
+			if (!preg_match('#^[A-Za-z0-9\s\-]{4,10}$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_ZIP'];
 			}
 		}
 
 		if (strpos($field, 'phone') !== false) {
-			if (!preg_match('#^[0-9)(xX +.-/]{7,20}$#', $value)) {
+			if (!preg_match('#^[0-9)(xX+./\s\-]{7,20}$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_PHONE'];
 			}

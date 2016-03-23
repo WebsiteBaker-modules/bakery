@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -134,12 +134,13 @@ if ($query_customer->numRows() > 0) {
 		$invoice = str_replace($vars, $values, $invoice_template);
 
 		// Reset header image to a max width
-		$pattern = '#<img src="http://(.*)" #Uis';
+		$pattern = '#<img src="(.*)" #Uis';
 		if (preg_match($pattern, $invoice, $matches)) {
-			list($width, $height, $type, $attr) = getimagesize('http://'.$matches[1]);
+			$img_path = str_replace(WB_URL, WB_PATH, $matches[1]);
+			list($width, $height, $type, $attr) = getimagesize($img_path);
 			if (is_numeric($width) && $width > $max_width) {
-				$height = round($max_width * $height / $width);
-				$width  = $max_width;
+				$height  = round($max_width * $height / $width);
+				$width   = $max_width;
 				$invoice = preg_replace('#width="(.*)"#Uis', 'width="'.$width.'"', $invoice, 1);
 				$invoice = preg_replace('#height="(.*)"#Uis', 'height="'.$height.'"', $invoice, 1);
 			}
@@ -180,9 +181,9 @@ if ($query_customer->numRows() > 0) {
 
 		// Send invoice email to customer
 		if (mail($cust_email, $email_subject, $pre['html'], $headers)) {
-			// On success view confirmation
-			$database->query("UPDATE `".TABLE_PREFIX."mod_bakery_customer` SET `sent_invoices` = `sent_invoices` + '1' WHERE order_id = '$order_id'");
 			// On success increment email counter
+			$database->query("UPDATE `".TABLE_PREFIX."mod_bakery_customer` SET `sent_invoices` = `sent_invoices` + '1' WHERE order_id = '$order_id'");
+			// On success view confirmation
 			$admin->print_success($MOD_BAKERY['TXT_INVOICE_HAS_BEEN_SENT_SUCCESSFULLY'], WB_URL.'/modules/bakery/modify_orders.php?page_id='.$page_id);
 		} else {
 			$admin->print_error($database->get_error(), WB_URL.'/modules/bakery/modify_orders.php?page_id='.$page_id);

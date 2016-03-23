@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -28,14 +28,6 @@ if (defined('WB_PATH') == false) {
 // **********************************************
 // SET DEFAULT VALUES OF SOME ADDITIONAL SETTINGS
 // **********************************************
-
-
-// FORMS (FRONTEND)
-// ****************
-
-// List of special chars that are accepted by the address form fields (added to the regexp)
-$add_chars = 'ÁÀÂÃÄÅáàâãäåÆæÇçČčÐðÉÈÊËéèêëÍÌÎÏíìîïÑñÓÒÔÕÖØóòôõöøŒœÞþÚÙÛÜúùûüŠšßÝŸýÿŽž°';
-
 
 
 // CART (FRONTEND)

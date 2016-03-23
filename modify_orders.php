@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -52,26 +52,26 @@ if ($query_payment_methods->numRows() > 0) {
 	$reminder_alert = is_numeric($payment_method['value_3']) ? $payment_method['value_3'] : 0;
 }
 
-// Make difference between current orders and archived orders
+// Toggle between current orders and archived / canceled orders
 if ($view == 'current') {
-	$toggle = 'archive';
-	$toggle_page = $MOD_BAKERY['TXT_ORDER_ARCHIVED'];
-	$current_page = $MOD_BAKERY['TXT_ORDER_CURRENT'];
-	$query_customer = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer` WHERE status != 'archived' AND submitted != 'no' ORDER BY order_date DESC");
+	$toggle         = 'archive';
+	$toggle_page    = $MOD_BAKERY['TXT_ORDER_ARCHIVED'];
+	$current_page   = $MOD_BAKERY['TXT_ORDER_CURRENT'];
+	$query_customer = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer` WHERE status != 'archived' AND status != 'canceled' AND submitted != 'no' ORDER BY order_date DESC");
 }
 else {
-	$toggle = 'current';
-	$toggle_page = $MOD_BAKERY['TXT_ORDER_CURRENT'];
-	$current_page = $MOD_BAKERY['TXT_ORDER_ARCHIVED'];
-	$query_customer = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer` WHERE status = 'archived' AND submitted != 'no' ORDER BY order_date DESC");
+	$toggle         = 'current';
+	$toggle_page    = $MOD_BAKERY['TXT_ORDER_CURRENT'];
+	$current_page   = $MOD_BAKERY['TXT_ORDER_ARCHIVED'];
+	$query_customer = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer` WHERE status = 'archived' OR status = 'canceled' AND submitted != 'no' ORDER BY order_date DESC");
 }
 
 
-echo "<h2>{$MOD_BAKERY['TXT_ORDER_ADMIN']}: <br/>$current_page <span style='text-transform: lowercase;'>{$TEXT['MODIFY']}/{$TEXT['DELETE']}</span></h2>"
+echo '<h2>'.$MOD_BAKERY['TXT_ORDER_ADMIN'].': <br/>'.$current_page.' <span style="text-transform: lowercase;">'.$TEXT['MODIFY'].' / '.$TEXT['DELETE'].'</span></h2>';
+
 
 // Show buttons
 ?>
-
 <script type="text/javascript">
 	function newInvoice(url) {
 	  if (screen.availHeight) {
@@ -152,75 +152,81 @@ if ($query_customer->numRows() > 0) {
 				}
 
 				// Show icon
-				echo "<img src='".WB_URL."/modules/bakery/payment_methods/$payment_method/icon.png' alt='$payment_method_name' title='$payment_method_name' border='0' />";
+				echo '<img src="'.WB_URL.'/modules/bakery/payment_methods/'.$payment_method.'/icon.png" alt="'.$payment_method_name.'" title="'.$payment_method_name.'" border="0" />';
 
 			// Show email, customer name and order date ?>
 			</td>
 			<td width="5%" align="right" style="padding-right: 8px; font-weight: bold;"><?php echo $costumer['invoice_id']; ?></td>
 			<td width="18">
-			<a href="mailto:<?php echo stripslashes($costumer['cust_email']); ?>"><img src="<?php echo WB_URL; ?>/modules/bakery/images/email.png" alt="<?php echo $TEXT['EMAIL']; ?>" title="<?php echo $TEXT['EMAIL']." ".$TEXT['TO']." ".stripslashes($costumer['cust_email']); ?>" style="margin-bottom: -3px;" border="0" /></a>
+			<a href="mailto:<?php echo stripslashes($costumer['cust_email']); ?>"><img src="<?php echo WB_URL; ?>/modules/bakery/images/email.png" alt="<?php echo $TEXT['EMAIL']; ?>" title="<?php echo $TEXT['EMAIL'].' '.$TEXT['TO'].' '.stripslashes($costumer['cust_email']); ?>" style="margin-bottom: -3px;" border="0" /></a>
 			</td>
 			<td>
-			<a href="<?php echo WB_URL; ?>/modules/bakery/view_order.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;order_id=<?php echo $costumer['order_id']; ?>" onclick="showOrder(this.href); return false;"><?php echo stripslashes($costumer['cust_first_name'])." ".stripslashes($costumer['cust_last_name']); ?></a>
+			<a href="<?php echo WB_URL; ?>/modules/bakery/view_order.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;order_id=<?php echo $costumer['order_id']; ?>" onclick="showOrder(this.href); return false;"><?php echo stripslashes($costumer['cust_first_name']).' '.stripslashes($costumer['cust_last_name']); ?></a>
 			</td>
 			<td width="135"><?php echo gmdate(DATE_FORMAT.', '.TIME_FORMAT, $costumer['order_date']+TIMEZONE); ?></td>
 			<td width="22">
 			<?php
 
-			// Show colored images for status
-			$status_img_url = WB_URL."/modules/bakery/images/status";
-			$status_img_style = "style='margin-bottom: -3px;' border='0'";
+			// Show status images
+			$status_img_url   = WB_URL.'/modules/bakery/images/status';
+			$status_img_style = 'style="margin-bottom: -3px;" border="0"';
 			switch (stripslashes($costumer['status'])) {
 
-				case 'ordered': echo "<img src='$status_img_url/ordered.gif' alt='{$MOD_BAKERY['TXT_STATUS_ORDERED']}' title='{$MOD_BAKERY['TXT_STATUS_ORDERED']}' $status_img_style />"; break;
+				case 'ordered': echo '<img src="'.$status_img_url.'/ordered.gif" alt="'.$MOD_BAKERY['TXT_STATUS_ORDERED'].'" title="'.$MOD_BAKERY['TXT_STATUS_ORDERED'].'" '.$status_img_style.' />'; break;
 
-				case 'shipped': echo "<img src='$status_img_url/shipped.gif' alt='{$MOD_BAKERY['TXT_STATUS_SHIPPED']}' title='{$MOD_BAKERY['TXT_STATUS_SHIPPED']}' $status_img_style />"; break;
+				case 'shipped': echo '<img src="'.$status_img_url.'/shipped.gif" alt="'.$MOD_BAKERY['TXT_STATUS_SHIPPED'].'" title="'.$MOD_BAKERY['TXT_STATUS_SHIPPED'].'" '.$status_img_style.' />'; break;
 
-				case 'busy': echo "<img src='$status_img_url/busy.gif' alt='{$MOD_BAKERY['TXT_STATUS_BUSY']}' title='{$MOD_BAKERY['TXT_STATUS_BUSY']}' $status_img_style />"; break;
+				case 'busy': echo '<img src="'.$status_img_url.'/busy.gif" alt="'.$MOD_BAKERY['TXT_STATUS_BUSY'].'" title="'.$MOD_BAKERY['TXT_STATUS_BUSY'].'" '.$status_img_style.' />'; break;
 
 				case 'invoice':
 					// Invoice alert
 					if ($costumer['order_date'] + (60 * 60 * 24 * $invoice_alert) < time() && $invoice_alert != 0) {
-						echo "<img src='$status_img_url/alert.gif' alt='{$MOD_BAKERY['TXT_STATUS_REMINDER']}' title='{$MOD_BAKERY['TXT_STATUS_REMINDER']}' $status_img_style />"; break;	
+						echo '<img src="'.$status_img_url.'/alert.gif" alt="'.$MOD_BAKERY['TXT_STATUS_REMINDER'].'" title="'.$MOD_BAKERY['TXT_STATUS_REMINDER'].'" '.$status_img_style.' />'; break;	
 						}
 					else {
-						echo "<img src='$status_img_url/invoice.gif' alt='{$MOD_BAKERY['TXT_STATUS_INVOICE']}' title='{$MOD_BAKERY['TXT_STATUS_INVOICE']}' $status_img_style />"; break;
+						echo '<img src="'.$status_img_url.'/invoice.gif" alt="'.$MOD_BAKERY['TXT_STATUS_INVOICE'].'" title="'.$MOD_BAKERY['TXT_STATUS_INVOICE'].'" '.$status_img_style.' />'; break;
 					}
 
 				case 'reminder':
 					// Reminder alert
 					if ($costumer['order_date'] + (60 * 60 * 24 * $reminder_alert) < time() && $reminder_alert != 0) {
-						echo "<img src='$status_img_url/alert.gif' alt='{$MOD_BAKERY['TXT_STATUS_REMINDER']}' title='{$MOD_BAKERY['TXT_STATUS_REMINDER']}' $status_img_style />"; break;	
+						echo '<img src="'.$status_img_url.'/alert.gif" alt="'.$MOD_BAKERY['TXT_STATUS_REMINDER'].'" title="'.$MOD_BAKERY['TXT_STATUS_REMINDER'].'" '.$status_img_style.' />'; break;	
 						}
 					else {
-						echo "<img src='$status_img_url/reminder.gif' alt='{$MOD_BAKERY['TXT_STATUS_REMINDER']}' title='{$MOD_BAKERY['TXT_STATUS_REMINDER']}' $status_img_style />"; break;
+						echo '<img src="'.$status_img_url.'/reminder.gif" alt="'.$MOD_BAKERY['TXT_STATUS_REMINDER'].'" title="'.$MOD_BAKERY['TXT_STATUS_REMINDER'].'" '.$status_img_style.' />'; break;
 					}
 
-				case 'paid': echo "<img src='$status_img_url/paid.gif' alt='{$MOD_BAKERY['TXT_STATUS_PAID']}' title='{$MOD_BAKERY['TXT_STATUS_PAID']}' $status_img_style />"; break;
+				case 'paid': echo '<img src="'.$status_img_url.'/paid.gif" alt="'.$MOD_BAKERY['TXT_STATUS_PAID'].'" title="'.$MOD_BAKERY['TXT_STATUS_PAID'].'" '.$status_img_style.' />'; break;
 
-				case 'archived': echo "<img src='$status_img_url/archived.gif' alt='{$MOD_BAKERY['TXT_STATUS_ARCHIVED']}' title='{$MOD_BAKERY['TXT_STATUS_ARCHIVED']}' $status_img_style />"; break;
+				case 'archived': echo '<img src="'.$status_img_url.'/archived.gif" alt="'.$MOD_BAKERY['TXT_STATUS_ARCHIVED'].'" title="'.$MOD_BAKERY['TXT_STATUS_ARCHIVED'].'" '.$status_img_style.' />'; break;
+
+				case 'canceled': echo '<img src="'.$status_img_url.'/canceled.gif" alt="'.$MOD_BAKERY['TXT_STATUS_CANCELED'].'" title="'.$MOD_BAKERY['TXT_STATUS_CANCELED'].'" '.$status_img_style.' />'; break;
 			}
-			echo "</td>\n<td width='120'>";
-			
+			echo '</td>'."\n".'<td width="120">';
+
 // Show status select depending on the payment method
-if (stripslashes($costumer['status']) == "archived") {
-	echo " {$MOD_BAKERY['TXT_STATUS_ARCHIVED']}";
+if (stripslashes($costumer['status']) == 'archived' || stripslashes($costumer['status']) == 'canceled') {
+	if (stripslashes($costumer['status']) == 'canceled') {
+		echo $MOD_BAKERY['TXT_STATUS_CANCELED'];
+	} else {
+		echo $MOD_BAKERY['TXT_STATUS_ARCHIVED'];
+	}
 } else {
 	switch (stripslashes($costumer['submitted'])) {
-		case 'advance': $select_status = array("ordered" => $MOD_BAKERY['TXT_STATUS_ORDERED'], "paid" => $MOD_BAKERY['TXT_STATUS_PAID'], "shipped" => $MOD_BAKERY['TXT_STATUS_SHIPPED'], "archived" => $MOD_BAKERY['TXT_STATUS_ARCHIVE']);
+		case 'advance': $select_status = array('ordered' => $MOD_BAKERY['TXT_STATUS_ORDERED'], 'paid' => $MOD_BAKERY['TXT_STATUS_PAID'], 'shipped' => $MOD_BAKERY['TXT_STATUS_SHIPPED'], 'archived' => $MOD_BAKERY['TXT_STATUS_ARCHIVE'], 'canceled' => $MOD_BAKERY['TXT_STATUS_CANCEL']);
 			break;
-		case 'invoice': $select_status = array("ordered" => $MOD_BAKERY['TXT_STATUS_ORDERED'], "shipped" => $MOD_BAKERY['TXT_STATUS_SHIPPED'], "invoice" => $MOD_BAKERY['TXT_STATUS_INVOICE'], "reminder" => $MOD_BAKERY['TXT_STATUS_REMINDER'], "paid" => $MOD_BAKERY['TXT_STATUS_PAID'], "archived" => $MOD_BAKERY['TXT_STATUS_ARCHIVE']);
+		case 'invoice': $select_status = array('ordered' => $MOD_BAKERY['TXT_STATUS_ORDERED'], 'shipped' => $MOD_BAKERY['TXT_STATUS_SHIPPED'], 'invoice' => $MOD_BAKERY['TXT_STATUS_INVOICE'], 'reminder' => $MOD_BAKERY['TXT_STATUS_REMINDER'], 'paid' => $MOD_BAKERY['TXT_STATUS_PAID'], 'archived' => $MOD_BAKERY['TXT_STATUS_ARCHIVE'], 'canceled' => $MOD_BAKERY['TXT_STATUS_CANCEL']);
 			break;
-		default: $select_status = array("ordered" => $MOD_BAKERY['TXT_STATUS_ORDERED'], "shipped" => $MOD_BAKERY['TXT_STATUS_SHIPPED'], "archived" => $MOD_BAKERY['TXT_STATUS_ARCHIVE']);
+		default: $select_status = array('ordered' => $MOD_BAKERY['TXT_STATUS_ORDERED'], 'shipped' => $MOD_BAKERY['TXT_STATUS_SHIPPED'], 'archived' => $MOD_BAKERY['TXT_STATUS_ARCHIVE'], 'canceled' => $MOD_BAKERY['TXT_STATUS_CANCEL']);
 	}
 	// Generate status select
-	echo " <select name='status[{$costumer['order_id']}]' style='width: 110px'>";
+	echo ' <select name="status['.$costumer['order_id'].']" style="width: 110px;">';
 	foreach ($select_status as $option_value => $option_text) {
-		echo "<option value='$option_value'";
+		echo '<option value="'.$option_value.'"';
 		echo stripslashes($costumer['status']) == $option_value ? ' selected="selected"' : '';
-		echo ">$option_text</option>\n";
+		echo '>'.$option_text.'</option>'."\n";
 	}
-	echo "</select>";
+	echo '</select>';
 }
 
 // Send invoice button
@@ -243,7 +249,7 @@ if ($costumer['sent_invoices'] == 0) {
 			</td>
 			<td  width="22">
 				<a href="<?php echo WB_URL; ?>/modules/bakery/view_order.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;order_id=<?php echo $costumer['order_id']; ?>" onclick="showOrder(this.href); return false;" title="<?php echo $TEXT['VIEW_DETAILS']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/view_16.png" alt="<?php echo $MOD_BAKERY['TXT_INVOICE']." ".$TEXT['VIEW_DETAILS']; ?>" border="0" />
+					<img src="<?php echo THEME_URL; ?>/images/view_16.png" alt="<?php echo $MOD_BAKERY['TXT_INVOICE'].' '.$TEXT['VIEW_DETAILS']; ?>" border="0" />
 				</a>
 			</td>
 			<td width="22">

@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -42,17 +42,9 @@ if ($setting_lightbox2 == "detail" || $setting_lightbox2 == "all") {
 	<script type="text/javascript" src="<?php echo WB_URL; ?>/modules/bakery/lightbox2/js/lightbox.js"></script>
 	<script type="text/javascript">
 	//  Lightbox2 options
-	$(function () {
-	    var lightbox, options;
-	    options = new LightboxOptions;
-
-	    options.fileLoadingImage = '<?php echo WB_URL; ?>/modules/bakery/lightbox2/images/loading.gif';
-	    options.fileCloseImage   = '<?php echo WB_URL; ?>/modules/bakery/lightbox2/images/close.png';
-	    options.labelImage       = '<?php echo $MOD_BAKERY['TXT_IMAGE']; ?>';
-	    options.labelOf          = '<?php echo $TEXT['OF']; ?>';
-
-	    return lightbox          = new Lightbox(options);
-	});
+	lightbox.option({
+		'albumLabel': '<?php echo $MOD_BAKERY['TXT_IMAGE']; ?> %1 <?php echo $TEXT['OF']; ?> %2'
+	})
 	</script>
 	<?php
 }
@@ -181,8 +173,11 @@ if ($query_item->numRows() > 0) {
 			$img_title      = $image['title'];
 			$img_caption    = $image['caption'];
 
-			// Thumbs use .jpg extension only
-			$thumb_file = str_replace(".png", ".jpg", $image_file);
+			// Check if png image has a jpg thumb (version < 1.7.6 used jpg thumbs only)
+			$thumb_file = $image_file;
+			if (!file_exists($thumb_path.$thumb_file)) {
+				$thumb_file = str_replace('.png', '.jpg', $thumb_file);
+			}
 
 			// Prepare div image wrapper for image caption
 			$caption_prepend = empty($img_caption) ? '' : '<div class="mod_bakery_item_caption_f">';
@@ -254,7 +249,7 @@ if ($query_item->numRows() > 0) {
 					$attributes = array_map('stripslashes', $attributes);
 					// Make attribute select
 					$attributes['operator'] = $attributes['operator'] == "=" ? '' : $attributes['operator'];
-					$ia_price = ", ".$setting_shop_currency." ".$attributes['operator'].$attributes['price'];
+					$ia_price = ", ".$setting_shop_currency.' '.$attributes['operator'].$attributes['price'];
 					$ia_price = $attributes['price'] == 0 ? '' : $ia_price;
 					$option_select .= "<option value='{$attributes['attribute_id']}'>{$attributes['attribute_name']}$ia_price</option>\n";
 				}

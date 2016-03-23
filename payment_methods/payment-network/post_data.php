@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -63,7 +63,7 @@ $post_data = array(
 	'sender_country_id'       => $cust_country,
 	'amount'                  => $_SESSION['bakery']['order_total'],
 	'currency_id'             => $setting_shop_currency,
-	'reason_1'                => $MOD_BAKERY['TXT_ORDER']." ".$setting_shop_name,
+	'reason_1'                => $MOD_BAKERY['TXT_ORDER'].' '.$setting_shop_name,
 	'reason_2'                => $MOD_BAKERY['TXT_ORDER_ID'].': '.$order_id,
 	'user_variable_0'         => $order_id,
 	'user_variable_1'         => str_ireplace(array('http://', 'https://'), '', $setting_continue_url), // url w/o scheme

@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
   NL version by Ruud
 
   LICENCE TERMS:
@@ -220,6 +220,8 @@ $MOD_BAKERY['TXT_STATUS_REMINDER'] = 'Aanmaning';
 $MOD_BAKERY['TXT_STATUS_PAID'] = 'betaald';
 $MOD_BAKERY['TXT_STATUS_ARCHIVE'] = 'archiveren';
 $MOD_BAKERY['TXT_STATUS_ARCHIVED'] = 'gearchiveerd';
+$MOD_BAKERY['TXT_STATUS_CANCEL'] = 'annuleren';
+$MOD_BAKERY['TXT_STATUS_CANCELED'] = 'geannuleerd';
 
 $MOD_BAKERY['TXT_PRINT'] = 'Print';
 $MOD_BAKERY['TXT_INVOICE'] = 'Factuur';

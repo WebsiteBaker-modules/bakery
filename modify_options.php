@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -84,12 +84,12 @@ if ($query_options->numRows() > 0) {
 			<td width="300" align="left"><span style="margin-left: 5px;"><?php echo $option['option_name']; ?></span></td>
 			<td align="center" width="22">
 				<a href="<?php echo WB_URL; ?>/modules/bakery/modify_options.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;option_id=<?php echo $option['option_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" alt="<?php echo $TEXT['MODIFY']." ".$MOD_BAKERY['TXT_OPTION_NAME']; ?>" border="0" />
+					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" alt="<?php echo $TEXT['MODIFY'].' '.$MOD_BAKERY['TXT_OPTION_NAME']; ?>" border="0" />
 				</a>
 			</td>
 			<td width="22">
 				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/bakery/delete_option.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&option_id=<?php echo $option['option_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="<?php echo $TEXT['DELETE']." ".$MOD_BAKERY['TXT_OPTION_NAME']; ?>" />
+					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="<?php echo $TEXT['DELETE'].' '.$MOD_BAKERY['TXT_OPTION_NAME']; ?>" />
 				</a>
 			</td>
 			<td>&nbsp;</td>
@@ -172,12 +172,12 @@ if ($query_attributes->numRows() > 0) {
 			<td align="left"><span style="margin-left: 12px;"><?php echo $attribute['attribute_name']; ?></span></td>
 			<td align="center" width="22">
 				<a href="<?php echo WB_URL; ?>/modules/bakery/modify_options.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;option_id=<?php echo $attribute['option_id']; ?>&amp;attribute_id=<?php echo $attribute['attribute_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" alt="<?php echo $TEXT['MODIFY']." ".$MOD_BAKERY['TXT_OPTION_NAME']; ?>" border="0" />
+					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" alt="<?php echo $TEXT['MODIFY'].' '.$MOD_BAKERY['TXT_OPTION_NAME']; ?>" border="0" />
 				</a>
 			</td>
 			<td align="left" width="22">
 				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/bakery/delete_attribute.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&attribute_id=<?php echo $attribute['attribute_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="<?php echo $TEXT['DELETE']." ".$MOD_BAKERY['TXT_OPTION_NAME']; ?>" />	
+					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="<?php echo $TEXT['DELETE'].' '.$MOD_BAKERY['TXT_OPTION_NAME']; ?>" />	
 				</a>
 			</td>
 			<td>&nbsp;</td>

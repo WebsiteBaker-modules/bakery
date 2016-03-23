@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
   
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -39,7 +39,7 @@ if (isset($_SESSION['bakery']['order_id']) && is_numeric($_SESSION['bakery']['or
 	$order_id = $_SESSION['bakery']['order_id'];
 
 	// Look for items in the db
-	$query_order = $database->query("SELECT item_id, attributes, quantity, price FROM " .TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
+	$query_order = $database->query("SELECT item_id, attributes, quantity, price FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
 	$num_orders = $query_order->numRows();
 	if ($num_orders > 0) {
 

@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -80,7 +80,7 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.stripslashes($fetch_
 
 <!-- Shop -->
 	<tr valign="bottom">
-		  <td width="30%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_SHOP']." ".$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
+		  <td width="30%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_SHOP'].' '.$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
 		  <td height="32" colspan="4">&nbsp;</td>
     </tr>
 	<tr>
@@ -197,7 +197,7 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.stripslashes($fetch_
 	
 <!-- Items -->
 	<tr valign="bottom">
-		  <td width="30%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_ITEM']." ".$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
+		  <td width="30%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_ITEM'].' '.$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
 		  <td height="32" colspan="4">&nbsp;</td>
     </tr>
 	<tr>
@@ -246,14 +246,14 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.stripslashes($fetch_
 
 <!-- Payment -->
 	<tr valign="bottom">
-	  <td width="30%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_PAYMENT']." ".$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
+	  <td width="30%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_PAYMENT'].' '.$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
 	  <td height="32" colspan="4">&nbsp;</td>
     </tr>
 	<tr>
 		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_SHOP_CURRENCY']; ?>:</td>
 		<td colspan="4">
 			<input type="text" name="shop_currency" style="width: 35px; text-align: center;" value="<?php echo stripslashes($fetch_settings['shop_currency']); ?>" maxlength="3" /> 
-		  (USD, EUR, CHF, ... &nbsp;&nbsp;<a href="http://en.wikipedia.org/wiki/ISO_4217#Active_codes" target="_blank">&gt; ISO 4217</a>) </td>
+		  (USD, EUR, CHF, ... &nbsp;&gt;&nbsp;<a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes" target="_blank">ISO 4217</a>) </td>
 	</tr>
 	<tr>
 		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_SEPARATOR_FOR']; ?>:</td>
@@ -274,7 +274,7 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.stripslashes($fetch_
 			<label for="tax_by_none"><?php echo $TEXT['NONE']; ?></label>		</td>
 	</tr>
 	<tr>
-		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_TAX_RATE']." ".$MOD_BAKERY['TXT_ITEM']; ?>:</td>
+		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_TAX_RATE'].' '.$MOD_BAKERY['TXT_ITEM']; ?>:</td>
 		<td width="13%">
 			1.<input type="text" name="tax_rate" size="5" maxlength="5" style="text-align: right;" value="<?php echo stripslashes($fetch_settings['tax_rate']); ?>" />%</td>
         <td width="13%">
@@ -307,16 +307,16 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.stripslashes($fetch_
 
 <!-- Shipping -->
 	<tr valign="bottom">
-	  <td width="30%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_SHIPPING']." ".$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
+	  <td width="30%" height="32" align="right"><strong><?php echo $MOD_BAKERY['TXT_SHIPPING'].' '.$MOD_BAKERY['TXT_SETTINGS']; ?>:</strong></td>
 	  <td height="32" colspan="4">&nbsp;</td>
     </tr>
 	<tr>
-		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_TAX_RATE']." ".$MOD_BAKERY['TXT_SHIPPING']; ?>:</td>
+		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_TAX_RATE'].' '.$MOD_BAKERY['TXT_SHIPPING']; ?>:</td>
 	  <td colspan="4">
 		  <input type="text" name="tax_rate_shipping" size="5" maxlength="5" style="text-align: right;" value="<?php echo stripslashes($fetch_settings['tax_rate_shipping']); ?>" />%</td>
 	</tr>
 	<tr>
-	  <td align="right"><?php echo $MOD_BAKERY['TXT_FREE_SHIPPING']." ".$MOD_BAKERY['TXT_OVER']; ?>:</td>
+	  <td align="right"><?php echo $MOD_BAKERY['TXT_FREE_SHIPPING'].' '.$MOD_BAKERY['TXT_OVER']; ?>:</td>
 	  <td colspan="4">
 	  	<input type="text" name="free_shipping" size="8" maxlength="8" style="text-align: right;" value="<?php echo stripslashes($fetch_settings['free_shipping']); ?>" /><?php echo stripslashes($fetch_settings['shop_currency']); ?> &nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="checkbox" name="free_shipping_msg" id="free_shipping_msg" value="show" <?php if ($fetch_settings['free_shipping_msg'] == 'show') { echo 'checked="checked"'; } ?> />
@@ -341,13 +341,13 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.stripslashes($fetch_
         </select>	  </td>
     </tr>
 	<tr>
-		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_SHIPPING']." ".$MOD_BAKERY['TXT_DOMESTIC']; ?>:</td>
+		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_SHIPPING'].' '.$MOD_BAKERY['TXT_DOMESTIC']; ?>:</td>
 		<td width="13%">
 			<input type="text" name="shipping_domestic" size="6" maxlength="7" style="text-align: right;" value="<?php echo stripslashes($fetch_settings['shipping_domestic']); ?>" /><?php if ($fetch_settings['shipping_method'] != "percentage") { echo stripslashes($fetch_settings['shop_currency']); } else { echo "%"; } ?></td>
 	    <td colspan="3">&nbsp;</td>
 	</tr>
 	<tr>
-		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_SHIPPING']." ".$MOD_BAKERY['TXT_ABROAD']; ?>:</td>
+		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_SHIPPING'].' '.$MOD_BAKERY['TXT_ABROAD']; ?>:</td>
 		<td>
 			<input type="text" name="shipping_abroad" size="6" maxlength="7" style="text-align: right;" value="<?php echo stripslashes($fetch_settings['shipping_abroad']); ?>" /><?php if ($fetch_settings['shipping_method'] != "percentage") { echo stripslashes($fetch_settings['shop_currency']); } else { echo "%"; } ?></td>
 		<td colspan="3">&nbsp;</td>

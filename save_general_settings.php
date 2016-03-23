@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -36,16 +36,16 @@ $shop_country    = $admin->add_slashes(strip_tags($_POST['shop_country']));
 $shop_state      = isset($_POST['shop_state']) ? $admin->add_slashes(strip_tags($_POST['shop_state'])) : '';
 $shipping_form   = $admin->add_slashes(strip_tags($_POST['shipping_form']));
 
-$company_field = isset($_POST['company_field']) ? "show" : "hide";
-$tax_no_field  = isset($_POST['tax_no_field']) ? "show" : "hide";
-$state_field   = isset($_POST['state_field']) ? "show" : "hide";
-$zip_location  = isset($_POST['zip_location']) ? "end" : "inside";
-$cust_msg      = isset($_POST['cust_msg']) ? "show" : "hide";
+$company_field = isset($_POST['company_field']) ? 'show' : 'hide';
+$tax_no_field  = isset($_POST['tax_no_field'])  ? 'show' : 'hide';
+$state_field   = isset($_POST['state_field'])   ? 'show' : 'hide';
+$zip_location  = isset($_POST['zip_location'])  ? 'end' : 'inside';
+$cust_msg      = isset($_POST['cust_msg'])      ? 'show' : 'hide';
 
-$display_settings    = isset($_POST['display_settings']) ? 1 : 0;
-$skip_cart           = isset($_POST['skip_cart']) ? "yes" : "no";
+$display_settings    = isset($_POST['display_settings'])    ? 1 : 0;
+$skip_cart           = isset($_POST['skip_cart'])           ? 'yes' : 'no';
 $out_of_stock_orders = isset($_POST['out_of_stock_orders']) ? 1 : 0;
-$use_captcha         = isset($_POST['use_captcha']) ? "yes" : "no";
+$use_captcha         = isset($_POST['use_captcha'])         ? 'yes' : 'no';
 
 $definable_field_0 = $admin->add_slashes(strip_tags($_POST['definable_field_0']));
 $definable_field_1 = $admin->add_slashes(strip_tags($_POST['definable_field_1']));
@@ -60,23 +60,23 @@ $tax_rate      = $admin->add_slashes(strip_tags($_POST['tax_rate']));
 $tax_rate1     = $admin->add_slashes(strip_tags($_POST['tax_rate1']));
 $tax_rate2     = $admin->add_slashes(strip_tags($_POST['tax_rate2']));
 $tax_group     = $admin->add_slashes(strip_tags($_POST['tax_group']));
-$tax_included  = isset($_POST['tax_included']) ? "included" : "excluded";
+$tax_included  = isset($_POST['tax_included']) ? 'included' : 'excluded';
 $tax_by        = $admin->add_slashes(strip_tags($_POST['tax_by']));
 
 $tax_rate_shipping = $admin->add_slashes(strip_tags($_POST['tax_rate_shipping']));
 $free_shipping     = $admin->add_slashes(strip_tags($_POST['free_shipping']));
-$free_shipping_msg = isset($_POST['free_shipping_msg']) ? "show" : "hide";
+$free_shipping_msg = isset($_POST['free_shipping_msg']) ? 'show' : 'hide';
 $shipping_method   = $admin->add_slashes(strip_tags($_POST['shipping_method']));
 $shipping_domestic = $admin->add_slashes(strip_tags($_POST['shipping_domestic']));
 $shipping_abroad   = $admin->add_slashes(strip_tags($_POST['shipping_abroad']));
 $shipping_zone     = $admin->add_slashes(strip_tags($_POST['shipping_zone']));
-$zone_countries    = isset($_POST['zone_countries']) ? implode(",", $_POST['zone_countries']) : '';
+$zone_countries    = isset($_POST['zone_countries']) ? implode(',', $_POST['zone_countries']) : '';
 
 
 // Clean out protocol names if added to the shop name
 // to prevent problems with the php mail() function
-$shop_name = str_replace("http://",  '', $shop_name);
-$shop_name = str_replace("https://", '', $shop_name);
+$shop_name = str_replace('http://',  '', $shop_name);
+$shop_name = str_replace('https://', '', $shop_name);
 
 
 // If no state file exists for the selected country...
@@ -84,7 +84,7 @@ if (!file_exists(WB_PATH.'/modules/bakery/languages/states/'.$shop_country.'.php
 	// ...set shop state to blank
 	$shop_state = '';
 	// ...change tax by from state to country
-	if ($tax_by == "state") $tax_by = "country";
+	if ($tax_by == 'state') $tax_by = 'country';
 }
 
 

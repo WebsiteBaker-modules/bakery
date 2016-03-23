@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -95,7 +95,7 @@ if (!isset($_POST['agree']) || $_POST['agree'] != 'yes') {
 // **********
 
 // If cart is empty, show an error message and a "continue shopping" button
-$sql_result1 = $database->query("SELECT * FROM " .TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
+$sql_result1 = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
 $n_row = $sql_result1->numRows();
 if ($n_row < 1) {
 	// Show empty cart error message using template file
@@ -121,7 +121,7 @@ while ($row1 = $sql_result1->fetchRow()) {
 			$items[$i][$field] = $value;
 			// Get item name and shipping from db items table
 			if ($field == 'item_id') {
-				$sql_result2 = $database->query("SELECT title, shipping, description FROM " .TABLE_PREFIX."mod_bakery_items WHERE item_id = '$row1[item_id]'");
+				$sql_result2 = $database->query("SELECT title, shipping, description FROM ".TABLE_PREFIX."mod_bakery_items WHERE item_id = '$row1[item_id]'");
 				$row2 = $sql_result2->fetchRow();	
 				$items[$i]['name'] = $row2[0];
 				$items[$i]['shipping'] = $row2[1];
@@ -163,7 +163,7 @@ while ($row1 = $sql_result1->fetchRow()) {
 		// HTML version: remove leading comma and space
 		$items[$i]['html_show_attribute'] = substr($items[$i]['show_attribute'], 2);
 		// Email version: add \n\t to html version and replace &nbsp; by space
-		$items[$i]['email_show_attribute'] = "\n\t".str_replace("&nbsp;", " ", $items[$i]['html_show_attribute']);
+		$items[$i]['email_show_attribute'] = "\n\t".str_replace('&nbsp;', " ", $items[$i]['html_show_attribute']);
 	}
 	// Increment counter
 	$i++;
@@ -233,7 +233,7 @@ if ($state_key = array_keys($MOD_BAKERY['TXT_STATE_CODE'], $cust_state)) {
 }
 
 // Join customer first and last name
-$cust_name = $cust_first_name." ".$cust_last_name;
+$cust_name = $cust_first_name.' '.$cust_last_name;
 
 // Prepare field customer company
 if ($setting_company_field != "show" OR $cust_company == '') {
@@ -250,12 +250,12 @@ if ($setting_state_field == "show") {
 	if ($setting_zip_location == "end") {
 		// Show zip at the end of address
 		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city, $cust_state $cust_zip<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city.", ".$cust_state." ".$cust_zip."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city.", ".$cust_state.' '.$cust_zip."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 	else {
 		// Show zip inside of address
 		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_country-$cust_zip $cust_city<br />$cust_state<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_country."-".$cust_zip." ".$cust_city."\n\t".$cust_state."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_country."-".$cust_zip.' '.$cust_city."\n\t".$cust_state."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 }
 // Show address w/o state field	
@@ -268,7 +268,7 @@ else {
 	else {	
 		// Show zip inside of address
 		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_country-$cust_zip $cust_city<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";	
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_country."-".$cust_zip." ".$cust_city."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_country."-".$cust_zip.' '.$cust_city."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 }
 
@@ -297,7 +297,7 @@ if ($setting_shipping_form == "always" || $_SESSION['bakery']['ship_data']) {
 	}
 
 	// Join customer first and last name
-	$ship_name = $ship_first_name." ".$ship_last_name;
+	$ship_name = $ship_first_name.' '.$ship_last_name;
 
 	// Prepare field shipping company
 	if ($setting_company_field != "show" OR $ship_company == '') {
@@ -314,12 +314,12 @@ if ($setting_shipping_form == "always" || $_SESSION['bakery']['ship_data']) {
 		if ($setting_zip_location == "end") {
 			// Show zip at the end of address
 			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city, $ship_state $ship_zip<br />$ship_country_name";
-			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city.", ".$ship_state." ".$ship_zip."\n";
+			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city.", ".$ship_state.' '.$ship_zip."\n";
 		}
 		else {
 			// Show zip inside of address
 			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_country-$ship_zip $ship_city<br />$ship_state<br />$ship_country_name";
-			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_country."-".$ship_zip." ".$ship_city."\n\t".$ship_state."\n\t".$ship_country_name."\n";		
+			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_country."-".$ship_zip.' '.$ship_city."\n\t".$ship_state."\n\t".$ship_country_name."\n";		
 		}
 	}
 	// Show address w/o state field	
@@ -332,7 +332,7 @@ if ($setting_shipping_form == "always" || $_SESSION['bakery']['ship_data']) {
 		else {	
 			// Show zip inside of address
 			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_country-$ship_zip $ship_city<br />$ship_country_name";	
-			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_country."-".$ship_zip." ".$ship_city."\n\t".$ship_country_name."\n";		
+			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_country."-".$ship_zip.' '.$ship_city."\n\t".$ship_country_name."\n";		
 		}
 	}
 	// Make var that contains either customer address or - if existing - the shipping address
@@ -921,7 +921,7 @@ if ($query_invoice->numRows() > 0) {
 
 // Make string of invoice data and email data to store in db
 $invoice_array = array($order_id, $setting_shop_name, $bank_account, $cust_name, $address, $cust_address, $ship_address, $cust_email, $invoice_item_list, $order_date, $setting_shop_email, $email_address, $email_cust_address, $email_ship_address, $email_item_list, $cust_tax_no, $cust_msg);
-$invoice_str   = addslashes(implode("&&&&&", $invoice_array));
+$invoice_str   = addslashes(implode('&&&&&', $invoice_array));
 
 // Write invoice data and email data string into db
 $database->query("UPDATE ".TABLE_PREFIX."mod_bakery_customer SET invoice = '$invoice_str' WHERE order_id = '{$_SESSION['bakery']['order_id']}'");

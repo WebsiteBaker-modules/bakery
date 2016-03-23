@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -51,6 +51,7 @@ require('../../../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 
 // Get setting of magic quotes
+$magic_quotes_on = false;
 if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc() == 1) {
 	$magic_quotes_on = true;
 }
@@ -155,14 +156,12 @@ if (strcmp($res, 'VERIFIED') == 0) {
 	$payment_status   = $_POST['payment_status'];
 	$payment_amount   = $_POST['mc_gross'];
 
-	// Get transaction id from db
-	$transaction_id = $database->get_one("SELECT transaction_id FROM ".TABLE_PREFIX."mod_bakery_customer WHERE order_id = '$order_id'");
-	// Get receiver’s email from db 
-	$paypal_email = $database->get_one("SELECT value_1 FROM ".TABLE_PREFIX."mod_bakery_payment_methods WHERE directory = 'paypal'");
-	// Get payer's email from db
-	$cust_email = $database->get_one("SELECT cust_email FROM ".TABLE_PREFIX."mod_bakery_customer");
 	// Get shop currency from db
-	$shop_currency = $database->get_one("SELECT shop_currency FROM ".TABLE_PREFIX."mod_bakery_general_settings");
+	$shop_currency = $database->get_one("SELECT `shop_currency` FROM ".TABLE_PREFIX."mod_bakery_general_settings");
+	// Get transaction id from db
+	$transaction_id = $database->get_one("SELECT `transaction_id` FROM ".TABLE_PREFIX."mod_bakery_customer WHERE `order_id` = '$order_id'");
+	// Get receiver’s email from db 
+	$paypal_email = $database->get_one("SELECT `value_1` FROM ".TABLE_PREFIX."mod_bakery_payment_methods WHERE `directory` = 'paypal'");
 
 	// Check some transaction details to validate transaction 
 	$error = false;
@@ -172,6 +171,13 @@ if (strcmp($res, 'VERIFIED') == 0) {
 		$error = true;
 		if ($debug) {	
 			error_log(date('[Y-m-d H:i e] ').'ERROR: The payment status returned by PayPal is "'.$payment_status.'". The payment status should be "Completed"'.PHP_EOL, 3, $log_file);
+		}
+	}
+	// Check if the payment_currency is correct
+	if ($payment_currency != $shop_currency) {
+		$error = true;
+		if ($debug) {	
+			error_log(date('[Y-m-d H:i e] ').'ERROR: The payment currency did not match.'.PHP_EOL, 3, $log_file);
 		}
 	}
 	// Check if the transaction id is correct
@@ -186,20 +192,6 @@ if (strcmp($res, 'VERIFIED') == 0) {
 		$error = true;
 		if ($debug) {	
 			error_log(date('[Y-m-d H:i e] ').'ERROR: The receiver\'s PayPal email address is not registered to Bakery.'.PHP_EOL, 3, $log_file);
-		}
-	}
-	// Check if the payer's email address is correct
-	if (strtolower($payer_email) != strtolower($cust_email)) {
-		$error = true;
-		if ($debug) {	
-			error_log(date('[Y-m-d H:i e] ').'ERROR: The payer\'s email address did not match.'.PHP_EOL, 3, $log_file);
-		}
-	}
-	// Check if the payment_currency is correct
-	if ($payment_currency != $shop_currency) {
-		$error = true;
-		if ($debug) {	
-			error_log(date('[Y-m-d H:i e] ').'ERROR: The payment currency did not match.'.PHP_EOL, 3, $log_file);
 		}
 	}
 

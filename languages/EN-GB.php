@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -237,6 +237,8 @@ $MOD_BAKERY['TXT_STATUS_REMINDER'] = 'Reminder';
 $MOD_BAKERY['TXT_STATUS_PAID'] = 'Paid';
 $MOD_BAKERY['TXT_STATUS_ARCHIVE'] = 'archive';
 $MOD_BAKERY['TXT_STATUS_ARCHIVED'] = 'archived';
+$MOD_BAKERY['TXT_STATUS_CANCEL'] = 'cancel';
+$MOD_BAKERY['TXT_STATUS_CANCELED'] = 'cancelled';
 
 $MOD_BAKERY['TXT_PRINT'] = 'Print';
 $MOD_BAKERY['TXT_INVOICE'] = 'Invoice';

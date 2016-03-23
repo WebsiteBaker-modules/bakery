@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2015, Christoph Marti
+  Copyright (C) 2007 - 2016, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -84,7 +84,7 @@ if (isset($_POST)) {
 				echo "Transaction ID: ".$_POST['transaction']."\n";
 				echo "Order ID: ".$order_id."\n";
 				echo "Created: ".$_POST['created']."\n";
-				echo "Amount: ".$_POST['currency_id']." ".$_POST['amount']."\n";
+				echo "Amount: ".$_POST['currency_id'].' '.$_POST['amount']."\n";
 				echo "Security Criteria: ".$_POST['security_criteria']."\n";
 			} else {
 				echo $database->get_error()."\n";
