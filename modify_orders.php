@@ -45,7 +45,7 @@ else {
 }
 
 // Get the time until the admin will be alerted if the invoice has not been payed
-$query_payment_methods = $database->query("SELECT value_2, value_3 FROM `".TABLE_PREFIX."mod_bakery_payment_methods` WHERE directory = 'invoice' LIMIT 1");
+$query_payment_methods = $database->query("SELECT value_2, value_3 FROM ".TABLE_PREFIX."mod_bakery_payment_methods WHERE directory = 'invoice' LIMIT 1");
 if ($query_payment_methods->numRows() > 0) {
 	$payment_method = $query_payment_methods->fetchRow();
 	$invoice_alert  = is_numeric($payment_method['value_2']) ? $payment_method['value_2'] : 0;
@@ -57,13 +57,13 @@ if ($view == 'current') {
 	$toggle         = 'archive';
 	$toggle_page    = $MOD_BAKERY['TXT_ORDER_ARCHIVED'];
 	$current_page   = $MOD_BAKERY['TXT_ORDER_CURRENT'];
-	$query_customer = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer` WHERE status != 'archived' AND status != 'canceled' AND submitted != 'no' ORDER BY order_date DESC");
+	$query_customer = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_customer WHERE status != 'archived' AND status != 'canceled' AND submitted != 'no' ORDER BY order_date DESC");
 }
 else {
 	$toggle         = 'current';
 	$toggle_page    = $MOD_BAKERY['TXT_ORDER_CURRENT'];
 	$current_page   = $MOD_BAKERY['TXT_ORDER_ARCHIVED'];
-	$query_customer = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_customer` WHERE status = 'archived' OR status = 'canceled' AND submitted != 'no' ORDER BY order_date DESC");
+	$query_customer = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_customer WHERE status = 'archived' OR status = 'canceled' AND submitted != 'no' ORDER BY order_date DESC");
 }
 
 
@@ -115,7 +115,7 @@ if ($query_customer->numRows() > 0) {
 	<tr height="30" valign="bottom" class="mod_bakery_submit_row_b">
 		<th colspan="2" align="left" style="padding-left: 5px;"><?php echo $MOD_BAKERY['TXT_ORDER']; ?></th>
 		<th align="left"><?php echo $MOD_BAKERY['TXT_INVOICE']; ?></th>
-		<th colspan="2" align="left"><?php echo $MOD_BAKERY['TXT_CUSTOMER']; ?></th>
+		<th colspan="3" align="left"><?php echo $MOD_BAKERY['TXT_CUSTOMER']; ?></th>
 		<th align="left"><?php echo $MOD_BAKERY['TXT_ORDER_DATE']; ?></th>
 		<th colspan="2" align="left"><?php echo $MOD_BAKERY['TXT_STATUS']; ?></th>
 		<th colspan="4"><?php echo $TEXT['ACTIONS']; ?></th>
@@ -157,11 +157,18 @@ if ($query_customer->numRows() > 0) {
 			// Show email, customer name and order date ?>
 			</td>
 			<td width="5%" align="right" style="padding-right: 8px; font-weight: bold;"><?php echo $costumer['invoice_id']; ?></td>
-			<td width="18">
+
+
+
+
+			<td width="22">
 			<a href="mailto:<?php echo stripslashes($costumer['cust_email']); ?>"><img src="<?php echo WB_URL; ?>/modules/bakery/images/email.png" alt="<?php echo $TEXT['EMAIL']; ?>" title="<?php echo $TEXT['EMAIL'].' '.$TEXT['TO'].' '.stripslashes($costumer['cust_email']); ?>" style="margin-bottom: -3px;" border="0" /></a>
 			</td>
+			<td width="22">
+			<a href="<?php echo WB_URL; ?>/modules/bakery/modify_order.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;order_id=<?php echo $costumer['order_id']; ?>"><img src="<?php echo WB_URL; ?>/modules/bakery/images/user_edit.png" alt="<?php echo $MOD_BAKERY['TXT_EDIT_ORDER']; ?>" title="<?php echo $MOD_BAKERY['TXT_EDIT_ORDER']; ?>" style="margin-bottom: -3px;" border="0" /></a>
+			</td>
 			<td>
-			<a href="<?php echo WB_URL; ?>/modules/bakery/view_order.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;order_id=<?php echo $costumer['order_id']; ?>" onclick="showOrder(this.href); return false;"><?php echo stripslashes($costumer['cust_first_name']).' '.stripslashes($costumer['cust_last_name']); ?></a>
+			<a href="<?php echo WB_URL; ?>/modules/bakery/modify_order.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;order_id=<?php echo $costumer['order_id']; ?>" title="<?php echo $MOD_BAKERY['TXT_EDIT_ORDER']; ?>"><?php echo stripslashes($costumer['cust_last_name'])." ".stripslashes($costumer['cust_first_name']); ?></a>
 			</td>
 			<td width="135"><?php echo gmdate(DATE_FORMAT.', '.TIME_FORMAT, $costumer['order_date']+TIMEZONE); ?></td>
 			<td width="22">

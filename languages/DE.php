@@ -210,6 +210,7 @@ $MOD_BAKERY['TXT_ORDER_CURRENT'] = 'Alle aktuellen Bestellungen';
 $MOD_BAKERY['TXT_CUSTOMER'] = 'Kunde';
 $MOD_BAKERY['TXT_STATUS'] = 'Status';
 $MOD_BAKERY['TXT_ORDER_DATE'] = 'Bestelldatum';
+$MOD_BAKERY['TXT_EDIT_ORDER'] = 'Kundendaten &auml;ndern';
 
 $MOD_BAKERY['TXT_STATUS_ORDERED'] = 'bestellt';
 $MOD_BAKERY['TXT_STATUS_SHIPPED'] = 'versandt';
@@ -230,7 +231,7 @@ $MOD_BAKERY['TXT_PRINT_INVOICE'] = 'Rechnung drucken';
 
 $MOD_BAKERY['TXT_SEND_INVOICE'] = 'Rechnung als HTML E-Mail senden.';
 $MOD_BAKERY['TXT_INVOICE_ALREADY_SENT'] = 'Die Rechnung wurde bereits %d-mal gesendet.';
-$MOD_BAKERY['TXT_INVOICE_HAS_BEEN_SENT_SUCCESSFULLY'] = 'Die Rechnung wurde erfolgreich per E-Mail an den Kunden gesendet.';
+$MOD_BAKERY['TXT_INVOICE_HAS_BEEN_SENT_SUCCESSFULLY'] = 'Die Rechnung wurde erfolgreich als HTML E-Mail an den Kunden gesendet.';
 
 // MODUL BAKERY STOCK ADMINISTRATION
 $MOD_BAKERY['TXT_STOCK_ADMIN'] = 'Lagerverwaltung';
@@ -274,8 +275,9 @@ $MOD_BAKERY['ERR_NO_PAYMENT_METHOD'] = 'Es wurde keine Zahlungsmethode aktiviert
 $MOD_BAKERY['ERR_EMAIL_NOT_SENT'] = 'Die E-Mail konnte nicht an Sie versandt werden.<br />Ihre Bestellung ist dennoch g&uuml;ltig.<br />Bitte wenden Sie sich an den Shop-Betreiber';
 
 // MODUL BAKERY JAVASCRIPT MESSAGES (Important: Do not remove \n !)
-$MOD_BAKERY['TXT_JS_CONFIRM'] = 'M\u00F6chten Sie Ihre Bestellung wirklich abbrechen?';
-$MOD_BAKERY['TXT_JS_AGREE'] = 'Wir k\u00F6nnen Ihre Bestellung nur ausf\u00FChren, wenn Sie unsere AGB akzeptieren. Danke f\u00FCr Ihr Verst\u00E4ndnis!';
-$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Bitte geben Sie die Pr\u00FCfziffer ein!';
-$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'Die eingegebene Pr\u00FCfziffer stimmt nicht \u00FCberein.\nBitte \u00FCberpr\u00FCfen Sie Ihre Eingabe!';
-$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = 'M\u00F6chten Sie diese Rechnung per E-Mail an den Kunden senden?';
+$MOD_BAKERY['TXT_JS_CONFIRM'] = 'Möchten Sie Ihre Bestellung wirklich abbrechen?';
+$MOD_BAKERY['TXT_JS_AGREE'] = 'Wir können Ihre Bestellung nur ausführen, wenn Sie unsere AGB akzeptieren. Danke für Ihr Verständnis!';
+#$MOD_BAKERY['TXT_JS_AGREE'] = 'Wir können Ihre Bestellung nur ausführen, wenn Sie unsere AGB akzeptieren. Danke für Ihr Verständnis!';
+$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Bitte geben Sie die Prüfziffer ein!';
+$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'Die eingegebene Prüfziffer stimmt nicht überein.\nBitte überprüfen Sie Ihre Eingabe!';
+$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = 'Möchten Sie diese Rechnung als HTML E-Mail an den Kunden senden?';

@@ -99,7 +99,7 @@ if ($query_general_settings->numRows() > 0) {
 <?php
 
 // Loop through existing items
-$query_items = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_bakery_items` WHERE section_id = '$section_id' ORDER BY position ASC");
+$query_items = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_items WHERE section_id = '$section_id' ORDER BY position ASC");
 
 if ($query_items->numRows() > 0) {
 	$num_items = $query_items->numRows();
@@ -132,7 +132,7 @@ if ($query_items->numRows() > 0) {
 
 			// Get main thumb (image with position == 1)
 			$main_image = FALSE;
-			$main_image = $database->get_one("SELECT `filename` FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '{$post['item_id']}' AND `active` = '1' ORDER BY `position` ASC LIMIT 1");
+			$main_image = $database->get_one("SELECT filename FROM ".TABLE_PREFIX."mod_bakery_images WHERE item_id = '{$post['item_id']}' AND active = '1' ORDER BY position ASC LIMIT 1");
 
 			// Check if png image has a jpg thumb (version < 1.7.6 used jpg thumbs only)
 			$main_thumb = $main_image;

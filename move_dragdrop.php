@@ -21,13 +21,13 @@ else {
 	$action = $admin->add_slashes($_POST['action']);
 	// We just get the array here, and few lines below we sanitize it
 	$row = $_POST['row'];	
-	$sID = $database->get_one("SELECT `section_id` FROM `".TABLE_PREFIX."mod_bakery_items` WHERE `item_id` = ".intval($row[0]));
+	$sID = $database->get_one("SELECT section_id FROM ".TABLE_PREFIX."mod_bakery_items WHERE item_id = ".intval($row[0]));
 	
 	
 	/*
 	Bakery isn't using ordering (ASC/DESC) so we comment this code
 
-	$sorting = $database->get_one("SELECT `ordering` FROM `".TABLE_PREFIX."bakery_settings` WHERE `section_id` = ".$sID." ");
+	$sorting = $database->get_one("SELECT ordering FROM ".TABLE_PREFIX."bakery_settings WHERE section_id = ".$sID." ");
 	if($sorting == 1) // DESC == new first
 	{
 		$row = array_reverse($row);
@@ -41,7 +41,7 @@ else {
 		foreach ($row as $recID) {
 			// Sanitize array
 			$recID = $admin->add_slashes($recID);
-			$database->query("UPDATE `".TABLE_PREFIX."mod_bakery_items` SET `position` = ".$i." WHERE `item_id` = ".$recID." ");
+			$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_items SET position = ".$i." WHERE item_id = ".$recID." ");
 			$i++;
 		}
 	

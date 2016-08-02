@@ -157,11 +157,11 @@ if (strcmp($res, 'VERIFIED') == 0) {
 	$payment_amount   = $_POST['mc_gross'];
 
 	// Get shop currency from db
-	$shop_currency = $database->get_one("SELECT `shop_currency` FROM ".TABLE_PREFIX."mod_bakery_general_settings");
+	$shop_currency = $database->get_one("SELECT shop_currency FROM ".TABLE_PREFIX."mod_bakery_general_settings");
 	// Get transaction id from db
-	$transaction_id = $database->get_one("SELECT `transaction_id` FROM ".TABLE_PREFIX."mod_bakery_customer WHERE `order_id` = '$order_id'");
+	$transaction_id = $database->get_one("SELECT transaction_id FROM ".TABLE_PREFIX."mod_bakery_customer WHERE order_id = '$order_id'");
 	// Get receiver’s email from db 
-	$paypal_email = $database->get_one("SELECT `value_1` FROM ".TABLE_PREFIX."mod_bakery_payment_methods WHERE `directory` = 'paypal'");
+	$paypal_email = $database->get_one("SELECT value_1 FROM ".TABLE_PREFIX."mod_bakery_payment_methods WHERE directory = 'paypal'");
 
 	// Check some transaction details to validate transaction 
 	$error = false;

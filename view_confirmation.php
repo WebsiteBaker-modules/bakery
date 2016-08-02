@@ -109,7 +109,7 @@ if (is_string($payment_status) && is_string($payment_method)) {
 			$email_sent = 0;
 
 			// Consecutive numbering of invoice numbers
-			$new_invoice_id = $database->get_one("SELECT MAX(`invoice_id`) + 1 AS new_invoice_id FROM ".TABLE_PREFIX."mod_bakery_customer");
+			$new_invoice_id = $database->get_one("SELECT MAX(invoice_id) + 1 AS new_invoice_id FROM ".TABLE_PREFIX."mod_bakery_customer");
 			// Update db
 			$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_customer SET submitted = '$payment_method', status = 'ordered', invoice_id = '$new_invoice_id' WHERE order_id = '$order_id'");
 

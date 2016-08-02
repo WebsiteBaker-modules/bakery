@@ -37,7 +37,7 @@ require_once(WB_PATH.'/modules/bakery/config.php');
 <?php
 
 // If requested include lightbox2 (css is appended to the frontend.css stylesheet)
-if ($setting_lightbox2 == "detail" || $setting_lightbox2 == "all") {
+if ($setting_lightbox2 == 'detail' || $setting_lightbox2 == 'all') {
 	?>
 	<script type="text/javascript" src="<?php echo WB_URL; ?>/modules/bakery/lightbox2/js/lightbox.js"></script>
 	<script type="text/javascript">
@@ -59,8 +59,8 @@ $(document).ready(function() {
 	container     = $('.mod_bakery_item_price_f').parent().next();
 	
 	// General settings
-	currency      = "<?php echo $setting_shop_currency; ?>";
-	decimal_sep   = "<?php echo $setting_dec_point; ?>";
+	currency      = '<?php echo $setting_shop_currency; ?>';
+	decimal_sep   = '<?php echo $setting_dec_point; ?>';
 	thousands_sep = "<?php echo $setting_thousands_sep; ?>";
 
 	// Calculate price on document ready
@@ -161,7 +161,7 @@ if ($query_item->numRows() > 0) {
 	$img_url    = WB_URL.MEDIA_DIRECTORY.'/'.$img_dir.'/images/item'.ITEM_ID.'/';
 
 	// Get image data from db
-	$query_image = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '".ITEM_ID."' AND `active` = '1' ORDER BY position ASC");
+	$query_image = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_images WHERE item_id = '".ITEM_ID."' AND active = '1' ORDER BY position ASC");
 	if ($query_image->numRows() > 0) {
 		while ($image = $query_image->fetchRow()) {
 			$image          = array_map('stripslashes', $image);
@@ -190,15 +190,15 @@ if ($query_item->numRows() > 0) {
 			// Make array of all item thumbs and images
 			if (file_exists($thumb_path.$thumb_file) && file_exists($img_path.$image_file)) {
 				// If needed add lightbox2 link to the thumb/image...
-				if ($setting_lightbox2 == "detail" || $setting_lightbox2 == "all") {
-					$prepend = "<a href='".$img_url.$image_file."' rel='lightbox[image_".ITEM_ID."]' title='".$img_title."'><img src='";
-					$thumb_append = "' alt='".$img_alt."' title='".$img_title."' id='".$thumb_id."' class='mod_bakery_item_thumb_f' /></a>";
-					$img_append = "' alt='".$img_alt."' title='".$img_title."' id='".$img_id."' class='mod_bakery_item_img_f' /></a>";
+				if ($setting_lightbox2 == 'detail' || $setting_lightbox2 == 'all') {
+					$prepend = '<a href="'.$img_url.$image_file.'" rel="lightbox[image_'.ITEM_ID.']" title="'.$img_title.'"><img src="';
+					$thumb_append = '" alt="'.$img_alt.'" title="'.$img_title.'" id="'.$thumb_id.'" class="mod_bakery_item_thumb_f" /></a>';
+					$img_append = '" alt="'.$img_alt.'" title="'.$img_title.'" id="'.$img_id.'" class="mod_bakery_item_img_f" /></a>';
 				// ...else add thumb/image only
 				} else {
-					$prepend = "<img src='";
-					$thumb_append = "' alt='".$img_alt."' title='".$img_title."' id='".$thumb_id."' class='mod_bakery_item_thumb_f' />";
-					$img_append = "' alt='".$img_alt."' title='".$img_title."' id='".$img_id."' class='mod_bakery_item_img_f' />";
+					$prepend = '<img src="';
+					$thumb_append = '" alt="'.$img_alt.'" title="'.$img_title.'" id="'.$thumb_id.'" class="mod_bakery_item_thumb_f" />';
+					$img_append = '" alt="'.$img_alt.'" title="'.$img_title.'" id="'.$img_id.'" class="mod_bakery_item_img_f" />';
 				}
 				// Make array
 				$thumb_arr[] = $prepend.$thumb_url.$thumb_file.$thumb_append;
@@ -248,10 +248,10 @@ if ($query_item->numRows() > 0) {
 				while ($attributes = $query_attributes->fetchRow()) {
 					$attributes = array_map('stripslashes', $attributes);
 					// Make attribute select
-					$attributes['operator'] = $attributes['operator'] == "=" ? '' : $attributes['operator'];
-					$ia_price = ", ".$setting_shop_currency.' '.$attributes['operator'].$attributes['price'];
+					$attributes['operator'] = $attributes['operator'] == '=' ? '' : $attributes['operator'];
+					$ia_price = ', '.$setting_shop_currency.' '.$attributes['operator'].$attributes['price'];
 					$ia_price = $attributes['price'] == 0 ? '' : $ia_price;
-					$option_select .= "<option value='{$attributes['attribute_id']}'>{$attributes['attribute_name']}$ia_price</option>\n";
+					$option_select .= '<option value="'.$attributes['attribute_id'].'">'.$attributes['attribute_name'].$ia_price.'</option>'."\n";
 				}
 				$option_select .= '</select>'."\n".$select_end;
 				$option         = $option_select;
@@ -262,33 +262,33 @@ if ($query_item->numRows() > 0) {
 	// Check if we should show number of items, stock image or "in stock" message or nothing at all
 	$item_stock = stripslashes($item['stock']);
 	// Only show if item stock is not blank
-	if ($item_stock == '' && $setting_stock_mode != "none") {
+	if ($item_stock == '' && $setting_stock_mode != 'none') {
 		$stock = $MOD_BAKERY['TXT_N/A'];
 	} else {
 		// Display number of items
-		if ($setting_stock_mode == "number") {
+		if ($setting_stock_mode == 'number') {
 			if ($item_stock < 1) {
 				$stock = 0;
 			} else {
 				$stock = $item_stock;
 			}
 		// Display stock image
-		} elseif ($setting_stock_mode == "img" && is_numeric($setting_stock_limit) && $setting_stock_limit != '') {
+		} elseif ($setting_stock_mode == 'img' && is_numeric($setting_stock_limit) && $setting_stock_limit != '') {
 			if ($item_stock < 1) {
-				$stock = "<img src='".WB_URL."/modules/bakery/images/out_of_stock.gif' alt='".$MOD_BAKERY['TXT_OUT_OF_STOCK']."' class='mod_bakery_item_stock_img_f' />";
+				$stock = '<img src="'.WB_URL.'/modules/bakery/images/out_of_stock.gif" alt="'.$MOD_BAKERY['TXT_OUT_OF_STOCK'].'" class="mod_bakery_item_stock_img_f" />';
 			} elseif ($item_stock > $setting_stock_limit) {
-				$stock = "<img src='".WB_URL."/modules/bakery/images/in_stock.gif' alt='".$MOD_BAKERY['TXT_IN_STOCK']."' class='mod_bakery_item_stock_img_f' />";
+				$stock = '<img src="'.WB_URL.'/modules/bakery/images/in_stock.gif" alt="'.$MOD_BAKERY['TXT_IN_STOCK'].'" class="mod_bakery_item_stock_img_f" />';
 			} else {
-				$stock = "<img src='".WB_URL."/modules/bakery/images/short_of_stock.gif' alt='".$MOD_BAKERY['TXT_SHORT_OF_STOCK']."' class='mod_bakery_item_stock_img_f' />";
+				$stock = '<img src="'.WB_URL.'/modules/bakery/images/short_of_stock.gif" alt="'.$MOD_BAKERY['TXT_SHORT_OF_STOCK'].'" class="mod_bakery_item_stock_img_f" />';
 		}
 		// Display stock text message			
-		} elseif ($setting_stock_mode == "text" && is_numeric($setting_stock_limit) && $setting_stock_limit != '') {
+		} elseif ($setting_stock_mode == 'text' && is_numeric($setting_stock_limit) && $setting_stock_limit != '') {
 			if ($item_stock < 1) {
-				$stock = "<span class='mod_bakery_item_out_of_stock_f'>".$MOD_BAKERY['TXT_OUT_OF_STOCK']."</span>";
+				$stock = '<span class="mod_bakery_item_out_of_stock_f">'.$MOD_BAKERY['TXT_OUT_OF_STOCK'].'</span>';
 			} elseif ($item_stock > $setting_stock_limit) {
-				$stock = "<span class='mod_bakery_item_in_stock_f'>".$MOD_BAKERY['TXT_IN_STOCK']."</span>";
+				$stock = '<span class="mod_bakery_item_in_stock_f">'.$MOD_BAKERY['TXT_IN_STOCK'].'</span>';
 			} else {
-				$stock = "<span class='mod_bakery_item_short_of_stock_f'>".$MOD_BAKERY['TXT_SHORT_OF_STOCK']."</span>";
+				$stock = '<span class="mod_bakery_item_short_of_stock_f">'.$MOD_BAKERY['TXT_SHORT_OF_STOCK'].'</span>';
 			}
 		// Display nothing
 		} else {

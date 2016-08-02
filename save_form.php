@@ -50,7 +50,7 @@ foreach ($_POST as $field => $value) {
 // If blank fields show error message
 if (isset($blanks)) {
 	$form_error = $MOD_BAKERY['ERR_FIELD_BLANK'];
-	$error_bg = $blanks;
+	$error_bg   = $blanks;
 	extract($_POST);
 	include('view_form.php');
 	return;

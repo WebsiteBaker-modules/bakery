@@ -211,6 +211,7 @@ $MOD_BAKERY['TXT_ORDER_CURRENT'] = 'Commandes en Cours';
 $MOD_BAKERY['TXT_CUSTOMER'] = 'Client';
 $MOD_BAKERY['TXT_STATUS'] = 'Etat';
 $MOD_BAKERY['TXT_ORDER_DATE'] = 'Date de la Commande';
+$MOD_BAKERY['TXT_EDIT_ORDER'] = 'Modifier la client&egrave;le';
 
 $MOD_BAKERY['TXT_STATUS_ORDERED'] = 'commande pass&eacute;e';
 $MOD_BAKERY['TXT_STATUS_SHIPPED'] = 'livr&eacute;';
@@ -275,8 +276,8 @@ $MOD_BAKERY['ERR_NO_PAYMENT_METHOD'] = 'Aucune M&eacute;thode de Paiement Activ&
 $MOD_BAKERY['ERR_EMAIL_NOT_SENT'] = 'L&apos;envoi d&apos;email n&apos;a pu &ecirc;tre effectu&eacute;. Votre commande est encore valide. Veuillez contacter l&apos;administrateur de la boutique';
 
 // MODUL BAKERY JAVASCRIPT MESSAGES (Important: Do not remove \n !)
-$MOD_BAKERY['TXT_JS_CONFIRM'] = 'Voulez vous vraiment arr\u00EAter votre commande?';
-$MOD_BAKERY['TXT_JS_AGREE'] = 'Votre commande ne peut &ecirc;tre valid&eacute;e si vous n\'acceptez pas les conditions g&eacute;n&eacute;rales de vente du site. Merci pour votre compr&eacute;hension!';
-$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Veuillez saisir le num\u00E9ro de v\u00E9rification (aussi appel\u00E9 CAPTCHA)!';
-$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'Le num\u00E9ro de v\u00E9rification (aussi appel\u00E9 CAPTCHA) ne correspond pas.\nVeuillez corriger votre saisie!';
+$MOD_BAKERY['TXT_JS_CONFIRM'] = 'Voulez vous vraiment arrêter votre commande?';
+$MOD_BAKERY['TXT_JS_AGREE'] = 'Votre commande ne peut être validée si vous n\'acceptez pas les conditions générales de vente du site. Merci pour votre compréhension!';
+$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Veuillez saisir le numéro de vérification (aussi appelé CAPTCHA)!';
+$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'Le numéro de vérification (aussi appelé CAPTCHA) ne correspond pas.\nVeuillez corriger votre saisie!';
 $MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = 'Voulez-vous envoyer cette facture au client?';

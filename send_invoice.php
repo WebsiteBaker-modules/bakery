@@ -67,7 +67,7 @@ if ($query_payment_methods->numRows() > 0) {
 $invoice_template = stripslashes($payment_methods['value_4']);
 
 // Get invoice data string from db customer table
-$query_customer = $database->query("SELECT `invoice_id`, `sent_invoices`, `invoice`, `submitted`, `transaction_status` FROM `".TABLE_PREFIX."mod_bakery_customer` WHERE `order_id` = '$order_id'");
+$query_customer = $database->query("SELECT invoice_id, sent_invoices, invoice, submitted, transaction_status FROM ".TABLE_PREFIX."mod_bakery_customer WHERE order_id = '$order_id'");
 if ($query_customer->numRows() > 0) {
 	$customer = $query_customer->fetchRow();
 
@@ -182,7 +182,7 @@ if ($query_customer->numRows() > 0) {
 		// Send invoice email to customer
 		if (mail($cust_email, $email_subject, $pre['html'], $headers)) {
 			// On success increment email counter
-			$database->query("UPDATE `".TABLE_PREFIX."mod_bakery_customer` SET `sent_invoices` = `sent_invoices` + '1' WHERE order_id = '$order_id'");
+			$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_customer SET sent_invoices = sent_invoices + '1' WHERE order_id = '$order_id'");
 			// On success view confirmation
 			$admin->print_success($MOD_BAKERY['TXT_INVOICE_HAS_BEEN_SENT_SUCCESSFULLY'], WB_URL.'/modules/bakery/modify_orders.php?page_id='.$page_id);
 		} else {

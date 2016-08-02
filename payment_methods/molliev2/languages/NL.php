@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2016, Christoph Marti
+  Copyright (C) 2012, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -21,8 +21,8 @@
 // *********************
 
 // SETTINGS - USED BY BACKEND
-$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Mollie';
 $MOD_BAKERY[$payment_method]['TXT_PARTNER_ID'] = 'Mollie API Key';
+$MOD_BAKERY[$payment_method]['TXT_NAME'] = 'Mollie';
 
 // USED BY FILE bakery/payment_methods/mollie/processor.php
 $MOD_BAKERY[$payment_method]['TXT_TITLE'] = 'Mollie online betalingen';
@@ -70,7 +70,7 @@ $MOD_BAKERY[$payment_method]['EMAIL_BODY_SHOP'] = 'Geachte [SHOP_NAME] Administr
 
 NIEUWE BESTELLING BIJ [SHOP_NAME]:
 	Bestelling #: [ORDER_ID]
-	Betaal methode: Mollie
+	Betaal methode: Mollie (iDEAL)
 
 Aflever adres:
 [ADDRESS]
@@ -80,10 +80,6 @@ Factuur adres:
 
 Bestellijst: 
 [ITEM_LIST]
-
-
-Klant opmerking:
-[CUST_MSG]
 
 
 Met vriendelijke groet,

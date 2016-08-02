@@ -211,6 +211,7 @@ $MOD_BAKERY['TXT_ORDER_CURRENT'] = 'Huidige Bestellingen';
 $MOD_BAKERY['TXT_CUSTOMER'] = 'Klant';
 $MOD_BAKERY['TXT_STATUS'] = 'Status';
 $MOD_BAKERY['TXT_ORDER_DATE'] = 'Besteldatum';
+$MOD_BAKERY['TXT_EDIT_ORDER'] = 'Adressen van de klant aanpassen';
 
 $MOD_BAKERY['TXT_STATUS_ORDERED'] = 'besteld';
 $MOD_BAKERY['TXT_STATUS_SHIPPED'] = 'verzonden';

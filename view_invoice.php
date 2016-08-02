@@ -56,9 +56,9 @@ else {
 }
 
 // Make difference between invoice, delivery note and reminder
-$display_reminder      = "none";
-$display_delivery_note = "none";
-$display_invoice       = "none";
+$display_reminder      = 'none';
+$display_delivery_note = 'none';
+$display_invoice       = 'none';
 if ($view == 'reminder') {
 	$title            = $MOD_BAKERY['TXT_REMINDER'];
 	$display_reminder = '';
@@ -99,10 +99,10 @@ if ($query_customer->numRows() > 0) {
 	if ($customer['invoice'] != '') {
 		// Convert string to array
 		$invoice = stripslashes($customer['invoice']);
-		$invoice_array = explode("&&&&&", $invoice);
+		$invoice_array = explode('&&&&&', $invoice);
 		// Chop off phone number and email from customer address
-		$invoice_address = explode("<br /><br />", $invoice_array[4]);
-		$invoice_cust_address = explode("<br /><br />", $invoice_array[5]);
+		$invoice_address = explode('<br /><br />', $invoice_array[4]);
+		$invoice_cust_address = explode('<br /><br />', $invoice_array[5]);
 		// If given get customer tax no
 		$cust_tax_no = !empty($invoice_array[15]) ? $invoice_array[15] : ' &#8212; ';
 		// Change frontend classes (eg. mod_bakery_anything_f) to backend classes (eg. mod_bakery_anything_b)
@@ -120,7 +120,7 @@ if ($query_customer->numRows() > 0) {
 		$invoice = str_replace($vars, $values, $invoice_template);
 		
 		// Wrap invoice in a <div> and add an anchor
-		$invoice = "<div id='invoice'>\n".$invoice."\n</div>\n<a name='bottom'></a>";
+		$invoice = '<div id="invoice">'."\n".$invoice."\n".'</div>'."\n".'<a name="bottom"></a>';
 		// View invoice
 		echo $invoice;
 	}

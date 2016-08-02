@@ -30,7 +30,7 @@ $order = new order(TABLE_PREFIX.'mod_bakery_items', 'position', 'item_id', 'sect
 $position = $order->get_new($section_id);
 
 // Insert new row into database
-$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_items (section_id,page_id,active,position,created_when,created_by) VALUES ('$section_id','$page_id','1','$position','".@mktime()."','".$admin->get_user_id()."')");
+$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_items (section_id,page_id,active,position,created_when,created_by) VALUES ('$section_id','$page_id','1','$position','".time()."','".$admin->get_user_id()."')");
 
 // Get the id
 $item_id = $database->get_one("SELECT LAST_INSERT_ID()");

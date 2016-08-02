@@ -83,6 +83,7 @@ function sendMail($transaction_id) {
 			$ship_address      = $invoice_array[13];
 			$item_list         = $invoice_array[14];
 			$cust_tax_no       = $invoice_array[15];
+			$cust_msg 	       = $invoice_array[16];
 		}
 	}
 	
@@ -113,10 +114,11 @@ function sendMail($transaction_id) {
 	$transaction_status_notice = '';
 	
 	$n_order_id = substr("000000".$order_id,-6);
-	
+	$cust_msg = empty($cust_msg) ? "\t".$TEXT['NONE'] : $cust_msg;
+
 	// Replace placeholders by values in the email body 
-	$vars = array('[ORDER_ID]', '[SHOP_NAME]', '[BANK_ACCOUNT]', '[TRANSACTION_STATUS]', '[CUSTOMER_NAME]', '[ADDRESS]', '[CUST_ADDRESS]', '[SHIPPING_ADDRESS]', '[CUST_EMAIL]', '[ITEM_LIST]', '[CUST_TAX_NO]');
-	$values = array($n_order_id, $setting_shop_name, $bank_account, $transaction_status_notice, $cust_name, $address, $cust_address, $ship_address, $cust_email, $item_list, $cust_tax_no);
+	$vars = array('[ORDER_ID]', '[SHOP_NAME]', '[BANK_ACCOUNT]', '[TRANSACTION_STATUS]', '[CUSTOMER_NAME]', '[ADDRESS]', '[CUST_ADDRESS]', '[SHIPPING_ADDRESS]', '[CUST_EMAIL]', '[ITEM_LIST]', '[CUST_TAX_NO]', '[CUST_MSG]');
+	$values = array($n_order_id, $setting_shop_name, $bank_account, $transaction_status_notice, $cust_name, $address, $cust_address, $ship_address, $cust_email, $item_list, $cust_tax_no, $cust_msg);
 		
 	$cust_email_subject = str_replace($vars, $values, $cust_email_subject);
 	$shop_email_subject = str_replace($vars, $values, $shop_email_subject);

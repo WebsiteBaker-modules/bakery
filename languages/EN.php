@@ -216,6 +216,7 @@ $MOD_BAKERY['TXT_ORDER_CURRENT'] = 'Current Orders';
 $MOD_BAKERY['TXT_CUSTOMER'] = 'Customer';
 $MOD_BAKERY['TXT_STATUS'] = 'Status';
 $MOD_BAKERY['TXT_ORDER_DATE'] = 'Order date';
+$MOD_BAKERY['TXT_EDIT_ORDER'] = 'Edit customer details';
 
 $MOD_BAKERY['TXT_STATUS_ORDERED'] = 'Ordered';
 $MOD_BAKERY['TXT_STATUS_SHIPPED'] = 'Shipped';

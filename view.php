@@ -142,8 +142,8 @@ if ($query_continue_url->numRows() > 0) {
 }
 
 // Add a wrapper for Bakery to help with layout
-echo "\n<div id='mod_bakery_wrapper_f'>\n";
-$end_of_wrapper = "\n</div> <!-- End of bakery wrapper -->\n";
+echo "\n".'<div id="mod_bakery_wrapper_f">'."\n";
+$end_of_wrapper = "\n".'</div> <!-- End of bakery wrapper -->'."\n";
 
 
 
@@ -182,13 +182,13 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 
 	// Check order id
 	if (!isset($_SESSION['bakery']['order_id']) || ($_SESSION['bakery']['order_id'] == '')) {
-		$mktime = @mktime();
-		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_customer (order_date) VALUES ('$mktime')");
+		$now = time();
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_customer (order_date) VALUES ('$now')");
 		$order_id = $database->get_one("SELECT LAST_INSERT_ID()");
 		$_SESSION['bakery']['order_id'] = $order_id;
 
 		// Delete db records of not submitted orders older than 1 hour
-		$outdate = $mktime - (60 * 60 * 1);
+		$outdate = $now - (60 * 60 * 1);
 		$query_outdated_orders = $database->query("SELECT order_id FROM ".TABLE_PREFIX."mod_bakery_customer WHERE order_date < $outdate AND submitted = 'no'");
 		if ($query_outdated_orders->numRows() > 0) {
 			while ($outdated_orders = $query_outdated_orders->fetchRow()) {
@@ -198,7 +198,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 				$query_order = $database->query("SELECT item_id, quantity FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$outdated_order_id'");
 				if ($query_order->numRows() > 0) {
 					while ($order = $query_order->fetchRow()) {
-						$item_id = stripslashes($order['item_id']);
+						$item_id  = stripslashes($order['item_id']);
 						$quantity = stripslashes($order['quantity']);
 						// Query item stock
 						$query_items = $database->query("SELECT stock FROM ".TABLE_PREFIX."mod_bakery_items WHERE item_id = '$item_id'");

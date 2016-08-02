@@ -25,6 +25,14 @@
  
 	DEVELOPMENT HISTORY:
 
+   v1.78  (Christoph Marti; 07/19/2016)
+	 + Fixed problem with single quotes in image title and alt attributes (reported by dbs)
+	 + [view_cart.php, search.php] Fixed hardcoded thumb_dir (thanks to Ruud)
+	 + Replaced @mktime() by time() function since as of PHP 5.1 mktime() throws a notice when called without arguments
+	 + Replaced view order by a feature that allows editing of customer and invoice address data
+	 + Changed all js alerts to utf-8
+	 + Updated Mollie payment plugin to v1.1 (thanks to Ruud - Dev4me)
+
    v1.77  (Christoph Marti; 03/19/2016)
 	 + [send_invoice.php] Bugfix: Use function getimagesize() with image path since
 	   url does not work properly if php ini option allow_url_fopen is set to 0 (reported by JPS77)
@@ -700,7 +708,7 @@
 $module_directory   = 'bakery';
 $module_name        = 'Bakery';
 $module_function    = 'page';
-$module_version     = '1.77';
+$module_version     = '1.78';
 $module_platform    = '2.7';
 $module_author      = 'Christoph Marti';
 $module_license     = 'GNU General Public License';

@@ -99,54 +99,6 @@ Modify the CSS of the invoice template and the view order in this stylesheet.
 	margin-left: 20px;
 }
 
-
-
-
-/* VIEW ORDER */
-
-/* General */
-#order table {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
-	border: 1px dotted #BCBCBC;
-	margin: 0 auto;
-}
-#order hr {
-	margin: 0;
-	border: 0;
-	border-top: 1px dotted #BCBCBC;
-	height: 1px;
-}
-#order .mod_bakery_order_b {
-	font-weight: bold;
-	margin-left: 12px;
-}
-#order .mod_bakery_address_b {
-	font-weight: bold;
-}
-#order .mod_bakery_tax_no_b {
-	font-weight: bold;
-}
-
-
-
-
-/* INVOICE PRINT and VIEW ORDER */
-
-/* Error */
-.mod_bakery_error_b {
-	width: 260px;
-	margin: 150px auto;
-	padding: 15px 0;
-	text-align: center;
-	color: red;
-	border: solid 1px red;
-	background-color: #FFDCD9;
-	background-image: url(images/error.gif);
-	background-position: 15px center;
-	background-repeat: no-repeat;
-}
-	
 /* INVOICE table header */
 .mod_bakery_invoice_th_sku_b {
 	text-align: left;
@@ -248,31 +200,6 @@ Modify the CSS of the invoice template and the view order in this stylesheet.
 
 
 /* GENERAL */
-
-/* Modify items navigation buttons */
-#mod_bakery_modify_b {
-	background-color: #fbfbfb;
-	background-image: url("images/box_bg.png");
-	background-repeat: repeat-x;
-	background-position: 0 -40px;
-	margin-top: 8px;
-	margin-bottom: 8px;
-	padding: 4px;
-	border: solid 1px #bfc9df;
-}
-#mod_bakery_modify_b input {
-	color: #5c6a86;
-	font-size: 10px;
-	font-weight: bold;
-	background-color: #c5cdd6;
-	background-image: url("images/box_bg.png");
-	background-position: 0 -40px;
-	border: solid 1px;
-}
-#mod_bakery_modify_b input:hover {
-	background-image: none;
-}
-
 
 /* Modify items drag&drop table */
 table.mod_bakery_dragndrop_b {
@@ -417,6 +344,20 @@ input.mod_bakery_edit_css {
 	width: 200px;
 	float: right;
 	clear: both;
+}
+
+/* Error */
+.mod_bakery_error_b {
+	width: 260px;
+	margin: 150px auto;
+	padding: 15px 0;
+	text-align: center;
+	color: red;
+	border: solid 1px red;
+	background-color: #FFDCD9;
+	background-image: url(images/error.gif);
+	background-position: 15px center;
+	background-repeat: no-repeat;
 }
 
 

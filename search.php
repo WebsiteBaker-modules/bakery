@@ -34,6 +34,9 @@ function bakery_search($func_vars) {
 	$divider      = '.';
 	$result       = false;
 
+	// Get some default values
+	require_once(WB_PATH.'/modules/bakery/config.php');
+
 	$table_item     = TABLE_PREFIX."mod_bakery_items";
 	$table_images   = TABLE_PREFIX."mod_bakery_images";
 	$table_item_att = TABLE_PREFIX."mod_bakery_item_attributes";
@@ -42,10 +45,10 @@ function bakery_search($func_vars) {
 	// Fetch all active bakery-items in this section
 	// Do not care if the shop is offline
 	$query = $func_database->query("
-		SELECT `item_id`, `title`, `sku`, `definable_field_0`, `definable_field_1`, `definable_field_2`, `link`, `description`, `full_desc`, `modified_when`, `modified_by`
-		FROM `$table_item`
-		WHERE `section_id`='$func_section_id' AND `active` = '1'
-		ORDER BY `title` ASC
+		SELECT item_id, title, sku, definable_field_0, definable_field_1, definable_field_2, link, description, full_desc, modified_when, modified_by
+		FROM $table_item
+		WHERE section_id = '$func_section_id' AND active = '1'
+		ORDER BY title ASC
 	");
 
 	// Now call print_excerpt() for every single item
@@ -60,15 +63,15 @@ function bakery_search($func_vars) {
 			$pic_link = '';
 			if ($show_thumb) {
 				$query_thumb = $func_database->query("
-					SELECT `filename`
-					FROM `$table_images`
-					WHERE `item_id` = '".$res['item_id']."' AND `active` = '1'
+					SELECT filename
+					FROM $table_images
+					WHERE item_id = '".$res['item_id']."' AND active = '1'
 					ORDER BY position ASC
 					LIMIT 1
 				");
 				if ($query_thumb->numRows() > 0) {
 					$thumb     = $query_thumb->fetchRow();
-					$thumb_dir = '/bakery/thumbs/item'.$res['item_id'].'/';
+					$thumb_dir = '/'.$img_dir.'/thumbs/item'.$res['item_id'].'/';
 					if (is_file(WB_PATH.MEDIA_DIRECTORY.$thumb_dir.$thumb['filename'])) {
 						$pic_link = $thumb_dir.$thumb['filename'];
 					}
@@ -79,10 +82,10 @@ function bakery_search($func_vars) {
 			$options = '.';
 			if ($show_options) {
 				$query_att = $func_database->query("
-					SELECT `attribute_name`
-					FROM `$table_item_att` INNER JOIN `$table_att` USING(`attribute_id`)
-					WHERE `item_id` = '{$res['item_id']}'
-					ORDER BY `$table_att`.`option_id` ASC
+					SELECT attribute_name
+					FROM $table_item_att INNER JOIN $table_att USING(attribute_id)
+					WHERE item_id = '{$res['item_id']}'
+					ORDER BY $table_att.option_id ASC
 				");
 
 				if ($query_att->numRows() > 0) {

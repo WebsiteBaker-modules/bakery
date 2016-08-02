@@ -341,10 +341,10 @@ if ($show_item_mover) {
 	$thumb_path = WB_PATH.MEDIA_DIRECTORY.'/'.$img_dir.'/thumbs/item'.$item_id.'/';
 
 	// Get image top position for this item
-	$top_img = $database->get_one("SELECT MAX(`position`) FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '$item_id'");
+	$top_img = $database->get_one("SELECT MAX(position) FROM ".TABLE_PREFIX."mod_bakery_images WHERE item_id = '$item_id'");
 
 	// Get image data from db
-	$query_image = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '$item_id' ORDER BY position ASC");
+	$query_image = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_images WHERE item_id = '$item_id' ORDER BY position ASC");
 	if ($query_image->numRows() > 0) {
 		$no_image = false;
 		while ($image = $query_image->fetchRow()) {

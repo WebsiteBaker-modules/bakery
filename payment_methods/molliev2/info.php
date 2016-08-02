@@ -8,8 +8,8 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
  * @requirements    PHP 5.3 and higher
- * @version         1.0
- * @lastmodified    June 19, 2015
+ * @version         1.1
+ * @lastmodified    July 12, 2016
  *
  */
 
@@ -25,7 +25,7 @@ $field_6 = '';
 // Payment method info
 $payment_gateway_url = WB_URL."/modules/bakery/payment_methods/molliev2/redirect.php";
 $payment_method_name = 'Mollie (API version)';
-$payment_method_version = '1.0';
+$payment_method_version = '1.1';
 $payment_method_author = 'Dev4me - Ruud';
 $requires_bakery_module = '1.7';
 

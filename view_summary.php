@@ -19,7 +19,7 @@
 
 // Prevent this file from being accessed directly
 if (defined('WB_PATH') == false) {
-	exit("Cannot access this file directly"); 
+	exit('Cannot access this file directly'); 
 }
 
 // Include WB functions file
@@ -130,30 +130,30 @@ while ($row1 = $sql_result1->fetchRow()) {
 		}
 	}
 	// Default if item has no attributes
-	$items[$i]['html_show_attribute'] = '';
+	$items[$i]['html_show_attribute']  = '';
 	$items[$i]['email_show_attribute'] = '';
-	$items[$i]['attribute_price'] = 0;
+	$items[$i]['attribute_price']      = 0;
 	// Initialize vars
 	$items[$i]['show_attribute'] = '';
-	$attribute['operator'] = '';
+	$attribute['operator']       = '';
 	// Get item attribute ids
-	if ($items[$i]['attributes'] != "none") {
-		$attribute_ids = explode(",", $items[$i]['attributes']);
+	if ($items[$i]['attributes'] != 'none') {
+		$attribute_ids = explode(',', $items[$i]['attributes']);
 		foreach ($attribute_ids as $attribute_id) {
 			// Get option name and attribute name, price, operator (=/+/-)
 			$query_attributes = $database->query("SELECT o.option_name, a.attribute_name, ia.price, ia.operator FROM ".TABLE_PREFIX."mod_bakery_options o INNER JOIN ".TABLE_PREFIX."mod_bakery_attributes a ON o.option_id = a.option_id INNER JOIN ".TABLE_PREFIX."mod_bakery_item_attributes ia ON a.attribute_id = ia.attribute_id WHERE ia.item_id = {$items[$i]['item_id']} AND ia.attribute_id = $attribute_id");
 			$attribute = $query_attributes->fetchRow();
 			// Calculate the item attribute prices sum depending on the operator
-			if ($attribute['operator'] == "+") {
+			if ($attribute['operator'] == '+') {
 				$items[$i]['attribute_price'] = $items[$i]['attribute_price'] + $attribute['price'];
-			} elseif ($attribute['operator'] == "-") {
+			} elseif ($attribute['operator'] == '-') {
 				$items[$i]['attribute_price'] = $items[$i]['attribute_price'] - $attribute['price'];
 			// If operator is '=' then override the item price by the attribute price
-			} elseif ($attribute['operator'] == "=") {
+			} elseif ($attribute['operator'] == '=') {
 				$items[$i]['price'] = $attribute['price'];
 			}
 			// Prepare option and attributes for display in cart table
-			$items[$i]['show_attribute'] .= ", ".$attribute['option_name'].":&nbsp;".$attribute['attribute_name'];
+			$items[$i]['show_attribute'] .= ', '.$attribute['option_name'].':&nbsp;'.$attribute['attribute_name'];
 		}
 		// Now calculate item price including all attribute prices
 		$items[$i]['price'] = $items[$i]['price'] + $items[$i]['attribute_price'];
@@ -163,7 +163,7 @@ while ($row1 = $sql_result1->fetchRow()) {
 		// HTML version: remove leading comma and space
 		$items[$i]['html_show_attribute'] = substr($items[$i]['show_attribute'], 2);
 		// Email version: add \n\t to html version and replace &nbsp; by space
-		$items[$i]['email_show_attribute'] = "\n\t".str_replace('&nbsp;', " ", $items[$i]['html_show_attribute']);
+		$items[$i]['email_show_attribute'] = "\n\t".str_replace('&nbsp;', ' ', $items[$i]['html_show_attribute']);
 	}
 	// Increment counter
 	$i++;
@@ -236,7 +236,7 @@ if ($state_key = array_keys($MOD_BAKERY['TXT_STATE_CODE'], $cust_state)) {
 $cust_name = $cust_first_name.' '.$cust_last_name;
 
 // Prepare field customer company
-if ($setting_company_field != "show" OR $cust_company == '') {
+if ($setting_company_field != 'show' OR $cust_company == '') {
 	$email_cust_company = '';
 	$cust_company       = '';
 }
@@ -246,8 +246,8 @@ else {
 }
 
 // Show address with state field
-if ($setting_state_field == "show") {
-	if ($setting_zip_location == "end") {
+if ($setting_state_field == 'show') {
+	if ($setting_zip_location == 'end') {
 		// Show zip at the end of address
 		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city, $cust_state $cust_zip<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
 		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city.", ".$cust_state.' '.$cust_zip."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
@@ -260,7 +260,7 @@ if ($setting_state_field == "show") {
 }
 // Show address w/o state field	
 else {
-	if ($setting_zip_location == "end") {
+	if ($setting_zip_location == 'end') {
 		// Show zip at the end of address
 		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city<br />$cust_country-$cust_zip<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
 		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city."\n\t".$cust_country."-".$cust_zip."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
@@ -280,7 +280,7 @@ $address       = $cust_address;
 
 // SHIPPING ADDRESS
 
-if ($setting_shipping_form == "always" || $_SESSION['bakery']['ship_data']) {
+if ($setting_shipping_form == 'always' || $_SESSION['bakery']['ship_data']) {
 
 	// Convert country code to country name
 	$country_key = array_keys($MOD_BAKERY['TXT_COUNTRY_CODE'], $ship_country);
@@ -300,7 +300,7 @@ if ($setting_shipping_form == "always" || $_SESSION['bakery']['ship_data']) {
 	$ship_name = $ship_first_name.' '.$ship_last_name;
 
 	// Prepare field shipping company
-	if ($setting_company_field != "show" OR $ship_company == '') {
+	if ($setting_company_field != 'show' OR $ship_company == '') {
 		$email_ship_company = '';
 		$ship_company       = '';
 	}
@@ -310,8 +310,8 @@ if ($setting_shipping_form == "always" || $_SESSION['bakery']['ship_data']) {
 	}
 
 	// Show address with state field
-	if ($setting_state_field == "show") {
-		if ($setting_zip_location == "end") {
+	if ($setting_state_field == 'show') {
+		if ($setting_zip_location == 'end') {
 			// Show zip at the end of address
 			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city, $ship_state $ship_zip<br />$ship_country_name";
 			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city.", ".$ship_state.' '.$ship_zip."\n";
@@ -324,7 +324,7 @@ if ($setting_shipping_form == "always" || $_SESSION['bakery']['ship_data']) {
 	}
 	// Show address w/o state field	
 	else {
-		if ($setting_zip_location == "end") {
+		if ($setting_zip_location == 'end') {
 			// Show zip at the end of address
 			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city<br />$ship_country-$ship_zip<br />$ship_country_name";
 			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city."\n\t".$ship_country."-".$ship_zip."\n\t".$ship_country_name."\n";
@@ -462,7 +462,7 @@ if ($shipping_sum > 0 && $num_of_tax_rates > 1) {
 // Shipping per item but no tax rates
 elseif ($shipping_sum > 0 && $num_of_tax_rates <= 1) {
 	$display_shipping = '';
-	$display_tax_rate = "none";
+	$display_tax_rate = 'none';
 	$colspan_summary_l = 6;
 	$colspan_summary_m = 5;
 	$colspan_summary_s = 4;
@@ -472,7 +472,7 @@ elseif ($shipping_sum > 0 && $num_of_tax_rates <= 1) {
 }
 // No shipping per item but tax rates
 elseif ($shipping_sum <= 0 && $num_of_tax_rates > 1) {
-	$display_shipping = "none";
+	$display_shipping = 'none';
 	$display_tax_rate = '';
 	$colspan_summary_l = 5;
 	$colspan_summary_m = 4;
@@ -483,8 +483,8 @@ elseif ($shipping_sum <= 0 && $num_of_tax_rates > 1) {
 }
 // No shipping per item and no tax rates
 else {
-	$display_shipping = "none";
-	$display_tax_rate = "none";
+	$display_shipping = 'none';
+	$display_tax_rate = 'none';
 	$colspan_summary_l = 5;
 	$colspan_summary_m = 4;
 	$colspan_summary_s = 3;
@@ -638,23 +638,23 @@ else {
 }
 
 // Calculate shipping
-if ($setting_shipping_method == "highest") {
+if ($setting_shipping_method == 'highest') {
 	// Determine highest shipping per item of all items specified
 	$highest_shipping = $shipping_array;
 	rsort($highest_shipping, SORT_NUMERIC);
 	$shipping = $highest_shipping[0];
 } else {
 	// Determine shipping and add shipping per item subtotal
-	if ($setting_shipping_method == "flat") {
+	if ($setting_shipping_method == 'flat') {
 		$shipping = $setting_shipping_rate;
 	}
-	elseif ($setting_shipping_method == "items") {
+	elseif ($setting_shipping_method == 'items') {
 		$shipping = $setting_shipping_rate * $count_items;
 	}
-	elseif ($setting_shipping_method == "positions") {
+	elseif ($setting_shipping_method == 'positions') {
 		$shipping = $setting_shipping_rate * sizeof($items);
 	}
-	elseif ($setting_shipping_method == "percentage") {
+	elseif ($setting_shipping_method == 'percentage') {
 		$shipping = $order_subtotal / 100 * $setting_shipping_rate;
 	}
 	else {
@@ -665,16 +665,16 @@ if ($setting_shipping_method == "highest") {
 
 // Text normal shipping
 $txt_shipping_cost = $MOD_BAKERY['TXT_SHIPPING_COST'];
-$css_class_cart_shipping_f = "mod_bakery_cart_shipping_f";
-$css_class_invoice_shipping_b = "mod_bakery_invoice_shipping_b";
+$css_class_cart_shipping_f = 'mod_bakery_cart_shipping_f';
+$css_class_invoice_shipping_b = 'mod_bakery_invoice_shipping_b';
 
 // Free shipping for larger amounts
 if ($order_subtotal >= $setting_free_shipping) {
 	$shipping = 0;
 	// Text free shipping
 	$txt_shipping_cost = $MOD_BAKERY['TXT_FREE_SHIPPING'];
-	$css_class_cart_shipping_f = "mod_bakery_cart_free_shipping_f";
-	$css_class_invoice_shipping_b = "mod_bakery_invoice_free_shipping_b";
+	$css_class_cart_shipping_f = 'mod_bakery_cart_free_shipping_f';
+	$css_class_invoice_shipping_b = 'mod_bakery_invoice_free_shipping_b';
 } else {
 	// If no free shipping and shipping tax rate is not 0, add shipping tax rate to the tax rates array
 	if ($setting_tax_rate_shipping != 0) {
@@ -691,7 +691,7 @@ if ($payment_method == 'bopis') {
 $f_shipping = number_format($shipping, 2, $setting_dec_point, $setting_thousands_sep);
 
 // Inform customers about free shipping limit using template file
-if ($setting_free_shipping_msg == "show" && $setting_free_shipping > 0 && $order_subtotal < $setting_free_shipping) {
+if ($setting_free_shipping_msg == 'show' && $setting_free_shipping > 0 && $order_subtotal < $setting_free_shipping) {
 	$tpl_so->set_file('summary_free_shipping', 'free_shipping.htm');
 	$tpl_so->set_var(array(
 		'TXT_FREE_SHIPPING'			=>	$MOD_BAKERY['TXT_FREE_SHIPPING'],
@@ -801,7 +801,7 @@ $f_order_total = number_format($order_total, 2, $setting_dec_point, $setting_tho
 $_SESSION['bakery']['order_total'] = round($order_total, 2);
 
 // Write shipping fee and sales tax into db
-$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_customer SET shipping_fee = '$f_shipping', sales_tax = '$f_sales_tax' WHERE order_id='{$_SESSION['bakery']['order_id']}'");
+$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_customer SET shipping_fee = '$f_shipping', sales_tax = '$f_sales_tax' WHERE order_id ='{$_SESSION['bakery']['order_id']}'");
 
 
 
@@ -890,7 +890,7 @@ $invoice_item_list = $tpl_ip->get('invoice_print');
 
 	// Make list of sales tax, shipping and order total for the email
 	// Do not change text indent since it fits to the email
-	$email_setting_tax_by = $setting_tax_by == "none" ? '' : "\n\t{$MOD_BAKERY['TXT_INCL']} $f_tax_rate {$MOD_BAKERY['TXT_TAX']}: $setting_shop_currency $f_sales_tax";
+	$email_setting_tax_by = $setting_tax_by == 'none' ? '' : "\n\t{$MOD_BAKERY['TXT_INCL']} $f_tax_rate {$MOD_BAKERY['TXT_TAX']}: $setting_shop_currency $f_sales_tax";
 	$email_item_list .= "
 	-------------------------------------
 	{$MOD_BAKERY['TXT_SUBTOTAL']}: $setting_shop_currency $f_order_subtotal

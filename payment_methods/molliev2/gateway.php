@@ -8,8 +8,8 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
  * @requirements    PHP 5.3 and higher
- * @version         1.0
- * @lastmodified    June 19, 2015
+ * @version         1.1
+ * @lastmodified    July 12, 2016
  *
  */
 
@@ -88,11 +88,7 @@ switch ($pay_error) {
 </tr>
 <tr>
 	<td colspan="2" class="mod_bakery_pay_submit_f">
-		<form method="post" action="<?php echo WB_URL ?>/modules/bakery/payment_methods/<?php echo $payment_method ?>/redirect.php">
-		<input type="hidden" name="payment_method" value="<?php echo $payment_method ?>" />
-		<input type="hidden" name="setting_continue_url" value="<?php echo $setting_continue_url ?>" />
 		<input type="submit" name="payment_method[<?php echo $payment_method ?>]" class="mod_bakery_bt_pay_advance_f" value="<?php echo $MOD_BAKERY[$payment_method]['TXT_PAY']; ?>" onclick="javascript: return checkTaC()" />
-		</form>
 	</td>
 </tr>
 <tr>

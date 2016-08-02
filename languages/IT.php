@@ -210,6 +210,7 @@ $MOD_BAKERY['TXT_ORDER_CURRENT'] = 'Ordini Attivi';
 $MOD_BAKERY['TXT_CUSTOMER'] = 'Cliente';
 $MOD_BAKERY['TXT_STATUS'] = 'Stato';
 $MOD_BAKERY['TXT_ORDER_DATE'] = 'Data Ordine';
+$MOD_BAKERY['TXT_EDIT_ORDER'] = 'Modifica i Dettagli del Cliente';
 
 $MOD_BAKERY['TXT_STATUS_ORDERED'] = 'ordinato';
 $MOD_BAKERY['TXT_STATUS_SHIPPED'] = 'spedito';
@@ -277,5 +278,5 @@ $MOD_BAKERY['ERR_EMAIL_NOT_SENT'] = 'Errore nell\'invio dell\'email. Il tuo ordi
 $MOD_BAKERY['TXT_JS_CONFIRM'] = 'Vuoi davvero abbandonare l\'ordine?';
 $MOD_BAKERY['TXT_JS_AGREE'] = 'Puoi completare l\'ordine solo accettando i termini e le condizioni. Grazie!';
 $MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Inserisci il codice di verifica!';
-$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'Il codice di verifica inserito non &egrave; corretto. \nRiprova!';
+$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'Il codice di verifica inserito non è corretto.\nRiprova!';
 $MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = 'Vuoi inviare questa fattura al cliente?';

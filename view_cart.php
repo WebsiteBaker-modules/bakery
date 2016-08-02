@@ -78,10 +78,9 @@ while ($row1 = $sql_result1->fetchRow()) {
 				$items[$i]['thumb_height'] = $cart_thumb_max_size;
 				// Get main thumb (image with position == 1)
 				$main_thumb = '';
-				$main_thumb = $database->get_one("SELECT `filename` FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '{$row1['item_id']}' AND `active` = '1' ORDER BY `position` ASC LIMIT 1");
-				$main_thumb = str_replace(".png", ".jpg", $main_thumb);
+				$main_thumb = $database->get_one("SELECT filename FROM ".TABLE_PREFIX."mod_bakery_images WHERE item_id = '{$row1['item_id']}' AND active = '1' ORDER BY position ASC LIMIT 1");
 				// Item thumb if exists
-				$thumb_dir               = '/bakery/thumbs/item'.$row1['item_id'].'/';
+				$thumb_dir               = '/'.$img_dir.'/thumbs/item'.$row1['item_id'].'/';
 				$items[$i]['thumb_path'] = WB_PATH.MEDIA_DIRECTORY.$thumb_dir.$main_thumb;
 				if (is_file($items[$i]['thumb_path'])) {
 					// Thumb URL

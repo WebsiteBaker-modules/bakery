@@ -170,7 +170,7 @@ if (isset($_POST['save_attribute']) AND $_POST['save_attribute'] != '') {
 	// Update item attribute
 	if (isset($_POST['attribute_id'])) {
 		if (isset($_POST['assign_id']) && is_numeric($_POST['assign_id'])) {
-			$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_item_attributes SET `option_id` = '$option_id', `attribute_id` = '$attribute_id', `price` = '$ia_price', `operator` = '$ia_operator' WHERE `item_id` = '$item_id' AND `assign_id` = '$assign_id'");
+			$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_item_attributes SET option_id = '$option_id', attribute_id = '$attribute_id', price = '$ia_price', operator = '$ia_operator' WHERE item_id = '$item_id' AND assign_id = '$assign_id'");
 		}
 		// Insert new item attribute
 		else {
@@ -192,7 +192,7 @@ if (isset($_POST['save_attribute']) AND $_POST['save_attribute'] != '') {
 // UPDATE ITEM DATA
 else {
 	// Only update if position is set and has been changed
-	$query_position = isset($position) ? " `position` = '$position'," : '';
+	$query_position = isset($position) ? " position = '$position'," : '';
 
 	// Item images
 	foreach ($images as $img_id => $image) {
@@ -204,11 +204,11 @@ else {
 		}
 
 		// Update db
-		$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_images SET item_attribute_id = '{$image['attribute']}', `active` = '{$image['active']}', `alt` = '{$image['alt']}', `title` = '{$image['title']}', `caption` = '{$image['caption']}' WHERE img_id = '$img_id'");
+		$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_images SET item_attribute_id = '{$image['attribute']}', active = '{$image['active']}', alt = '{$image['alt']}', title = '{$image['title']}', caption = '{$image['caption']}' WHERE img_id = '$img_id'");
 	}
 
 	// Item data
-	$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_items SET section_id = '$section_id', page_id = '$page_id', title = '$title', link = '$item_link', `sku` = '$sku', `stock` = '$stock', `price` = '$price', `shipping` = '$shipping', `tax_rate` = '$tax_rate', `definable_field_0` = '$definable_field_0', `definable_field_1` = '$definable_field_1', `definable_field_2` = '$definable_field_2', `description` = '$description', `full_desc` = '$full_desc', active = '$active',$query_position modified_when = '".@mktime()."', modified_by = '".$admin->get_user_id()."' WHERE item_id = '$item_id'");
+	$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_items SET section_id = '$section_id', page_id = '$page_id', title = '$title', link = '$item_link', sku = '$sku', stock = '$stock', price = '$price', shipping = '$shipping', tax_rate = '$tax_rate', definable_field_0 = '$definable_field_0', definable_field_1 = '$definable_field_1', definable_field_2 = '$definable_field_2', description = '$description', full_desc = '$full_desc', active = '$active',$query_position modified_when = '".time()."', modified_by = '".$admin->get_user_id()."' WHERE item_id = '$item_id'");
 
 	// Check if there was a db error
 	if ($database->is_error()) {
@@ -315,7 +315,7 @@ foreach ($images as $img_id  => $image) {
 			}
 		}
 		// Delete image in database
-		$database->query("DELETE FROM ".TABLE_PREFIX."mod_bakery_images WHERE `img_id` = '$img_id'");
+		$database->query("DELETE FROM ".TABLE_PREFIX."mod_bakery_images WHERE img_id = '$img_id'");
 		// Check if there was a db error
 		if ($database->is_error()) {
 			$errors[] = $database->get_error();
@@ -407,13 +407,13 @@ for ($i = 0; $i < $num_images; $i++) {
 		// Insert new image data into the db
 
 		// Get image top position for this item
-		$top_position = $database->get_one("SELECT MAX(`position`) AS `top_position` FROM ".TABLE_PREFIX."mod_bakery_images WHERE `item_id` = '$item_id'");
+		$top_position = $database->get_one("SELECT MAX(position) AS top_position FROM ".TABLE_PREFIX."mod_bakery_images WHERE item_id = '$item_id'");
 		// Increment position (db function returns NULL if this item has no image yet)
 		$top_position = intval($top_position) + 1;
 
 		// Insert file into database
 		$filename = $filename.'.'.$fileext;
-		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_images (`item_id`, `filename`, `position`) VALUES ('$item_id', '$filename', '$top_position')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_images (item_id, filename, position) VALUES ('$item_id', '$filename', '$top_position')");
 		// Check if there was a db error
 		if ($database->is_error()) {
 			$errors[] = $database->get_error();
@@ -444,7 +444,7 @@ if ($action == 'duplicate') {
 	// Get new order position
 	$position = $item_order ->get_new($section_id);
 	// Insert new row into database
-	$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_items (section_id, page_id, position, created_when, created_by) VALUES ('$section_id', '$page_id', '$position','".@mktime()."','".$admin->get_user_id()."')");
+	$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_items (section_id, page_id, position, created_when, created_by) VALUES ('$section_id', '$page_id', '$position','".time()."','".$admin->get_user_id()."')");
 
 	// Get the id
 	$orig_item_id = $item_id;
@@ -473,7 +473,7 @@ if ($action == 'duplicate') {
 	}
 
 	// Update duplicated item data
-	$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_items SET section_id = '$section_id', page_id = '$page_id', title = '$title', link = '$item_link', `sku` = '$sku', `stock` = '$stock', `price` = '$price', `shipping` = '$shipping', `tax_rate` = '$tax_rate', `definable_field_0` = '$definable_field_0', `definable_field_1` = '$definable_field_1', `definable_field_2` = '$definable_field_2', `description` = '$description', `full_desc` = '$full_desc', active = '0', modified_when = '".@mktime()."', modified_by = '".$admin->get_user_id()."' WHERE item_id = '$item_id'");
+	$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_items SET section_id = '$section_id', page_id = '$page_id', title = '$title', link = '$item_link', sku = '$sku', stock = '$stock', price = '$price', shipping = '$shipping', tax_rate = '$tax_rate', definable_field_0 = '$definable_field_0', definable_field_1 = '$definable_field_1', definable_field_2 = '$definable_field_2', description = '$description', full_desc = '$full_desc', active = '0', modified_when = '".time()."', modified_by = '".$admin->get_user_id()."' WHERE item_id = '$item_id'");
 
 	// Check if there was a db error
 	if ($database->is_error()) {

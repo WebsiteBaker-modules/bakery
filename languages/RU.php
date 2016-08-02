@@ -229,6 +229,7 @@ $MOD_BAKERY['TXT_ORDER_CURRENT'] = 'Текущие заказы';
 $MOD_BAKERY['TXT_CUSTOMER'] = 'Клиент';
 $MOD_BAKERY['TXT_STATUS'] = 'Статус';
 $MOD_BAKERY['TXT_ORDER_DATE'] = 'Дата заказа';
+$MOD_BAKERY['TXT_EDIT_ORDER'] = 'Изменить данные клиента';
 
 $MOD_BAKERY['TXT_STATUS_ORDERED'] = 'Заказ';
 $MOD_BAKERY['TXT_STATUS_SHIPPED'] = 'Отправлен';
