@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -63,10 +63,13 @@ $MOD_BAKERY['TXT_ADDRESS_FORM'] = 'Address Form';
 $MOD_BAKERY['TXT_SHIPPING_FORM_REQUEST'] = 'on request';
 $MOD_BAKERY['TXT_SHIPPING_FORM_HIDEABLE'] = 'hideable';
 $MOD_BAKERY['TXT_SHIPPING_FORM_ALWAYS'] = 'always';
+$MOD_BAKERY['TXT_DOMESTIC_ADDRESSES_HIDE_COUNTRY'] = 'Display domestic addresses without country';
 $MOD_BAKERY['TXT_SHOW_COMPANY_FIELD'] = 'Show Company Field';
 $MOD_BAKERY['TXT_SHOW_STATE_FIELD'] = 'Show State Field';
 $MOD_BAKERY['TXT_SHOW_TAX_NO_FIELD'] = 'Show VAT No Field';
 $MOD_BAKERY['TXT_SHOW_ZIP_END_OF_ADDRESS'] = 'ZIP at End of Address';
+$MOD_BAKERY['TXT_RIGHT_OF_REVOCATION'] = 'Right of revocation';
+$MOD_BAKERY['TXT_WAIVER_OF_RIGHT_TO_REVOKE'] = 'Waiving the right to revoke when purchasing digital products';
 $MOD_BAKERY['TXT_CUST_MSG'] = 'Customers Message';
 $MOD_BAKERY['TXT_SHOW_TEXTAREA'] = 'Show Textarea';
 $MOD_BAKERY['TXT_ALLOW_OUT_OF_STOCK_ORDERS'] = 'Allow out of Stock Orders';
@@ -173,6 +176,7 @@ $MOD_BAKERY['TXT_CANCEL_ORDER'] = 'Cancel order';
 $MOD_BAKERY['TXT_ORDER_SUMMARY'] = 'Review and place your order';
 
 $MOD_BAKERY['TXT_ADDRESS'] = 'Address';
+$MOD_BAKERY['TXT_ADDRESSES'] = 'Addresses';
 $MOD_BAKERY['TXT_MODIFY_ADDRESS'] = 'Modify Address';
 $MOD_BAKERY['TXT_FILL_IN_ADDRESS'] = 'Please fill in your address';
 $MOD_BAKERY['TXT_SHIP_ADDRESS'] = 'Shipping Address';
@@ -181,6 +185,7 @@ $MOD_BAKERY['TXT_HIDE_SHIP_FORM'] = 'Hide Shipping Address';
 $MOD_BAKERY['TXT_FILL_IN_SHIP_ADDRESS'] = 'Please fill in the Shipping Address';
 $MOD_BAKERY['TXT_TAC'] = 'Terms and Conditions';
 $MOD_BAKERY['TXT_AGREE'] = 'I agree to the terms and conditions of';
+$MOD_BAKERY['TXT_FULL_WAIVER_OF_RIGHT_TO_REVOKE'] = 'I agree and expressly require that you start the execution of the commissioned service before the end of the cancellation period. I am aware that I will lose my right of revocation at the time you have completed the contract.';
 $MOD_BAKERY['TXT_CANCEL'] = 'You have canceled your Order.';
 $MOD_BAKERY['TXT_DELETED'] = 'All your details have been deleted.';
 $MOD_BAKERY['TXT_THANK_U_VISIT'] = 'Thank you for visiting!';
@@ -276,13 +281,13 @@ $MOD_BAKERY['ERR_INVAL_EMAIL'] = 'is not a valid email address.';
 $MOD_BAKERY['ERR_INVAL_ZIP'] = 'is not a valid zip.';
 $MOD_BAKERY['ERR_INVAL_PHONE'] = 'is not a valid phone number.';
 $MOD_BAKERY['ERR_INVAL_TRY_AGAIN'] = 'Please verify your entries!';
-$MOD_BAKERY['ERR_AGREE'] = 'We can only complete your order if you agree to our terms and conditions.<br />Thank you for understanding!';
+$MOD_BAKERY['ERR_AGREE'] = 'We can only complete your order if you agree to our terms and conditions. Thank you for understanding!';
 $MOD_BAKERY['ERR_NO_PAYMENT_METHOD'] = 'No Payment Method activated.';
 $MOD_BAKERY['ERR_EMAIL_NOT_SENT'] = 'Unable to send email. Your order is still valid. Please contact the shop admin on';
 
 // MODUL BAKERY JAVASCRIPT MESSAGES (Important: Do not remove \n !)
-$MOD_BAKERY['TXT_JS_CONFIRM'] = 'Do you really want to cancel your order?';
-$MOD_BAKERY['TXT_JS_AGREE'] = 'We can only complete your order if you agree to our terms and conditions.\nThank you for understanding!';
-$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Please enter the verification number (also known as Captcha)!';
-$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'The verification number (also known as Captcha) does not match.\nPlease correct your entry!';
-$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = 'Do you want to email this customer invoice?';
+$MOD_BAKERY['TXT_JS_CONFIRM'] = "Do you really want to cancel your order?";
+$MOD_BAKERY['TXT_JS_AGREE'] = "We can only complete your order if you agree to our terms and conditions.\nThank you for understanding!";
+$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = "Please enter the verification number (also known as Captcha)!";
+$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = "The verification number (also known as Captcha) does not match.\nPlease correct your entry!";
+$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = "Do you want to email this customer invoice?";

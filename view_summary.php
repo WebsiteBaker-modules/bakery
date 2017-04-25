@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -70,22 +70,47 @@ $payment_method = $_SESSION['bakery']['payment_method'];
 
 
 
-// CHECK IF CUSTOMER HAS AGREED TO TERMS AND CONDITIONS
-// ****************************************************
+// CHECK IF CUSTOMER HAS AGREED TO CONDITIONS
+// ******************************************
 
-if (!isset($_POST['agree']) || $_POST['agree'] != 'yes') {
-	// Error message if customer has not agreed to terms and conditions, then show it again
-	
-	$tpl_so->set_file('agree_tac', 'err_agree_tac.htm');
+// This check is only needed if js is deactivated in the browser
+
+// Init vars
+$count                 = 0;
+$display_tac           = 'none';
+$display_no_revocation = 'none';
+
+// Customer has not agreed to terms and conditions
+if (!empty($setting_tac_url)) {
+	$display_tac   = 'block';
+	if (!isset($_POST['tac']) || $_POST['tac'] != 'yes') {
+		$count++;
+	}
+}
+
+// Customer has not agreed that he will loose his right of revocation when purchasing digital content
+if ($setting_no_revocation == 'e-goods') {
+	$display_no_revocation = 'block';
+	if (!isset($_POST['no_revocation']) || $_POST['no_revocation'] != 'yes') {
+		$count++;
+	}
+}
+
+// Error message
+if ($count > 0) {
+	$tpl_so->set_file('agree', 'err_agree.htm');
 	$tpl_so->set_var(array(
 		'ERR_AGREE'				=>	$MOD_BAKERY['ERR_AGREE'],
 		'SETTING_CONTINUE_URL'	=>	$setting_continue_url,
+		'DISPLAY_TAC'			=>	$display_tac,
 		'SETTING_TAC_URL'		=>	$setting_tac_url,
 		'TXT_AGREE'				=>	$MOD_BAKERY['TXT_AGREE'],
 		'SETTING_SHOP_NAME'		=>	$setting_shop_name,
+		'DISPLAY_NO_REVOCATION'	=>	$display_no_revocation,
+		'TXT_NO_REVOCATION'		=>	$MOD_BAKERY['TXT_FULL_WAIVER_OF_RIGHT_TO_REVOKE'],
 		'TXT_SUBMIT_ORDER'		=>	$MOD_BAKERY['TXT_SUBMIT_ORDER']
 	));
-	$tpl_so->pparse('output', 'agree_tac');
+	$tpl_so->pparse('output', 'agree');
 	return;
 }
 
@@ -123,8 +148,8 @@ while ($row1 = $sql_result1->fetchRow()) {
 			if ($field == 'item_id') {
 				$sql_result2 = $database->query("SELECT title, shipping, description FROM ".TABLE_PREFIX."mod_bakery_items WHERE item_id = '$row1[item_id]'");
 				$row2 = $sql_result2->fetchRow();	
-				$items[$i]['name'] = $row2[0];
-				$items[$i]['shipping'] = $row2[1];
+				$items[$i]['name']        = $row2[0];
+				$items[$i]['shipping']    = $row2[1];
 				$items[$i]['description'] = $row2[2];
 			} 
 		}
@@ -199,8 +224,8 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.$setting_shop_countr
 // GET CUSTOMER DATA
 
 // Arrays for all forms and fields
-$forms   = array('cust', 'ship');
-$fields  = array('company', 'first_name', 'last_name', 'tax_no', 'street', 'city', 'state', 'country', 'zip', 'email', 'phone');
+$forms  = array('cust', 'ship');
+$fields = array('company', 'first_name', 'last_name', 'tax_no', 'street', 'city', 'state', 'country', 'zip', 'email', 'phone');
 // Get customer data from the session var
 foreach ($forms as $form) {
 	foreach ($fields as $field) {
@@ -217,7 +242,7 @@ foreach ($forms as $form) {
 // CUSTOMER ADDRESS
 
 // Convert country code to country name
-$country_key = array_keys($MOD_BAKERY['TXT_COUNTRY_CODE'], $cust_country);
+$country_key       = array_keys($MOD_BAKERY['TXT_COUNTRY_CODE'], $cust_country);
 $cust_country_name = $MOD_BAKERY['TXT_COUNTRY_NAME'][$country_key[0]];
 // Convert country to uppercase
 if (function_exists('mb_strtoupper')) {
@@ -245,30 +270,40 @@ else {
 	$cust_company        = $cust_company.'<br />';
 }
 
+// Prepare field customer country
+if ($setting_hide_country == 'hide' && $setting_shop_country == $cust_country) {
+	$email_cust_country_name = '';
+	$cust_country_name       = '';
+}
+else {
+	$email_cust_country_name = "\n\t".$cust_country_name;
+	$cust_country_name       = '<br />'.$cust_country_name;
+}
+
 // Show address with state field
 if ($setting_state_field == 'show') {
 	if ($setting_zip_location == 'end') {
 		// Show zip at the end of address
-		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city, $cust_state $cust_zip<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city.", ".$cust_state.' '.$cust_zip."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
+		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city, $cust_state $cust_zip$cust_country_name<br /><br />$cust_phone<br />$cust_email";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city.", ".$cust_state.' '.$cust_zip.$email_cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 	else {
 		// Show zip inside of address
-		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_country-$cust_zip $cust_city<br />$cust_state<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_country."-".$cust_zip.' '.$cust_city."\n\t".$cust_state."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
+		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_zip $cust_city<br />$cust_state$cust_country_name<br /><br />$cust_phone<br />$cust_email";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_zip.' '.$cust_city."\n\t".$cust_state."\n\t".$email_cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 }
 // Show address w/o state field	
 else {
 	if ($setting_zip_location == 'end') {
 		// Show zip at the end of address
-		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city<br />$cust_country-$cust_zip<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city."\n\t".$cust_country."-".$cust_zip."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
+		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city<br />$cust_zip$cust_country_name<br /><br />$cust_phone<br />$cust_email";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city."\n\t".$cust_zip.$email_cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 	else {	
 		// Show zip inside of address
-		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_country-$cust_zip $cust_city<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";	
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_country."-".$cust_zip.' '.$cust_city."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
+		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_zip $cust_city$cust_country_name<br /><br />$cust_phone<br />$cust_email";	
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_zip.' '.$cust_city.$email_cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 }
 
@@ -309,30 +344,40 @@ if ($setting_shipping_form == 'always' || $_SESSION['bakery']['ship_data']) {
 		$ship_company        = $ship_company.'<br />';
 	}
 
+	// Prepare field shipping country
+	if ($setting_hide_country == 'hide' && $setting_shop_country == $ship_country) {
+		$email_ship_country_name = '';
+		$ship_country_name       = '';
+	}
+	else {
+		$email_ship_country_name = "\n\t".$ship_country_name;
+		$ship_country_name       = '<br />'.$ship_country_name;
+	}
+
 	// Show address with state field
 	if ($setting_state_field == 'show') {
 		if ($setting_zip_location == 'end') {
 			// Show zip at the end of address
-			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city, $ship_state $ship_zip<br />$ship_country_name";
-			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city.", ".$ship_state.' '.$ship_zip."\n";
+			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city, $ship_state $ship_zip$ship_country_name";
+			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city.", ".$ship_state.' '.$ship_zip.$email_ship_country_name."\n";
 		}
 		else {
 			// Show zip inside of address
-			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_country-$ship_zip $ship_city<br />$ship_state<br />$ship_country_name";
-			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_country."-".$ship_zip.' '.$ship_city."\n\t".$ship_state."\n\t".$ship_country_name."\n";		
+			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_zip $ship_city<br />$ship_state$ship_country_name";
+			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_zip.' '.$ship_city."\n\t".$ship_state.$email_ship_country_name."\n";		
 		}
 	}
 	// Show address w/o state field	
 	else {
 		if ($setting_zip_location == 'end') {
 			// Show zip at the end of address
-			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city<br />$ship_country-$ship_zip<br />$ship_country_name";
-			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city."\n\t".$ship_country."-".$ship_zip."\n\t".$ship_country_name."\n";
+			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city<br />$ship_zip$ship_country_name";
+			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city."\n\t".$ship_zip.$email_ship_country_name."\n";
 		}
 		else {	
 			// Show zip inside of address
-			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_country-$ship_zip $ship_city<br />$ship_country_name";	
-			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_country."-".$ship_zip.' '.$ship_city."\n\t".$ship_country_name."\n";		
+			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_zip $ship_city$ship_country_name";	
+			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_zip.' '.$ship_city.$email_ship_country_name."\n";		
 		}
 	}
 	// Make var that contains either customer address or - if existing - the shipping address

@@ -1,6 +1,6 @@
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2015, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -27,6 +27,11 @@ Modify the CSS of the invoice template and the view order in this stylesheet.
 */
 
 
+
+
+/* *********** */
+/* Argos Theme */
+/* *********** */
 
 /* INVOICE PRINT */
 
@@ -99,6 +104,54 @@ Modify the CSS of the invoice template and the view order in this stylesheet.
 	margin-left: 20px;
 }
 
+
+
+
+/* VIEW ORDER */
+
+/* General */
+#order table {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	border: 1px dotted #BCBCBC;
+	margin: 0 auto;
+}
+#order hr {
+	margin: 0;
+	border: 0;
+	border-top: 1px dotted #BCBCBC;
+	height: 1px;
+}
+#order .mod_bakery_order_b {
+	font-weight: bold;
+	margin-left: 12px;
+}
+#order .mod_bakery_address_b {
+	font-weight: bold;
+}
+#order .mod_bakery_tax_no_b {
+	font-weight: bold;
+}
+
+
+
+
+/* INVOICE PRINT and VIEW ORDER */
+
+/* Error */
+.mod_bakery_error_b {
+	width: 260px;
+	margin: 150px auto;
+	padding: 15px 0;
+	text-align: center;
+	color: red;
+	border: solid 1px red;
+	background-color: #FFDCD9;
+	background-image: url(images/error.gif);
+	background-position: 15px center;
+	background-repeat: no-repeat;
+}
+	
 /* INVOICE table header */
 .mod_bakery_invoice_th_sku_b {
 	text-align: left;
@@ -200,6 +253,31 @@ Modify the CSS of the invoice template and the view order in this stylesheet.
 
 
 /* GENERAL */
+
+/* Modify items navigation buttons */
+.block-outer #mod_bakery_modify_b {
+	background-color: #fbfbfb;
+	background-image: url("images/box_bg.png");
+	background-repeat: repeat-x;
+	background-position: 0 -40px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	padding: 4px;
+	border: solid 1px #bfc9df;
+}
+.block-outer #mod_bakery_modify_b input {
+	color: #5c6a86;
+	font-size: 10px;
+	font-weight: bold;
+	background-color: #c5cdd6;
+	background-image: url("images/box_bg.png");
+	background-position: 0 -40px;
+	border: solid 1px;
+}
+.block-outer #mod_bakery_modify_b input:hover {
+	background-image: none;
+}
+
 
 /* Modify items drag&drop table */
 table.mod_bakery_dragndrop_b {
@@ -346,20 +424,6 @@ input.mod_bakery_edit_css {
 	clear: both;
 }
 
-/* Error */
-.mod_bakery_error_b {
-	width: 260px;
-	margin: 150px auto;
-	padding: 15px 0;
-	text-align: center;
-	color: red;
-	border: solid 1px red;
-	background-color: #FFDCD9;
-	background-image: url(images/error.gif);
-	background-position: 15px center;
-	background-repeat: no-repeat;
-}
-
 
 
 
@@ -399,4 +463,214 @@ input.mod_bakery_edit_css {
 }
 .mod_bakery_placeholders_page_b {
 	color: #FF0099;
+}
+
+
+
+
+
+
+/* ************************ */
+/* Advanced Theme WBCE Flat */
+/* ************************ */
+
+/* Modify items drag&drop table */
+
+#mainarea table.mod_bakery_dragndrop_b {
+	border: solid 2px #D5DDE7;
+	border-collapse: separate;
+	border-spacing: 0 8px;
+}
+#mainarea table.mod_bakery_dragndrop_b caption {
+	height: initial;
+	background-color: #303641;
+	background-image: none;
+	border: none;
+	color: #CBCFD8 !important;
+	font-size: 1.5em;
+	line-height: 1.7em;
+	text-transform: uppercase;
+	letter-spacing: .1em;
+}
+#mainarea table.mod_bakery_dragndrop_b thead td {
+	color: #CBCFD8;
+	font-weight: bold;
+	background-color: #303641;
+	line-height: 40px;
+}
+#mainarea table.mod_bakery_dragndrop_b tbody td {
+	vertical-align: middle;
+	border-bottom: none;
+	background-color: #E8EAEE;
+}
+#mainarea table.mod_bakery_dragndrop_b tbody tr:hover td {
+	background-color: #D9DDE3;
+}
+#mainarea table.mod_bakery_dragndrop_b .hilite td {
+	background-color: #DBFBBA !important;
+}
+#mainarea table.mod_bakery_dragndrop_b thead td,
+#mainarea table.mod_bakery_dragndrop_b tfoot td {
+	font-size: initial;
+	background-image: none;
+	border: none;
+}
+
+/* Drag&drop specifics */
+
+#mainarea table.mod_bakery_dragndrop_b .dragdrop_handle {
+	background-image: url("images/dd_grip.png");
+	background-color: #E9EEF5;
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor: move;
+	padding: 0;
+	width: 20px !important;
+	border: none;
+}
+#mainarea table.mod_bakery_dragndrop_b tr.irow_hover {
+	background-color: #D9DDE3;
+}
+#mainarea table.mod_bakery_dragndrop_b .move_up,
+#mainarea table.mod_bakery_dragndrop_b .move_down {
+	width: 16px !important;
+}
+#mainarea table.mod_bakery_dragndrop_b td.item_id {
+	width: 3%;
+	text-align: right;
+	font-size: 1.6em;
+}
+
+/* Thumb tooltip */
+#mainarea div.mod_bakery_thumbnail_b {
+	color: initial;
+	background-color: #E8EAEE;
+	margin: 10px;
+	border: none;
+}
+
+
+/* GENERAL */
+
+#mainarea .row_a {
+	background-color: #E8EAEE;
+}
+#mainarea .row_b {
+	background-color: #E8EAEE;
+}
+#mainarea .row_a:hover, #mainarea .row_b:hover {
+	background-color: #D9DDE3;
+}
+
+
+/* ALL BACKEND TABLES */
+
+#mainarea table {
+	border-collapse: separate;
+	border-spacing: 0px 6px;
+}
+#mainarea table td[valign="top"],
+#mainarea table td[valign="top"],
+#mainarea table tr[valign="top"] td,
+#mainarea table tr[valign="top"] td {
+	vertical-align: top;
+}
+#mainarea table td[valign="bottom"],
+#mainarea table td[valign="bottom"],
+#mainarea table tr[valign="bottom"] td,
+#mainarea table tr[valign="bottom"] td {
+	vertical-align: bottom;
+}
+
+
+/* ADJUST CLASS .mod_bakery_submit_row_b */
+
+#mainarea .mod_bakery_submit_row_b {
+	background-color: transparent;
+}
+#mainarea tbody tr.mod_bakery_submit_row_b th {
+	height: 58px;
+	vertical-align: middle;
+	color: #CBCFD8;
+	background-color: #303641;
+}
+#mainarea tbody tr.mod_bakery_submit_row_b th:first-child,
+#mainarea tbody tr.mod_bakery_submit_row_b th:last-child {
+	padding-left: 7px;
+}
+#mainarea tbody tr.mod_bakery_submit_row_b th a {
+	color: #CBCFD8;
+}
+
+
+/* MODIFY */
+
+#mainarea #mod_bakery_modify_b {
+	border: solid 2px #D5DDE7;
+	margin-top: 0;
+	padding: 4px;
+}
+#mainarea #mod_bakery_modify_b input {
+	margin-top: 0;
+}
+#mainarea #mod_bakery_modify_b > br + h2 {
+	margin: 8px 0;
+}
+#mainarea .mod_bakery_section_header_b {
+	color: #CBCFD8;
+	background-color: #303641;
+	margin: 0;
+}
+
+
+/* MODIFY ITEM */
+
+#mainarea .mod_bakery_img_resize_table_b {
+	background-color: #E8EAEE;
+	border: 1px solid #D5DDE7;
+	margin: 8px;
+}
+
+
+/* PAGE SETTINGS */
+
+form[action$="save_page_settings.php"] > table {
+	margin-bottom: 40px;
+}
+form[action$="save_page_settings.php"] > table + table input[type="radio"] {
+	margin-left: 23px;
+}
+
+ 
+/* PLACEHOLDERS USED IN THE SEMINAR TEMPLATES (help.php) */
+
+#mainarea #mod_bakery_placeholders_b {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+#mainarea .mod_bakery_placeholders_header_b {
+	color: #CBCFD8;
+	background-color: #303641;
+}
+#mainarea .mod_bakery_placeholders_header_b:hover td {
+	background-color: #303641 !important;
+}
+#mainarea #mod_bakery_placeholders_b ul {
+	padding-left: 55px;
+}
+#mainarea #mod_bakery_placeholders_b:nth-of-type(3) tr:hover td {
+	background-color: #D9DDE3;
+}
+#mainarea #mod_bakery_placeholders_b th {
+	padding: 5px;
+	font-weight: bold;
+	background-color: #E8EAEE;
+	border: 1px solid #E1E1E1;
+}
+#mainarea #mod_bakery_placeholders_b td {
+	padding: 5px;
+	border: 1px solid #E1E1E1;
+}
+#mainarea .mod_bakery_placeholders_column_b {
+	background-color: #E8EAEE;
 }

@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -51,20 +51,22 @@ $query_general_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_ba
 if ($query_general_settings->numRows() > 0) {
 	$fetch_general_settings = $query_general_settings->fetchRow();
 	
-	$setting_shop_name     = stripslashes($fetch_general_settings['shop_name']);
-	$setting_shop_email    = stripslashes($fetch_general_settings['shop_email']);
-	$setting_tac_url       = stripslashes($fetch_general_settings['tac_url']);
-	$setting_shop_country  = stripslashes($fetch_general_settings['shop_country']);
-	$setting_shop_state    = stripslashes($fetch_general_settings['shop_state']);
-	$setting_shipping_form = stripslashes($fetch_general_settings['shipping_form']);
-	$setting_company_field = stripslashes($fetch_general_settings['company_field']);
-	$setting_state_field   = stripslashes($fetch_general_settings['state_field']);
-	$setting_tax_no_field  = stripslashes($fetch_general_settings['tax_no_field']);
-	$setting_tax_group     = stripslashes($fetch_general_settings['tax_group']);
-	$setting_zip_location  = stripslashes($fetch_general_settings['zip_location']);
-	$setting_cust_msg      = stripslashes($fetch_general_settings['cust_msg']);
-	$setting_skip_cart     = stripslashes($fetch_general_settings['skip_cart']);
-	$setting_use_captcha   = stripslashes($fetch_general_settings['use_captcha']);
+	$setting_shop_name           = stripslashes($fetch_general_settings['shop_name']);
+	$setting_shop_email          = stripslashes($fetch_general_settings['shop_email']);
+	$setting_tac_url             = stripslashes($fetch_general_settings['tac_url']);
+	$setting_shop_country        = stripslashes($fetch_general_settings['shop_country']);
+	$setting_shop_state          = stripslashes($fetch_general_settings['shop_state']);
+	$setting_shipping_form       = stripslashes($fetch_general_settings['shipping_form']);
+	$setting_company_field       = stripslashes($fetch_general_settings['company_field']);
+	$setting_state_field         = stripslashes($fetch_general_settings['state_field']);
+	$setting_tax_no_field        = stripslashes($fetch_general_settings['tax_no_field']);
+	$setting_tax_group           = stripslashes($fetch_general_settings['tax_group']);
+	$setting_zip_location        = stripslashes($fetch_general_settings['zip_location']);
+	$setting_no_revocation       = stripslashes($fetch_general_settings['no_revocation']);
+	$setting_hide_country        = stripslashes($fetch_general_settings['hide_country']);
+	$setting_cust_msg            = stripslashes($fetch_general_settings['cust_msg']);
+	$setting_skip_cart           = stripslashes($fetch_general_settings['skip_cart']);
+	$setting_use_captcha         = stripslashes($fetch_general_settings['use_captcha']);
 	
 	$setting_definable_field_0   = stripslashes($fetch_general_settings['definable_field_0']);
 	$setting_definable_field_1   = stripslashes($fetch_general_settings['definable_field_1']);
@@ -73,24 +75,24 @@ if ($query_general_settings->numRows() > 0) {
 	$setting_stock_limit         = stripslashes($fetch_general_settings['stock_limit']);
 	$setting_out_of_stock_orders = stripslashes($fetch_general_settings['out_of_stock_orders']);
 
-	$setting_shop_currency = stripslashes($fetch_general_settings['shop_currency']);
-	$setting_dec_point     = stripslashes($fetch_general_settings['dec_point']);
-	$setting_thousands_sep = stripslashes($fetch_general_settings['thousands_sep']);
-	$setting_tax_by        = stripslashes($fetch_general_settings['tax_by']);
-	$setting_tax_rate      = stripslashes($fetch_general_settings['tax_rate']);
-	$setting_tax_rate1     = stripslashes($fetch_general_settings['tax_rate1']);
-	$setting_tax_rate2     = stripslashes($fetch_general_settings['tax_rate2']);
-	$setting_tax_included  = stripslashes($fetch_general_settings['tax_included']);
+	$setting_shop_currency       = stripslashes($fetch_general_settings['shop_currency']);
+	$setting_dec_point           = stripslashes($fetch_general_settings['dec_point']);
+	$setting_thousands_sep       = stripslashes($fetch_general_settings['thousands_sep']);
+	$setting_tax_by              = stripslashes($fetch_general_settings['tax_by']);
+	$setting_tax_rate            = stripslashes($fetch_general_settings['tax_rate']);
+	$setting_tax_rate1           = stripslashes($fetch_general_settings['tax_rate1']);
+	$setting_tax_rate2           = stripslashes($fetch_general_settings['tax_rate2']);
+	$setting_tax_included        = stripslashes($fetch_general_settings['tax_included']);
 	
-	$setting_tax_rate_shipping = stripslashes($fetch_general_settings['tax_rate_shipping']);
-	$setting_free_shipping     = stripslashes($fetch_general_settings['free_shipping']);
-	$setting_free_shipping_msg = stripslashes($fetch_general_settings['free_shipping_msg']);
-	$setting_shipping_method   = stripslashes($fetch_general_settings['shipping_method']);
-	$setting_shipping_domestic = stripslashes($fetch_general_settings['shipping_domestic']);
-	$setting_shipping_abroad   = stripslashes($fetch_general_settings['shipping_abroad']);
-	$setting_shipping_zone     = stripslashes($fetch_general_settings['shipping_zone']);
-	$setting_zone_countries    = explode(",", stripslashes($fetch_general_settings['zone_countries']));  // make array
-	$setting_shipping_d_a      = $setting_shipping_domestic.'/'.$setting_shipping_abroad;
+	$setting_tax_rate_shipping   = stripslashes($fetch_general_settings['tax_rate_shipping']);
+	$setting_free_shipping       = stripslashes($fetch_general_settings['free_shipping']);
+	$setting_free_shipping_msg   = stripslashes($fetch_general_settings['free_shipping_msg']);
+	$setting_shipping_method     = stripslashes($fetch_general_settings['shipping_method']);
+	$setting_shipping_domestic   = stripslashes($fetch_general_settings['shipping_domestic']);
+	$setting_shipping_abroad     = stripslashes($fetch_general_settings['shipping_abroad']);
+	$setting_shipping_zone       = stripslashes($fetch_general_settings['shipping_zone']);
+	$setting_zone_countries      = explode(",", stripslashes($fetch_general_settings['zone_countries'])); // array
+	$setting_shipping_d_a        = $setting_shipping_domestic.'/'.$setting_shipping_abroad;
 }
 
 // Get payment method settings

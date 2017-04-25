@@ -1,0 +1,18 @@
+
+<div class="mod_bakery_error_f" style="margin-top: 50px"><p>{ERR_AGREE}</p></div>
+	<form action="{SETTING_CONTINUE_URL}" method="post">
+		<div class="mod_bakery_agree_f" style="font-weight: bold; margin-top: 40px;">
+			<p style="display: {DISPLAY_TAC}">
+				<input type="checkbox" name="tac" value="yes" />
+				<a href="{SETTING_TAC_URL}" target="_blank">{TXT_AGREE} {SETTING_SHOP_NAME}"</a>
+			</p>
+			<p style="display: {DISPLAY_NO_REVOCATION}" class="mod_bakery_no_revocation_f">
+				<input type="checkbox" name="no_revocation" value="yes" />
+				<span>{TXT_NO_REVOCATION}</span>
+			</p>
+		</div>
+		<p style="text-align: center">
+			<input type="submit" name="summary" class="mod_bakery_bt_order_f" value="{TXT_SUBMIT_ORDER}" />
+		</p>
+	</form>
+</div>

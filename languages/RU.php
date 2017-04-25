@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   Author translation: Klimentiy Ranchukov.
   E-mail: strag@bk.ru
@@ -71,10 +71,13 @@ $MOD_BAKERY['TXT_ADDRESS_FORM'] = 'Форма для заполнения Адр
 $MOD_BAKERY['TXT_SHIPPING_FORM_REQUEST'] = 'по запросу';
 $MOD_BAKERY['TXT_SHIPPING_FORM_HIDEABLE'] = 'скрыт';
 $MOD_BAKERY['TXT_SHIPPING_FORM_ALWAYS'] = 'всегда показвать';
+$MOD_BAKERY['TXT_DOMESTIC_ADDRESSES_HIDE_COUNTRY'] = 'Отображать внутренние адреса без страны';
 $MOD_BAKERY['TXT_SHOW_COMPANY_FIELD'] = 'Показать поле Компания';
 $MOD_BAKERY['TXT_SHOW_STATE_FIELD'] = 'Показать поле Область';
 $MOD_BAKERY['TXT_SHOW_TAX_NO_FIELD'] = 'Показать поле НДС';
 $MOD_BAKERY['TXT_SHOW_ZIP_END_OF_ADDRESS'] = 'Почтовый индекс и ваш Адрес';
+$MOD_BAKERY['TXT_RIGHT_OF_REVOCATION'] = 'Право отзыва';
+$MOD_BAKERY['TXT_WAIVER_OF_RIGHT_TO_REVOKE'] = 'Отказ от права отзыва при покупке цифровых продуктов';
 $MOD_BAKERY['TXT_CUST_MSG'] = 'Сообщение от покупателя';
 $MOD_BAKERY['TXT_SHOW_TEXTAREA'] = 'Показать текстовое поле';
 $MOD_BAKERY['TXT_ALLOW_OUT_OF_STOCK_ORDERS'] = 'Разрешить клиентам оформлять заказ, если заказываемых товаров на данный момент нет на складе';
@@ -186,6 +189,7 @@ $MOD_BAKERY['TXT_CANCEL_ORDER'] = 'Отменить заказ';
 $MOD_BAKERY['TXT_ORDER_SUMMARY'] = 'Просмотреть и оформить заказ';
 
 $MOD_BAKERY['TXT_ADDRESS'] = 'Адрес';
+$MOD_BAKERY['TXT_ADDRESSES'] = 'Адреса';
 $MOD_BAKERY['TXT_MODIFY_ADDRESS'] = 'Изменить адрес';
 $MOD_BAKERY['TXT_FILL_IN_ADDRESS'] = 'Пожалуйста, заполните в свой адрес';
 $MOD_BAKERY['TXT_SHIP_ADDRESS'] = 'Адрес доставки';
@@ -194,6 +198,7 @@ $MOD_BAKERY['TXT_HIDE_SHIP_FORM'] = 'Скрыть Адрес доставки';
 $MOD_BAKERY['TXT_FILL_IN_SHIP_ADDRESS'] = 'Пожалуйста, заполните адрес доставки';
 $MOD_BAKERY['TXT_TAC'] = 'Условия и положения';
 $MOD_BAKERY['TXT_AGREE'] = 'Я согласен с условиями';
+$MOD_BAKERY['TXT_FULL_WAIVER_OF_RIGHT_TO_REVOKE'] = 'Я соглашаюсь и прямо требую, чтобы вы начали выполнение заказанной услуги до окончания периода отмены. Я осознаю, что я потеряю право на снятие средств на момент завершения контракта.';
 $MOD_BAKERY['TXT_CANCEL'] = 'Вы отменили свой заказ.';
 $MOD_BAKERY['TXT_DELETED'] = 'Все ваши данные были удалены.';
 $MOD_BAKERY['TXT_THANK_U_VISIT'] = 'Спасибо за посещение!';
@@ -289,13 +294,13 @@ $MOD_BAKERY['ERR_INVAL_EMAIL'] = 'неправильный адрес элект
 $MOD_BAKERY['ERR_INVAL_ZIP'] = 'недопустимый почтовый индекс.';
 $MOD_BAKERY['ERR_INVAL_PHONE'] = 'недопустимый телефон.';
 $MOD_BAKERY['ERR_INVAL_TRY_AGAIN'] = 'Пожалуйста, проверьте ваши записи!';
-$MOD_BAKERY['ERR_AGREE'] = 'Мы можем выполнить Ваш заказ, если вы согласны с нашими условиями.<br />спасибо за понимание!';
+$MOD_BAKERY['ERR_AGREE'] = 'Мы можем выполнить Ваш заказ, если вы согласны с нашими условиями. спасибо за понимание!';
 $MOD_BAKERY['ERR_NO_PAYMENT_METHOD'] = 'Нет способа оплаты активирован.';
 $MOD_BAKERY['ERR_EMAIL_NOT_SENT'] = 'Не удается отправить почту. Ваш заказ остается в силе. Пожалуйста, свяжитесь с администратором магазина';
 
 // MODUL BAKERY JAVASCRIPT MESSAGES (Important: Do not remove \n !)
-$MOD_BAKERY['TXT_JS_CONFIRM'] = 'Вы действительно хотите отменить свой заказ?';
-$MOD_BAKERY['TXT_JS_AGREE'] = 'Мы можем выполнить Ваш заказ, если вы согласны с нашими условиями.<br />спасибо за понимание!';
-$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Пожалуйста, введите проверочный номер (также известный как капча)!';
-$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'Проверочный номер (также известный как капча) не совпадает.\ппожалуйста исправить вашу запись!';
-$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = 'Вы хотите, отправить заказчику счета-фактуры?';
+$MOD_BAKERY['TXT_JS_CONFIRM'] = "Вы действительно хотите отменить свой заказ?";
+$MOD_BAKERY['TXT_JS_AGREE'] = "Мы можем выполнить Ваш заказ, если вы согласны с нашими условиями.\nспасибо за понимание!";
+$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = "Пожалуйста, введите проверочный номер (также известный как капча)!";
+$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = "Проверочный номер (также известный как капча) не совпадает.\nпожалуйста исправить вашу запись!";
+$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = "Вы хотите, отправить заказчику счета-фактуры?";

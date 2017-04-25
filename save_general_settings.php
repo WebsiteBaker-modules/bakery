@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -36,11 +36,13 @@ $shop_country    = $admin->add_slashes(strip_tags($_POST['shop_country']));
 $shop_state      = isset($_POST['shop_state']) ? $admin->add_slashes(strip_tags($_POST['shop_state'])) : '';
 $shipping_form   = $admin->add_slashes(strip_tags($_POST['shipping_form']));
 
-$company_field = isset($_POST['company_field']) ? 'show' : 'hide';
-$tax_no_field  = isset($_POST['tax_no_field'])  ? 'show' : 'hide';
-$state_field   = isset($_POST['state_field'])   ? 'show' : 'hide';
-$zip_location  = isset($_POST['zip_location'])  ? 'end' : 'inside';
-$cust_msg      = isset($_POST['cust_msg'])      ? 'show' : 'hide';
+$company_field = isset($_POST['company_field']) ? 'show'    : 'hide';
+$tax_no_field  = isset($_POST['tax_no_field'])  ? 'show'    : 'hide';
+$state_field   = isset($_POST['state_field'])   ? 'show'    : 'hide';
+$zip_location  = isset($_POST['zip_location'])  ? 'end'     : 'inside';
+$no_revocation = isset($_POST['no_revocation']) ? 'e-goods' : 'none';
+$hide_country  = isset($_POST['hide_country'])  ? 'hide'    : 'show';
+$cust_msg      = isset($_POST['cust_msg'])      ? 'show'    : 'hide';
 
 $display_settings    = isset($_POST['display_settings'])    ? 1 : 0;
 $skip_cart           = isset($_POST['skip_cart'])           ? 'yes' : 'no';
@@ -132,7 +134,7 @@ if ($general_settings['pages_directory'] != $pages_directory) {
 
 
 // Update general settings
-$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_general_settings SET shop_name = '$shop_name', shop_email = '$shop_email', pages_directory = '$pages_directory', tac_url = '$tac_url', shop_country = '$shop_country', shop_state = '$shop_state', shipping_form = '$shipping_form', company_field = '$company_field', state_field = '$state_field', tax_no_field = '$tax_no_field', tax_group = '$tax_group', zip_location = '$zip_location', cust_msg = '$cust_msg',  display_settings = '$display_settings', skip_cart = '$skip_cart', out_of_stock_orders = '$out_of_stock_orders', use_captcha = '$use_captcha', definable_field_0 = '$definable_field_0', definable_field_1 = '$definable_field_1', definable_field_2 = '$definable_field_2', stock_mode = '$stock_mode', stock_limit = '$stock_limit', shop_currency = '$shop_currency', dec_point = '$dec_point', thousands_sep = '$thousands_sep', tax_rate = '$tax_rate', tax_rate1 = '$tax_rate1', tax_rate2 = '$tax_rate2', tax_included = '$tax_included', tax_by = '$tax_by', tax_rate_shipping = '$tax_rate_shipping', free_shipping = '$free_shipping', free_shipping_msg = '$free_shipping_msg', shipping_method = '$shipping_method', shipping_domestic = '$shipping_domestic', shipping_abroad = '$shipping_abroad', shipping_zone = '$shipping_zone', zone_countries = '$zone_countries'");
+$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_general_settings SET shop_name = '$shop_name', shop_email = '$shop_email', pages_directory = '$pages_directory', tac_url = '$tac_url', shop_country = '$shop_country', shop_state = '$shop_state', shipping_form = '$shipping_form', company_field = '$company_field', state_field = '$state_field', tax_no_field = '$tax_no_field', tax_group = '$tax_group', zip_location = '$zip_location', no_revocation = '$no_revocation', hide_country = '$hide_country', cust_msg = '$cust_msg',  display_settings = '$display_settings', skip_cart = '$skip_cart', out_of_stock_orders = '$out_of_stock_orders', use_captcha = '$use_captcha', definable_field_0 = '$definable_field_0', definable_field_1 = '$definable_field_1', definable_field_2 = '$definable_field_2', stock_mode = '$stock_mode', stock_limit = '$stock_limit', shop_currency = '$shop_currency', dec_point = '$dec_point', thousands_sep = '$thousands_sep', tax_rate = '$tax_rate', tax_rate1 = '$tax_rate1', tax_rate2 = '$tax_rate2', tax_included = '$tax_included', tax_by = '$tax_by', tax_rate_shipping = '$tax_rate_shipping', free_shipping = '$free_shipping', free_shipping_msg = '$free_shipping_msg', shipping_method = '$shipping_method', shipping_domestic = '$shipping_domestic', shipping_abroad = '$shipping_abroad', shipping_zone = '$shipping_zone', zone_countries = '$zone_countries'");
 
 // Check if there is a db error, otherwise say successful
 if ($database->is_error()) {

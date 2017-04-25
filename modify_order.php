@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System Website Baker (http://websitebaker.org)
-  Copyright (C) 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENSE TERMS:
   Please read the software license agreement included in this package

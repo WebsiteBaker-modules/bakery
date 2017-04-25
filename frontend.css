@@ -1,6 +1,6 @@
 /*
   CSS definition for WebsiteBaker module: Bakery
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   This CSS file is free software. You can redistribute it and/or modify it 
   under the terms of the GNU General Public License - version 2 or later, 
@@ -309,18 +309,28 @@ Modify the CSS of the invoice template and the view order in the backend stylesh
 .mod_bakery_pay_h_f img {
 	padding-left: 8px;
 }
-.mod_bakery_agree_tac_f {
-	height: 40px;
-	vertical-align: middle;
-	padding-left: 12px;
+.mod_bakery_agree_f {
+	padding: 3px 15px 15px 15px;
 	background-color: #ECECEC;
 	border-color: #CBCBCB;
 	border-width: 1px;
 	border-style: solid;
 }
-.mod_bakery_err_agree_tac_f {
+.mod_bakery_agree_f div {
+	padding-top: 12px;
+}
+.mod_bakery_err_agree_f {
 	border: solid 1px red;
 	background-color: #FFDCD9;
+}
+.mod_bakery_no_revocation_f input {
+	float: left;
+	margin-right: 5px;
+}
+.mod_bakery_no_revocation_f span {
+	display: block;
+	margin-top: 2px;
+	overflow: hidden;
 }
 .mod_bakery_cust_msg_f {
 	font-weight: bold;

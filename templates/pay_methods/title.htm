@@ -9,15 +9,19 @@
 <input type="hidden" name="summary" value="true" />
 
 <table width="98%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
+	<tr style="display: {DISPLAY_AGREE};">
 		<td colspan="2">
 			<hr class="mod_bakery_hr_f" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" class="mod_bakery_agree_tac_f" id="agree_tac">
-			 <input type="{TAC_INPUT_TYPE}" name="agree" id="agree" value="yes" />
-			 {TAC_LINK}
+			<div class="mod_bakery_agree_f" id="agree">
+				<div style="display: {DISPLAY_TAC};" class="mod_bakery_tac_f">
+					<input type="checkbox" name="tac" id="tac" value="yes" /> 
+					{TAC_LINK}
+				</div>
+				<div style="display: {DISPLAY_NO_REVOCATION};" class="mod_bakery_no_revocation_f">
+					<input type="checkbox" name="no_revocation" id="no_revocation" value="yes" /> 
+					<span>{TXT_NO_REVOCATION}</span>
+				</div>
+			</div>
 		</td>
 	</tr>
 	<tr style="display: {DISPLAY_CUST_MSG};">

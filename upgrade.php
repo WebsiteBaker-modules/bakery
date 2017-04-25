@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -1289,7 +1289,7 @@ if ($module_version < 1.40) {
 		if ($display_warning) {
 			echo '
 <div style="margin: 15px 0; padding: 10px 10px 10px 60px; text-align: left; color: red; border: solid 1px red; background-color: #FFDCD9; background-image: url('.WB_URL.'/modules/bakery/images/information.gif); background-position: 15px 25px; background-repeat: no-repeat;">
-	<p style="font-weight: bold;">IMPORTANT UPGRADE NOTES UPGRADING TO v1.4.0</p>
+	<p style="font-weight: bold;">IMPORTANT UPGRADE NOTES UPGRADING TO v1.40</p>
 	<p style="font-weight: bold;">Due to the new delivery notes printing feature you have to modify your invoice template slightly.</p>
 	<ol>
 	  <li style="list-style: decimal;">Go to &quot;Payment Methods&quot; &gt; select &quot;Invoice&quot; &gt; &quot;Invoice Template&quot;.</li>
@@ -1498,50 +1498,50 @@ if ($module_version < 1.70) {
 		} else { echo '<span class="ok">Database field main_image does not exist, update not needed</span><br />'; }
 
 	}
+
+
+	// Add new images table to the database
+	echo'<b>Adding new images table to the database</b><br />';
+	
+	// Create new GENERAL SETTINGS table
+	$mod_bakery = 'CREATE TABLE '.TABLE_PREFIX.'mod_bakery_images ( '
+				. "img_id int(11) NOT NULL AUTO_INCREMENT,"
+				. "item_id int(11) NOT NULL DEFAULT '0',"
+				. "item_attribute_id int(11) NOT NULL DEFAULT '0',"
+				. "filename varchar(150) NOT NULL DEFAULT '',"
+				. "active enum('1','0') NOT NULL DEFAULT '1',"
+				. "position int(11) NOT NULL DEFAULT '0',"
+				. "alt varchar(255) NOT NULL DEFAULT '',"
+				. "title varchar(255) NOT NULL DEFAULT '',"
+				. "caption text NOT NULL,"  
+				. "PRIMARY KEY (img_id)"
+				. ' )';
+	if ($database->query($mod_bakery)) {
+		echo '<span class="good">Created new images table successfully</span><br />';
+	}
+	else {
+		echo '<span class="bad">'.$database->get_error().'</span><br />';
+	}
+	
+	
+		echo '
+	<div style="margin: 15px 0; padding: 10px 10px 10px 60px; text-align: left; color: red; border: solid 1px red; background-color: #FFDCD9; background-image: url('.WB_URL.'/modules/bakery/images/information.gif); background-position: 15px 25px; background-repeat: no-repeat;">
+		<p style="font-weight: bold;">IMPORTANT UPGRADE NOTES UPGRADING TO BAKERY v1.70</p>
+		<p style="padding: 5px; border: 1px solid red;">This version features a big improvement in handling item images. It is now possible to reorder item images, add a title, alt attribute and even a image caption. The image on the top position will be used as main image.</p>
+		<p>In order to set the image settings you have to <b>open each item</b> in the Bakery backend:</p>
+		<ol>
+		  <li style="list-style: decimal;">The database will then be synced automatically with the item images currently saved in the <code>/media/bakery/</code> directory.</li>
+		  <li style="list-style: decimal;">Please enter your image data.</li>
+		  <li style="list-style: decimal;">If you set a title and no alt attribute, the title will be copied and used for the alt attribute as well.</li>
+		  <li style="list-style: decimal;">The alt attribute is mandatory.</li>
+		  <li style="list-style: decimal;">The image at the top position (position 1) will be used as main image.</li>
+		  <li style="list-style: decimal;">If you enter a image caption, the image will be wrapped in a &lt;div&gt; container and the image will be followed after a &lt;br&gt; by your caption.</li>
+		  <li style="list-style: decimal;">The item attribut generates a unique id like <code>mod_bakery_img_attrXX_f</code> where the <code>XX</code> stands for the image attribute id. This can be used for any JavaScript actions depending on the selected option attribute. Eg. change main image depending on selected item option.</li>
+		  <li style="list-style: decimal;">Not used images can be deactivated or deleted in the backend.</li>
+		</ol> 
+	</div>
+	';
 }
-
-
-// Add new images table to the database
-echo'<b>Adding new images table to the database</b><br />';
-
-// Create new GENERAL SETTINGS table
-$mod_bakery = 'CREATE TABLE '.TABLE_PREFIX.'mod_bakery_images ( '
-			. "img_id int(11) NOT NULL AUTO_INCREMENT,"
-			. "item_id int(11) NOT NULL DEFAULT '0',"
-			. "item_attribute_id int(11) NOT NULL DEFAULT '0',"
-			. "filename varchar(150) NOT NULL DEFAULT '',"
-			. "active enum('1','0') NOT NULL DEFAULT '1',"
-			. "position int(11) NOT NULL DEFAULT '0',"
-			. "alt varchar(255) NOT NULL DEFAULT '',"
-			. "title varchar(255) NOT NULL DEFAULT '',"
-			. "caption text NOT NULL,"  
-			. "PRIMARY KEY (img_id)"
-			. ' )';
-if ($database->query($mod_bakery)) {
-	echo '<span class="good">Created new images table successfully</span><br />';
-}
-else {
-	echo '<span class="bad">'.$database->get_error().'</span><br />';
-}
-
-
-	echo '
-<div style="margin: 15px 0; padding: 10px 10px 10px 60px; text-align: left; color: red; border: solid 1px red; background-color: #FFDCD9; background-image: url('.WB_URL.'/modules/bakery/images/information.gif); background-position: 15px 25px; background-repeat: no-repeat;">
-	<p style="font-weight: bold;">IMPORTANT UPGRADE NOTES UPGRADING TO BAKERY v1.7.0</p>
-	<p style="padding: 5px; border: 1px solid red;">This version features a big improvement in handling item images. It is now possible to reorder item images, add a title, alt attribute and even a image caption. The image on the top position will be used as main image.</p>
-	<p>In order to set the image settings you have to <b>open each item</b> in the Bakery backend:</p>
-	<ol>
-	  <li style="list-style: decimal;">The database will then be synced automatically with the item images currently saved in the <code>/media/bakery/</code> directory.</li>
-	  <li style="list-style: decimal;">Please enter your image data.</li>
-	  <li style="list-style: decimal;">If you set a title and no alt attribute, the title will be copied and used for the alt attribute as well.</li>
-	  <li style="list-style: decimal;">The alt attribute is mandatory.</li>
-	  <li style="list-style: decimal;">The image at the top position (position 1) will be used as main image.</li>
-	  <li style="list-style: decimal;">If you enter a image caption, the image will be wrapped in a &lt;div&gt; container and the image will be followed after a &lt;br&gt; by your caption.</li>
-	  <li style="list-style: decimal;">The item attribut generates a unique id like <code>mod_bakery_img_attrXX_f</code> where the <code>XX</code> stands for the image attribute id. This can be used for any JavaScript actions depending on the selected option attribute. Eg. change main image depending on selected item option.</li>
-	  <li style="list-style: decimal;">Not used images can be deactivated or deleted in the backend.</li>
-	</ol> 
-</div>
-';
 
 
 
@@ -1579,7 +1579,7 @@ if ($module_version < 1.76) {
 
 	echo '
 <div style="margin: 15px 0; padding: 10px 10px 10px 60px; text-align: left; color: red; border: solid 1px red; background-color: #FFDCD9; background-image: url('.WB_URL.'/modules/bakery/images/information.gif); background-position: 15px 25px; background-repeat: no-repeat;">
-	<p style="font-weight: bold;">IMPORTANT UPGRADE NOTES UPGRADING TO BAKERY v1.7.6</p>
+	<p style="font-weight: bold;">IMPORTANT UPGRADE NOTES UPGRADING TO BAKERY v1.76</p>
 	<p style="padding: 5px; border: 1px solid red;">This version features an improvement in handling item images. On resizing png images will no longer be converted to jpg thumbs.</p>
 	<p>If you are using the module snippets <b>Bakery Anyitems</b> or <b>Bakery Lastitems</b> please upgrade:</p>
 	<ol>
@@ -1588,6 +1588,35 @@ if ($module_version < 1.76) {
 	</ol> 
 </div>
 ';
+}
+
+
+
+
+// UPGRADE TO VERSION 1.79
+// ************************
+
+if ($module_version < 1.79) {
+
+	// Titel: Upgrading to
+	echo'<h3>Upgrading to version 1.79 or later:</h3>';
+
+	// Get GENERAL SETTINGS table to see what needs to be changed
+	$settingstable = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_general_settings");
+	if ($settings = $settingstable->fetchRow()) {
+	
+		if (!array_key_exists('no_revocation', $settings)) {
+				if ($database->query("ALTER TABLE ".TABLE_PREFIX."mod_bakery_general_settings ADD no_revocation VARCHAR(50) NOT NULL DEFAULT 'e-goods' AFTER zip_location")) {
+					echo '<span class="good">Database field no_revocation added successfully</span><br />';
+				} else { echo '<span class="bad">'.$database->get_error().'</span><br />'; }
+		} else { echo '<span class="ok">Database field no_revocation exists, update not needed</span><br />'; }
+
+		if (!array_key_exists('hide_country', $settings)) {
+				if ($database->query("ALTER TABLE ".TABLE_PREFIX."mod_bakery_general_settings ADD hide_country ENUM('show','hide') NOT NULL DEFAULT 'show' AFTER no_revocation")) {
+					echo '<span class="good">Database field hide_country added successfully</span><br />';
+				} else { echo '<span class="bad">'.$database->get_error().'</span><br />'; }
+		} else { echo '<span class="ok">Database field hide_country exists, update not needed</span><br />'; }
+	}
 }
 
 

@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -25,12 +25,26 @@
  
 	DEVELOPMENT HISTORY:
 
+   v1.79  (Christoph Marti; 04/01/2017)
+	 + [save_form.php] Added slash as accepted char to the street address field (reported by fischstäbchenbrenner)
+	 + [save_form.php] Added dot as accepted char to the company address field (reported by Broem)
+	 + [backend.css] Added support for the advanced theme wbce flat
+	 + [modify.php] Bugfix: Fixed thumbnail alt attribute (undefined index of $main_image)
+	 + [view_order.php] Re-added the file view_order.php (reported by KimCR)
+	 + [modify_orders.php] Commented view_details button since customer data can be checked at modify_order
+	   Feel free to uncomment it at ca. line 257 if you still want to make use of it.
+	 + Added setting: No right of revocation when purchasing digital content (requested by paulchen)
+	   http://forum.websitebaker.org/index.php/topic,30013.0.html
+	 + Added setting: If customer and shop country match, hide country (requested by paulchen)
+	   http://forum.websitebaker.org/index.php/topic,29916.0.html
+	 + Changed: In the customer and shipping address the country code is not displayed any more
+
    v1.78  (Christoph Marti; 07/19/2016)
 	 + Fixed problem with single quotes in image title and alt attributes (reported by dbs)
 	 + [view_cart.php, search.php] Fixed hardcoded thumb_dir (thanks to Ruud)
 	 + Replaced @mktime() by time() function since as of PHP 5.1 mktime() throws a notice when called without arguments
 	 + Replaced view order by a feature that allows editing of customer and invoice address data
-	 + Changed all js alerts to utf-8
+	 + Converted all js alerts to utf-8
 	 + Updated Mollie payment plugin to v1.1 (thanks to Ruud - Dev4me)
 
    v1.77  (Christoph Marti; 03/19/2016)
@@ -708,7 +722,7 @@
 $module_directory   = 'bakery';
 $module_name        = 'Bakery';
 $module_function    = 'page';
-$module_version     = '1.78';
+$module_version     = '1.79';
 $module_platform    = '2.7';
 $module_author      = 'Christoph Marti';
 $module_license     = 'GNU General Public License';

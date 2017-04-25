@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -91,7 +91,7 @@ foreach ($_POST as $field => $value) {
 		$value  = strip_tags($value);
 
 		if (strpos($field, 'company') !== false) {
-			if (!preg_match('#^[\p{Latin}'.$us.'0-9+&\s\-]{0,50}$#u', $value)) {
+			if (!preg_match('#^[\p{Latin}'.$us.'0-9.+&\s\-]{0,50}$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_NAME'];
 			}
@@ -122,7 +122,7 @@ foreach ($_POST as $field => $value) {
 		}
 
 		if (strpos($field, 'street') !== false) {
-			if (!preg_match('#^[\p{Latin}'.$us.'0-9.,\s\-]{1,50}$#u', $value)) {
+			if (!preg_match('#^[\p{Latin}'.$us.'0-9.,/\s\-]{1,50}$#u', $value)) {
 				$error_bg[] = $field;
 				$errors[]   = htmlspecialchars($value, ENT_QUOTES).' '.$MOD_BAKERY['ERR_INVAL_STREET'];
 			}

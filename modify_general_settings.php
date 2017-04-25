@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -152,6 +152,12 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.stripslashes($fetch_
         </select></td>
     </tr>
 	<tr>
+	  <td align="right"><?php echo $MOD_BAKERY['TXT_ADDRESSES']; ?>:</td>
+	  <td colspan="4"><input type="checkbox" name="hide_country" id="hide_country" value="hide" <?php if ($fetch_settings['hide_country'] == 'hide') { echo 'checked="checked"'; } ?> />
+		<label for="hide_country"><?php echo $MOD_BAKERY['TXT_DOMESTIC_ADDRESSES_HIDE_COUNTRY']; ?></label>
+	  </td>
+	</tr>
+	<tr>
 	  <td align="right" valign="top"><?php echo $MOD_BAKERY['TXT_ADDRESS_FORM']; ?>:</td>
 	  <td colspan="4">
 		  <table width="98%" border="0" cellspacing="0" cellpadding="0">
@@ -170,6 +176,12 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.stripslashes($fetch_
 		  </table>
 	  </td>
     </tr>
+	<tr>
+	  <td align="right"><?php echo $MOD_BAKERY['TXT_RIGHT_OF_REVOCATION']; ?>:</td>
+	  <td colspan="4"><input type="checkbox" name="no_revocation" id="no_revocation" value="e-goods" <?php if ($fetch_settings['no_revocation'] == 'e-goods') { echo 'checked="checked"'; } ?> />
+		<label for="no_revocation"><?php echo $MOD_BAKERY['TXT_WAIVER_OF_RIGHT_TO_REVOKE']; ?></label>
+	  </td>
+	</tr>
 	<tr>
 	  <td align="right"><?php echo $MOD_BAKERY['TXT_CUST_MSG']; ?>:</td>
 	  <td colspan="4">
@@ -203,17 +215,20 @@ if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.stripslashes($fetch_
 	<tr>
 		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_FREE_DEFINABLE_FIELD']; ?> 1:</td>
 		<td colspan="4">
-			<input type="text" name="definable_field_0" style="width: 98%" maxlength="50" value="<?php echo stripslashes($fetch_settings['definable_field_0']); ?>" />		</td>
+			<input type="text" name="definable_field_0" style="width: 98%" maxlength="50" value="<?php echo stripslashes($fetch_settings['definable_field_0']); ?>" />
+		</td>
 	</tr>
 	<tr>
 		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_FREE_DEFINABLE_FIELD']; ?> 2:</td>
 		<td colspan="4">
-			<input type="text" name="definable_field_1" style="width: 98%" maxlength="50" value="<?php echo stripslashes($fetch_settings['definable_field_1']); ?>" />		</td>
+			<input type="text" name="definable_field_1" style="width: 98%" maxlength="50" value="<?php echo stripslashes($fetch_settings['definable_field_1']); ?>" />
+		</td>
 	</tr>
 	<tr>
 		<td width="30%" align="right"><?php echo $MOD_BAKERY['TXT_FREE_DEFINABLE_FIELD']; ?> 3:</td>
 		<td colspan="4">
-			<input type="text" name="definable_field_2" style="width: 98%" maxlength="50" value="<?php echo stripslashes($fetch_settings['definable_field_2']); ?>" />		</td>
+			<input type="text" name="definable_field_2" style="width: 98%" maxlength="50" value="<?php echo stripslashes($fetch_settings['definable_field_2']); ?>" />
+		</td>
 	</tr>
 	<tr>
 		<td align="right" valign="top" style="padding-top: 5px;"><?php echo $MOD_BAKERY['TXT_STOCK']; ?>:</td>

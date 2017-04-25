@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -49,28 +49,34 @@ if (!empty($_SESSION['bakery']['cust_msg'])) {
 	$cust_msg = htmlspecialchars($_SESSION['bakery']['cust_msg'], ENT_QUOTES);
 }
 
-
-
 // If tac url is set customers have to accept the terms & conditions
+$display_agree = 'none';
+$display_tac   = 'none';
+$tac_link      = '<a href="'.$setting_tac_url.'" target="_blank">'.$MOD_BAKERY['TXT_AGREE'].' '.$setting_shop_name.'</a>';
 if (!empty($setting_tac_url)) {
-	$tac_input_type = 'checkbox';
-	$tac_link       = "<a href='$setting_tac_url' target='_blank'>{$MOD_BAKERY['TXT_AGREE']} $setting_shop_name</a>";
-	$js_check_tac   = "return checkTaC('{$MOD_BAKERY['TXT_JS_AGREE']}')";
-} else {
-	$tac_input_type = 'hidden';
-	$tac_link       = '';
-	$js_check_tac   = '';
+	$display_agree = 'table-row';
+	$display_tac   = 'block';
+}
+
+// No right of revocation when purchasing digital goods
+$display_no_revocation = 'none';
+if ($setting_no_revocation == 'e-goods') {
+	$display_agree         = 'table-row';
+	$display_no_revocation = 'block';
 }
 
 // Show title, customers message and terms & conditions using template file
 $tpl->set_file('pay_methods_title', 'title.htm');
 $tpl->set_var(array(
 	'WB_URL'					=>	WB_URL,
-	'TXT_TAC_AND_PAY_METHOD'	=>	$MOD_BAKERY['TXT_TAC_AND_PAY_METHOD'],
-	'TXT_JS_AGREE'				=>	$MOD_BAKERY['TXT_JS_AGREE'],
 	'SETTING_CONTINUE_URL'		=>	$setting_continue_url,
-	'TAC_INPUT_TYPE'			=>	$tac_input_type,
+	'TXT_TAC_AND_PAY_METHOD'	=>	$MOD_BAKERY['TXT_TAC_AND_PAY_METHOD'],
+	'DISPLAY_AGREE'				=>  $display_agree,
+	'DISPLAY_TAC'				=>  $display_tac,
+	'TXT_JS_AGREE'				=>	$MOD_BAKERY['TXT_JS_AGREE'],
 	'TAC_LINK'					=>	$tac_link,
+	'DISPLAY_NO_REVOCATION'		=>	$display_no_revocation,
+	'TXT_NO_REVOCATION'			=>	$MOD_BAKERY['TXT_FULL_WAIVER_OF_RIGHT_TO_REVOKE'],
 	'TXT_PAY_METHOD'			=>	$MOD_BAKERY['TXT_SELECT_PAY_METHOD'],
 	'DISPLAY_CUST_MSG'			=>	$display_cust_msg,
 	'TXT_ENTER_CUST_MSG'		=>	$MOD_BAKERY['TXT_ENTER_CUST_MSG'],

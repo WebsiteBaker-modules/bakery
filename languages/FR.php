@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System Website Baker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
   FR version by quinto
 
   LICENCE TERMS:
@@ -58,10 +58,13 @@ $MOD_BAKERY['TXT_ADDRESS_FORM'] = 'Formulaire d&apos;Adresse';
 $MOD_BAKERY['TXT_SHIPPING_FORM_REQUEST'] = 'sur demande';
 $MOD_BAKERY['TXT_SHIPPING_FORM_HIDEABLE'] = 'd&eacute;sactivable';
 $MOD_BAKERY['TXT_SHIPPING_FORM_ALWAYS'] = 'toujours';
+$MOD_BAKERY['TXT_DOMESTIC_ADDRESSES_HIDE_COUNTRY'] = 'Afficher les adresses domestiques sans pays';
 $MOD_BAKERY['TXT_SHOW_COMPANY_FIELD'] = 'Afficher le champ Entreprise';
 $MOD_BAKERY['TXT_SHOW_STATE_FIELD'] = 'Demander la r&eacute;gion';
 $MOD_BAKERY['TXT_SHOW_TAX_NO_FIELD'] = 'Demander Num&eacute;ro d&apos;identification TVA';
 $MOD_BAKERY['TXT_SHOW_ZIP_END_OF_ADDRESS'] = 'Code Postal en fin d&apos;Adresse';
+$MOD_BAKERY['TXT_RIGHT_OF_REVOCATION'] = 'Droit de r&eacute;vocation';
+$MOD_BAKERY['TXT_WAIVER_OF_RIGHT_TO_REVOKE'] = 'Renoncer au droit de r&eacute;voquer lors de l&apos;achat de produits num&eacute;riques';
 $MOD_BAKERY['TXT_CUST_MSG'] = 'Message du Client';
 $MOD_BAKERY['TXT_SHOW_TEXTAREA'] = 'Afficher le champ texte';
 $MOD_BAKERY['TXT_ALLOW_OUT_OF_STOCK_ORDERS'] = 'Permettre les commandes Hors Stock';
@@ -168,6 +171,7 @@ $MOD_BAKERY['TXT_CANCEL_ORDER'] = 'Arr&ecirc;ter la commande';
 $MOD_BAKERY['TXT_ORDER_SUMMARY'] = 'R&eacute;sum&eacute; de la commande';
 
 $MOD_BAKERY['TXT_ADDRESS'] = 'Adresse';
+$MOD_BAKERY['TXT_ADDRESSES'] = 'Adresses';
 $MOD_BAKERY['TXT_MODIFY_ADDRESS'] = 'Modifier l&apos;Adresse';
 $MOD_BAKERY['TXT_FILL_IN_ADDRESS'] = 'Veuillez saisir votre adresse';
 $MOD_BAKERY['TXT_SHIP_ADDRESS'] = 'Adresse de Livraison';
@@ -176,6 +180,7 @@ $MOD_BAKERY['TXT_HIDE_SHIP_FORM'] = 'Cacher l&apos;Adresse de Livraison';
 $MOD_BAKERY['TXT_FILL_IN_SHIP_ADDRESS'] = 'Veuillez saisir votre adresse de Livraison';
 $MOD_BAKERY['TXT_TAC'] = 'Termes et Conditions G&eacute;n&eacute;rales de Vente';
 $MOD_BAKERY['TXT_AGREE'] = 'J&apos;accepte les conditions g&eacute;n&eacute;rales de vente du site';
+$MOD_BAKERY['TXT_FULL_WAIVER_OF_RIGHT_TO_REVOKE'] = 'J&apos;accepte et j&apos;exige express&eacute;ment que vous commenciez l&apos;ex&eacute;cution du service command&eacute; avant la fin de la p&eacute;riode d&apos;annulation. Je suis conscient que je perdrai mon droit de r&eacute;tractation au moment o&ugrave; vous avez termin&eacute; le contrat.';
 $MOD_BAKERY['TXT_CANCEL'] = 'Vous avez annul&eacute; votre commande.';
 $MOD_BAKERY['TXT_DELETED'] = 'Toutes les donn&eacute;es vous concernant ont été effac&eacute;es.';
 $MOD_BAKERY['TXT_THANK_U_VISIT'] = 'Merci pour votre visite et bonne journ&eacute;e!';
@@ -271,13 +276,13 @@ $MOD_BAKERY['ERR_INVAL_EMAIL'] = 'n&apos;est pas une adresse email valide.';
 $MOD_BAKERY['ERR_INVAL_ZIP'] = 'n&apos;est pas un code postal valide.';
 $MOD_BAKERY['ERR_INVAL_PHONE'] = 'n&apos;est pas un num&eacute;ro de t&eacute;l&eacute;phone valide.';
 $MOD_BAKERY['ERR_INVAL_TRY_AGAIN'] = 'Veuillez v&eacute;rifier les donn&eacute;es saisie!';
-$MOD_BAKERY['ERR_AGREE'] = 'Votre commande ne peut &ecirc;tre valid&eacute;e si vous n&apos;acceptez pas les conditions g&eacute;n&eacute;rales de vente du site.<br />Merci pour votre compr&eacute;hension!';
+$MOD_BAKERY['ERR_AGREE'] = 'Votre commande ne peut &ecirc;tre valid&eacute;e si vous n&apos;acceptez pas les conditions de vente du site. Merci pour votre compr&eacute;hension!';
 $MOD_BAKERY['ERR_NO_PAYMENT_METHOD'] = 'Aucune M&eacute;thode de Paiement Activ&eacute;e.';
 $MOD_BAKERY['ERR_EMAIL_NOT_SENT'] = 'L&apos;envoi d&apos;email n&apos;a pu &ecirc;tre effectu&eacute;. Votre commande est encore valide. Veuillez contacter l&apos;administrateur de la boutique';
 
 // MODUL BAKERY JAVASCRIPT MESSAGES (Important: Do not remove \n !)
-$MOD_BAKERY['TXT_JS_CONFIRM'] = 'Voulez vous vraiment arrêter votre commande?';
-$MOD_BAKERY['TXT_JS_AGREE'] = 'Votre commande ne peut être validée si vous n\'acceptez pas les conditions générales de vente du site. Merci pour votre compréhension!';
-$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Veuillez saisir le numéro de vérification (aussi appelé CAPTCHA)!';
-$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'Le numéro de vérification (aussi appelé CAPTCHA) ne correspond pas.\nVeuillez corriger votre saisie!';
-$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = 'Voulez-vous envoyer cette facture au client?';
+$MOD_BAKERY['TXT_JS_CONFIRM'] = "Voulez vous vraiment arrêter votre commande?";
+$MOD_BAKERY['TXT_JS_AGREE'] = "Votre commande ne peut être validée si vous n\'acceptez pas les conditions de vente du site.\nMerci pour votre compréhension!";
+$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = "Veuillez saisir le numéro de vérification (aussi appelé CAPTCHA)!";
+$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = "Le numéro de vérification (aussi appelé CAPTCHA) ne correspond pas.\nVeuillez corriger votre saisie!";
+$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = "Voulez-vous envoyer cette facture au client?";

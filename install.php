@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -152,6 +152,8 @@ if (defined('WB_URL')) {
 			. "`tax_no_field` ENUM('show','hide') NOT NULL ,"
 			. "`tax_group` VARCHAR(255) NOT NULL ,"
 			. "`zip_location` ENUM('inside','end') NOT NULL ,"
+			. "`no_revocation` VARCHAR(50) NOT NULL DEFAULT 'e-goods' ,"
+			. "`hide_country` ENUM('show','hide') NOT NULL DEFAULT 'show' ,"
 			. "`cust_msg` ENUM('show','hide') NOT NULL  ,"
 			. "`skip_cart` ENUM('yes','no') NOT NULL DEFAULT 'no' ,"
 			. "`display_settings` ENUM('1','0') NOT NULL DEFAULT '0' ,"

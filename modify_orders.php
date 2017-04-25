@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -254,11 +254,13 @@ if ($costumer['sent_invoices'] == 0) {
 				<a href="javascript: confirm_link('<?php echo $MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE']; ?>', '<?php echo WB_URL; ?>/modules/bakery/send_invoice.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&order_id=<?php echo $costumer['order_id']; ?>');">
 					<img src="<?php echo WB_URL; ?>/modules/bakery/images/email<?php echo $send_invoice_icon; ?>.png" alt="<?php echo $send_invoice_txt; ?>" title="<?php echo $send_invoice_txt; ?>" border="0" /></a>
 			</td>
+<!--
 			<td  width="22">
 				<a href="<?php echo WB_URL; ?>/modules/bakery/view_order.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;order_id=<?php echo $costumer['order_id']; ?>" onclick="showOrder(this.href); return false;" title="<?php echo $TEXT['VIEW_DETAILS']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/view_16.png" alt="<?php echo $MOD_BAKERY['TXT_INVOICE'].' '.$TEXT['VIEW_DETAILS']; ?>" border="0" />
 				</a>
 			</td>
+-->
 			<td width="22">
 				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/bakery/delete_order.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&order_id=<?php echo $costumer['order_id']; ?>&view=<?php echo $view; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="<?php echo $TEXT['DELETE']; ?>" />

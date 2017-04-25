@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
   NL version by Ruud
 
   LICENCE TERMS:
@@ -58,10 +58,13 @@ $MOD_BAKERY['TXT_ADDRESS_FORM'] = 'Adres Formulier';
 $MOD_BAKERY['TXT_SHIPPING_FORM_REQUEST'] = 'indien nodig';
 $MOD_BAKERY['TXT_SHIPPING_FORM_HIDEABLE'] = 'verbergbaar';
 $MOD_BAKERY['TXT_SHIPPING_FORM_ALWAYS'] = 'altijd';
+$MOD_BAKERY['TXT_DOMESTIC_ADDRESSES_HIDE_COUNTRY'] = 'Toon binnenlandse adressen zonder land';
 $MOD_BAKERY['TXT_SHOW_COMPANY_FIELD'] = 'Laat bedrijfsnaam veld zien';
 $MOD_BAKERY['TXT_SHOW_STATE_FIELD'] = 'Laat &quot;State Field&quot; zien';
 $MOD_BAKERY['TXT_SHOW_TAX_NO_FIELD'] = 'Laat BTW-nummer veld zien';
 $MOD_BAKERY['TXT_SHOW_ZIP_END_OF_ADDRESS'] = 'Postcode rechts van het adres';
+$MOD_BAKERY['TXT_RIGHT_OF_REVOCATION'] = 'Recht van herroeping';
+$MOD_BAKERY['TXT_WAIVER_OF_RIGHT_TO_REVOKE'] = 'Afstand doen van het recht om in te trekken bij de aankoop van digitale producten';
 $MOD_BAKERY['TXT_CUST_MSG'] = 'Klant opmerking';
 $MOD_BAKERY['TXT_SHOW_TEXTAREA'] = 'Laat tekstveld zien';
 $MOD_BAKERY['TXT_ALLOW_OUT_OF_STOCK_ORDERS'] = 'Verkopen zonder voorraad toestaan';
@@ -168,6 +171,7 @@ $MOD_BAKERY['TXT_CANCEL_ORDER'] = 'Bestelling afbreken';
 $MOD_BAKERY['TXT_ORDER_SUMMARY'] = 'Bestelling';
 
 $MOD_BAKERY['TXT_ADDRESS'] = 'adres';
+$MOD_BAKERY['TXT_ADDRESSES'] = 'Adressen';
 $MOD_BAKERY['TXT_MODIFY_ADDRESS'] = 'Adres aanpassen';
 $MOD_BAKERY['TXT_FILL_IN_ADDRESS'] = 'Uw adres';
 $MOD_BAKERY['TXT_SHIP_ADDRESS'] = 'Aflever adres';
@@ -176,6 +180,7 @@ $MOD_BAKERY['TXT_HIDE_SHIP_FORM'] = 'Verberg aflever adres';
 $MOD_BAKERY['TXT_FILL_IN_SHIP_ADDRESS'] = 'Aflever adres';
 $MOD_BAKERY['TXT_TAC'] = 'Leverings voorwaarden';
 $MOD_BAKERY['TXT_AGREE'] = 'Ik ga akkoord met de leveringsvoorwaarden van';
+$MOD_BAKERY['TXT_FULL_WAIVER_OF_RIGHT_TO_REVOKE'] = 'Ik ben het eens uitdrukkelijk vereisen dat u de uitvoering van de opdracht service te starten voor het einde van de opzegtermijn. Ik ben me ervan bewust dat ik mijn herroepingsrecht verliest op het moment dat u het contract hebt voltooid.';
 $MOD_BAKERY['TXT_CANCEL'] = 'Uw bestelling is afgebroken.';
 $MOD_BAKERY['TXT_DELETED'] = 'Alle bestellingen zijn verwijderd.';
 $MOD_BAKERY['TXT_THANK_U_VISIT'] = 'Dank u wel!';
@@ -271,13 +276,13 @@ $MOD_BAKERY['ERR_INVAL_EMAIL'] = 'is niet een geldig email adres.';
 $MOD_BAKERY['ERR_INVAL_ZIP'] = 'is niet een geldige postcode.';
 $MOD_BAKERY['ERR_INVAL_PHONE'] = 'is niet een geldig telefoonnummer.';
 $MOD_BAKERY['ERR_INVAL_TRY_AGAIN'] = 'Controleer uw invoer!';
-$MOD_BAKERY['ERR_AGREE'] = 'We kunnen uw bestelling alleen uitvoeren als u akkoord gaat met onze leveringsvoorwaarden.<br />Bedankt voor uw begrip!';
+$MOD_BAKERY['ERR_AGREE'] = 'We kunnen uw bestelling alleen uitvoeren als u akkoord gaat met onze leveringsvoorwaarden. Bedankt voor uw begrip!';
 $MOD_BAKERY['ERR_NO_PAYMENT_METHOD'] = 'Geen betaalmethode geactiveerd.';
 $MOD_BAKERY['ERR_EMAIL_NOT_SENT'] = 'De email kon niet worden verzonden.<br />Uw bestelling is nog steeds geldig.<br/>Neem contact op met de winkel beheerder';
 
 // MODUL BAKERY JAVASCRIPT MESSAGES (Important: Do not remove \n !)
-$MOD_BAKERY['TXT_JS_CONFIRM'] = 'Wilt u uw bestelling afbreken?';
-$MOD_BAKERY['TXT_JS_AGREE'] = 'We kunnen uw bestelling alleen uitvoeren als u akkoord gaat met onze leveringsvoorwaarden. Bedankt voor uw begrip!';
-$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Voer a.u.b. de controle code in!';
-$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'De controlecode klopt niet.\nProbeer opnieuw!';
-$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = 'Wilt u email deze klant factuur?';
+$MOD_BAKERY['TXT_JS_CONFIRM'] = "Wilt u uw bestelling afbreken?";
+$MOD_BAKERY['TXT_JS_AGREE'] = "We kunnen uw bestelling alleen uitvoeren als u akkoord gaat met onze leveringsvoorwaarden.\nBedankt voor uw begrip!";
+$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = "Voer a.u.b. de controle code in!";
+$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = "De controlecode klopt niet.\nProbeer opnieuw!";
+$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = "Wilt u email deze klant factuur?";

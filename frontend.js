@@ -1,6 +1,6 @@
 /*
   Javascript routines for WebsiteBaker module Bakery
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   This Javascript routines are free software. You can redistribute it and/or modify it 
   under the terms of the GNU General Public License - version 2 or later, 
@@ -66,14 +66,35 @@ function mod_bakery_synchro_ship_state_f() {
 
 
 // **********************************************************************************
-//   Function to check if customer has agreed to the terms & conditions of the shop
+//   Function to check if customer has agreed to the terms & conditions and
+//   that he will loose his right of revocation when purchasing digital content
 // **********************************************************************************
 
 function checkTaC() {
-	if (document.getElementById('agree').checked != true) {
+
+	var count = 0,
+		tac   = document.getElementById('tac'),
+		nreg  = document.getElementById('no_revocation');
+
+	// Terms & conditions
+	if (tac.parentNode.style.display == 'block' && tac.checked != true) {
+		count += 1;
+	}
+
+	// No right of revocation when purchasing digital content
+	if (nreg.parentNode.style.display == 'block' && nreg.checked != true) {
+		count += 2;
+	}
+
+	// Alert error message and stop proceeding
+	if (count > 0) {
+		document.getElementById('agree').className += ' mod_bakery_err_agree_f';
+		if (count == 2) {
+			nreg.focus();
+		} else {
+			tac.focus();
+		}
 		alert(document.getElementById('txt_js_agree').firstChild.nodeValue);
-		document.getElementById('agree_tac').className += ' mod_bakery_err_agree_tac_f';
-		document.getElementById('agree').focus();
 		return false;
 	} else {
 		return true;

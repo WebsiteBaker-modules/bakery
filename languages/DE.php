@@ -2,7 +2,7 @@
 
 /*
   Module developed for the Open Source Content Management System WebsiteBaker (http://websitebaker.org)
-  Copyright (C) 2007 - 2016, Christoph Marti
+  Copyright (C) 2007 - 2017, Christoph Marti
 
   LICENCE TERMS:
   This module is free software. You can redistribute it and/or modify it 
@@ -57,10 +57,13 @@ $MOD_BAKERY['TXT_ADDRESS_FORM'] = 'Adress-Formular';
 $MOD_BAKERY['TXT_SHIPPING_FORM_REQUEST'] = 'zuschaltbar';
 $MOD_BAKERY['TXT_SHIPPING_FORM_HIDEABLE'] = 'ausblendbar';
 $MOD_BAKERY['TXT_SHIPPING_FORM_ALWAYS'] = 'immer';
+$MOD_BAKERY['TXT_DOMESTIC_ADDRESSES_HIDE_COUNTRY'] = 'Im Inland Adressen ohne Land anzeigen';
 $MOD_BAKERY['TXT_SHOW_COMPANY_FIELD'] = 'Zeige Feld Firma';
 $MOD_BAKERY['TXT_SHOW_TAX_NO_FIELD'] = 'Zeige UST-ID Feld';
 $MOD_BAKERY['TXT_SHOW_STATE_FIELD'] = 'Zeige Feld Bundesland/Kanton';
 $MOD_BAKERY['TXT_SHOW_ZIP_END_OF_ADDRESS'] = 'PLZ am Ende der Adresse';
+$MOD_BAKERY['TXT_RIGHT_OF_REVOCATION'] = 'Widerrufsrecht';
+$MOD_BAKERY['TXT_WAIVER_OF_RIGHT_TO_REVOKE'] = 'Erl&ouml;schen des Widerrufsrechtes beim Kauf von digitalen Produkten';
 $MOD_BAKERY['TXT_CUST_MSG'] = 'Kunden Bemerkung';
 $MOD_BAKERY['TXT_SHOW_TEXTAREA'] = 'Textfeld anzeigen';
 $MOD_BAKERY['TXT_ALLOW_OUT_OF_STOCK_ORDERS'] = 'Verk&auml;ufe ohne ausreichenden Lagerbestand zulassen';
@@ -167,6 +170,7 @@ $MOD_BAKERY['TXT_CANCEL_ORDER'] = 'Bestellung abbrechen';
 $MOD_BAKERY['TXT_ORDER_SUMMARY'] = 'Zusammenfassung der Bestellung';
 
 $MOD_BAKERY['TXT_ADDRESS'] = 'Adresse';
+$MOD_BAKERY['TXT_ADDRESSES'] = 'Adressen';
 $MOD_BAKERY['TXT_MODIFY_ADDRESS'] = 'Adresse bearbeiten';
 $MOD_BAKERY['TXT_FILL_IN_ADDRESS'] = 'Bitte tragen Sie Ihre Adresse ein';
 $MOD_BAKERY['TXT_SHIP_ADDRESS'] = 'Versandadresse';
@@ -175,6 +179,7 @@ $MOD_BAKERY['TXT_HIDE_SHIP_FORM'] = 'Versandadresse ausblenden';
 $MOD_BAKERY['TXT_FILL_IN_SHIP_ADDRESS'] = 'Bitte tragen Sie die Versandadresse ein';
 $MOD_BAKERY['TXT_TAC'] = 'AGB';
 $MOD_BAKERY['TXT_AGREE'] = 'Ich akzeptiere die AGB von';
+$MOD_BAKERY['TXT_FULL_WAIVER_OF_RIGHT_TO_REVOKE'] = 'Ich bin einverstanden und verlange ausdr&uuml;cklich, dass Sie vor Ende der Widerrufsfrist mit der Ausf&uuml;hrung der beauftragten Dienstleistung beginnen. Mir ist bekannt, dass ich bei vollst&auml;ndiger Vertragserf&uuml;llung durch Sie mein Widerrufrecht verliere.';
 $MOD_BAKERY['TXT_CANCEL'] = 'Sie haben Ihre Bestellung abgebrochen.';
 $MOD_BAKERY['TXT_DELETED'] = 'Ihre gesamten Daten wurden gel&ouml;scht.';
 $MOD_BAKERY['TXT_THANK_U_VISIT'] = 'Besten Dank f&uuml;r Ihren Besuch und auf Wiedersehen!';
@@ -270,14 +275,13 @@ $MOD_BAKERY['ERR_INVAL_EMAIL'] = 'ist keine g&uuml;ltige E-Mail Adresse.';
 $MOD_BAKERY['ERR_INVAL_ZIP'] = 'ist keine g&uuml;ltige PLZ.';
 $MOD_BAKERY['ERR_INVAL_PHONE'] = 'ist keine g&uuml;ltige Telefonnummer.';
 $MOD_BAKERY['ERR_INVAL_TRY_AGAIN'] = 'Bitte &uuml;berpr&uuml;fen Sie Ihre Eingabe(n)!';
-$MOD_BAKERY['ERR_AGREE'] = 'Wir k&ouml;nnen Ihre Bestellung nur ausf&uuml;hren, wenn Sie unsere AGB akzeptieren.<br />Danke f&uuml;r Ihr Verst&auml;ndnis!';
+$MOD_BAKERY['ERR_AGREE'] = 'Wir k&ouml;nnen Ihre Bestellung nur ausf&uuml;hren, wenn Sie unseren Bedingungen zustimmen. Danke f&uuml;r Ihr Verst&auml;ndnis!';
 $MOD_BAKERY['ERR_NO_PAYMENT_METHOD'] = 'Es wurde keine Zahlungsmethode aktiviert.';
 $MOD_BAKERY['ERR_EMAIL_NOT_SENT'] = 'Die E-Mail konnte nicht an Sie versandt werden.<br />Ihre Bestellung ist dennoch g&uuml;ltig.<br />Bitte wenden Sie sich an den Shop-Betreiber';
 
 // MODUL BAKERY JAVASCRIPT MESSAGES (Important: Do not remove \n !)
-$MOD_BAKERY['TXT_JS_CONFIRM'] = 'Möchten Sie Ihre Bestellung wirklich abbrechen?';
-$MOD_BAKERY['TXT_JS_AGREE'] = 'Wir können Ihre Bestellung nur ausführen, wenn Sie unsere AGB akzeptieren. Danke für Ihr Verständnis!';
-#$MOD_BAKERY['TXT_JS_AGREE'] = 'Wir können Ihre Bestellung nur ausführen, wenn Sie unsere AGB akzeptieren. Danke für Ihr Verständnis!';
-$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = 'Bitte geben Sie die Prüfziffer ein!';
-$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = 'Die eingegebene Prüfziffer stimmt nicht überein.\nBitte überprüfen Sie Ihre Eingabe!';
-$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = 'Möchten Sie diese Rechnung als HTML E-Mail an den Kunden senden?';
+$MOD_BAKERY['TXT_JS_CONFIRM'] = "Möchten Sie Ihre Bestellung wirklich abbrechen?";
+$MOD_BAKERY['TXT_JS_AGREE'] = "Wir können Ihre Bestellung nur ausführen, wenn Sie unseren Bedingungen zustimmen.\nDanke für Ihr Verständnis!";
+$MOD_BAKERY['TXT_JS_BLANK_CAPTCHA'] = "Bitte geben Sie die Prüfziffer ein!";
+$MOD_BAKERY['TXT_JS_INCORRECT_CAPTCHA'] = "Die eingegebene Prüfziffer stimmt nicht überein.\nBitte überprüfen Sie Ihre Eingabe!";
+$MOD_BAKERY['TXT_JS_CONFIRM_SEND_INVOICE'] = "Möchten Sie diese Rechnung als HTML E-Mail an den Kunden senden?";
