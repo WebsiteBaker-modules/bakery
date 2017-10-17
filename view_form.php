@@ -72,7 +72,7 @@ foreach ($forms as $form) {
 
 
 // For logged in user try to get customer data of a previous order from the db...
-if (isset($_SESSION['USER_ID']) && $cust_first_name == '' && $cust_last_name == '' && $cust_street == '' && $cust_city == '' && $cust_state == '' && $cust_zip == '' && $cust_email == '' && $cust_phone == '') {
+if (isset($_SESSION['USER_ID']) && empty($cust_first_name) && empty($cust_last_name) && empty($cust_street) && empty($cust_city) && empty($cust_state) && empty($cust_zip) && empty($cust_email) && empty($cust_phone)) {
 	$sql_result = $database->query("SELECT cust_company, cust_first_name, cust_last_name, cust_tax_no, cust_street, cust_city, cust_state, cust_country, cust_zip, cust_email, cust_phone FROM ".TABLE_PREFIX."mod_bakery_customer WHERE user_id = '{$_SESSION['USER_ID']}' ORDER BY order_id DESC LIMIT 1");
 	$n = $sql_result->numRows();
 	if ($n > 0) {
@@ -83,7 +83,7 @@ if (isset($_SESSION['USER_ID']) && $cust_first_name == '' && $cust_last_name == 
 }
 
 // ...and same for the shipping data
-if (isset($_SESSION['USER_ID']) &&  $ship_first_name == '' && $ship_last_name == '' && $ship_street == '' && $ship_city == '' && $ship_state == '' && $ship_zip == '') {
+if (isset($_SESSION['USER_ID']) &&  empty($ship_first_name) && empty($ship_last_name) && empty($ship_street) && empty($ship_city) && empty($ship_state) && empty($ship_zip)) {
 	$sql_result = $database->query("SELECT ship_company, ship_first_name, ship_last_name, ship_street, ship_city, ship_state, ship_country, ship_zip FROM ".TABLE_PREFIX."mod_bakery_customer WHERE user_id = '{$_SESSION['USER_ID']}' ORDER BY order_id DESC LIMIT 1");
 	$n = $sql_result->numRows();
 	if ($n > 0) {
@@ -94,17 +94,17 @@ if (isset($_SESSION['USER_ID']) &&  $ship_first_name == '' && $ship_last_name ==
 
 
 // If no country has been selected, preselect the shop country
-if (!isset($cust_country) || $cust_country == '') {
+if (empty($cust_country)) {
 	$cust_country = $setting_shop_country;
 }
-if ((!isset($ship_country) || $ship_country == '') && $setting_shipping_form != 'none') {
+if (empty($ship_country) && $setting_shipping_form != 'none') {
 	$ship_country = $setting_shop_country;
 }
 // If no state is selected, preselect the shop state
-if (!isset($cust_state) || $cust_state == '') {
+if (empty($cust_state)) {
 	$cust_state = $setting_shop_state;
 }
-if ((!isset($ship_state) || $ship_state == '') && $setting_shipping_form != 'none') {
+if (empty($ship_state) && $setting_shipping_form != 'none') {
 	$ship_state = $setting_shop_state;
 }
 
@@ -265,7 +265,7 @@ if (!isset($_SESSION['bakery']['ship_form'])) {
 	$_SESSION['bakery']['ship_form']     = null;
 	if ($setting_shipping_form == 'request') {
 		$_SESSION['bakery']['ship_form'] = false;
-	} elseif ($setting_shipping_form == 'hideable') {
+	} elseif ($setting_shipping_form == 'hideable' || $setting_shipping_form == 'always') {
 		$_SESSION['bakery']['ship_form'] = true;
 	}
 }
@@ -328,13 +328,13 @@ if ($show_ship_form) {
 	}
 
 	// Delete field shipping company if not needed
-	if ($setting_company_field != "show") {
+	if ($setting_company_field != 'show') {
 		unset($ship_info['ship_company']);
 		unset($length['ship_company']);
 	}
 	
 	// Delete field shipping state if not needed
-	if ($setting_state_field != "show") {
+	if ($setting_state_field != 'show') {
 		unset($ship_info['ship_state']);
 		unset($length['ship_state']);
 	}
@@ -374,14 +374,14 @@ if ($show_ship_form) {
 		else {
 			// Generate state dropdown menu...
 			if ($use_states && $field == 'ship_state') {
-				// Prepare cust state options
+				// Prepare ship state options
 				for ($n = 1; $n <= count($MOD_BAKERY['TXT_STATE_NAME']); $n++) {
-					$state = $MOD_BAKERY['TXT_STATE_NAME'][$n];
-					$state_code = $MOD_BAKERY['TXT_STATE_CODE'][$n];
+					$state          = $MOD_BAKERY['TXT_STATE_NAME'][$n];
+					$state_code     = $MOD_BAKERY['TXT_STATE_CODE'][$n];
 					$selected_state = ($state_code == @$_POST['cust_state'] || $state_code == @$ship_state) ? ' selected="selected"' : '';
 					$state_options .= "\n\t\t\t<option value='$state_code'$selected_state>$state</option>";
 				}
-				// Show cust state options block using template file
+				// Show ship state options block using template file
 				$tpl->set_var(array(
 					'TXT_CUST_STATE'	=>	$MOD_BAKERY['TXT_CUST_STATE'],
 					'STATE_OPTIONS'		=>	$state_options

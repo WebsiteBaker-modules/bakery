@@ -44,7 +44,7 @@ if (isset($_GET['cat'])) {
 } else {
 	$category = '';
 }
-$clause = $category != '' ? " AND section_id = $category" : '';
+$clause = !empty($category) ? " AND section_id = $category" : '';
 
 // Bakery page list
 $query_pages = "SELECT p.page_id, p.page_title, p.visibility, p.admin_groups, p.admin_users, p.viewing_groups, p.viewing_users, s.section_id FROM ".TABLE_PREFIX."pages p INNER JOIN ".TABLE_PREFIX."sections s ON p.page_id = s.page_id WHERE s.module = 'bakery' AND p.visibility != 'deleted' ORDER BY p.level, p.position ASC";
@@ -61,7 +61,7 @@ if ($get_pages->numRows() > 0) {
 			continue;
 		// Get user perms
 		$admin_groups = explode(',', str_replace('_', '', $page['admin_groups']));
-		$admin_users = explode(',', str_replace('_', '', $page['admin_users']));
+		$admin_users  = explode(',', str_replace('_', '', $page['admin_users']));
 		// Check user perms
 		$in_group = FALSE;
 		foreach ($admin->get_groups_id() as $cur_gid) {
@@ -107,7 +107,7 @@ $order_by = isset($_GET['order_by']) ? $_GET['order_by'] : "item_id";
 $order_by = $order_by == 'stock' ? 'CAST(' . $order_by . ' AS UNSIGNED INTEGER)' : $order_by;
 
 // Query items table
-$query_items = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_items WHERE title != ''$clause ORDER BY $order_by $order");
+$query_items = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_items WHERE title IS NOT NULL$clause ORDER BY $order_by $order");
 if ($query_items->numRows() > 0) {
 
 	// Items table header   ?>

@@ -261,7 +261,7 @@ if ($state_key = array_keys($MOD_BAKERY['TXT_STATE_CODE'], $cust_state)) {
 $cust_name = $cust_first_name.' '.$cust_last_name;
 
 // Prepare field customer company
-if ($setting_company_field != 'show' OR $cust_company == '') {
+if ($setting_company_field != 'show' OR empty($cust_company)) {
 	$email_cust_company = '';
 	$cust_company       = '';
 }
@@ -290,7 +290,7 @@ if ($setting_state_field == 'show') {
 	else {
 		// Show zip inside of address
 		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_zip $cust_city<br />$cust_state$cust_country_name<br /><br />$cust_phone<br />$cust_email";
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_zip.' '.$cust_city."\n\t".$cust_state."\n\t".$email_cust_country_name."\n\n\t".$cust_phone."\n";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_zip.' '.$cust_city."\n\t".$cust_state.$email_cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 }
 // Show address w/o state field	
@@ -335,7 +335,7 @@ if ($setting_shipping_form == 'always' || $_SESSION['bakery']['ship_data']) {
 	$ship_name = $ship_first_name.' '.$ship_last_name;
 
 	// Prepare field shipping company
-	if ($setting_company_field != 'show' OR $ship_company == '') {
+	if ($setting_company_field != 'show' OR empty($ship_company)) {
 		$email_ship_company = '';
 		$ship_company       = '';
 	}
@@ -397,7 +397,7 @@ else {
 // ***************************
 
 $display_tax_no = '';
-if ($cust_tax_no == '') {
+if (empty($cust_tax_no)) {
 	$display_tax_no = 'none';
 }
 
@@ -776,7 +776,7 @@ if ($setting_tax_by == 'country') {
 	// http://www.websitebaker2.org/forum/index.php/topic,21690.msg145849.html
 	if (strpos($setting_tax_group, $setting_shop_country) !== false &&
 		strpos($setting_tax_group, $cust_country) !== false) {
-		if ($cust_tax_no == '') {
+		if (empty($cust_tax_no)) {
 			$pay_sales_tax = true;
 		}
 	}

@@ -85,7 +85,7 @@ if ($query_page->numRows() > 0) {
 }
 
 // Get total number of items
-$query_total_num = $database->query("SELECT item_id FROM ".TABLE_PREFIX."mod_bakery_items WHERE section_id = '$section_id' AND active = '1' AND title != ''");
+$query_total_num = $database->query("SELECT item_id FROM ".TABLE_PREFIX."mod_bakery_items WHERE section_id = '$section_id' AND active = '1' AND title IS NOT NULL");
 $total_num = $query_total_num->numRows();
 
 // Get item info
@@ -262,7 +262,7 @@ if ($query_item->numRows() > 0) {
 	// Check if we should show number of items, stock image or "in stock" message or nothing at all
 	$item_stock = stripslashes($item['stock']);
 	// Only show if item stock is not blank
-	if ($item_stock == '' && $setting_stock_mode != 'none') {
+	if (empty($item_stock) && $setting_stock_mode != 'none') {
 		$stock = $MOD_BAKERY['TXT_N/A'];
 	} else {
 		// Display number of items
@@ -273,7 +273,7 @@ if ($query_item->numRows() > 0) {
 				$stock = $item_stock;
 			}
 		// Display stock image
-		} elseif ($setting_stock_mode == 'img' && is_numeric($setting_stock_limit) && $setting_stock_limit != '') {
+		} elseif ($setting_stock_mode == 'img' && is_numeric($setting_stock_limit) && !empty($setting_stock_limit)) {
 			if ($item_stock < 1) {
 				$stock = '<img src="'.WB_URL.'/modules/bakery/images/out_of_stock.gif" alt="'.$MOD_BAKERY['TXT_OUT_OF_STOCK'].'" class="mod_bakery_item_stock_img_f" />';
 			} elseif ($item_stock > $setting_stock_limit) {
@@ -282,7 +282,7 @@ if ($query_item->numRows() > 0) {
 				$stock = '<img src="'.WB_URL.'/modules/bakery/images/short_of_stock.gif" alt="'.$MOD_BAKERY['TXT_SHORT_OF_STOCK'].'" class="mod_bakery_item_stock_img_f" />';
 		}
 		// Display stock text message			
-		} elseif ($setting_stock_mode == 'text' && is_numeric($setting_stock_limit) && $setting_stock_limit != '') {
+		} elseif ($setting_stock_mode == 'text' && is_numeric($setting_stock_limit) && !empty($setting_stock_limit)) {
 			if ($item_stock < 1) {
 				$stock = '<span class="mod_bakery_item_out_of_stock_f">'.$MOD_BAKERY['TXT_OUT_OF_STOCK'].'</span>';
 			} elseif ($item_stock > $setting_stock_limit) {
@@ -311,7 +311,7 @@ if ($query_item->numRows() > 0) {
 
 	// Replace placeholders by values
 	$vars = array('[ADD_TO_CART]', '[PAGE_TITLE]', '[THUMB]', '[THUMBS]', '[IMAGE]', '[IMAGES]', '[TITLE]', '[ITEM_ID]', '[SKU]', '[STOCK]', '[PRICE]', '[TAX_RATE]', '[SHIPPING]', '[FIELD_1]', '[FIELD_2]', '[FIELD_3]', '[OPTION]', '[DESCRIPTION]', '[FULL_DESC]', '[SHOP_URL]', '[SHIPPING_DOMESTIC]', '[SHIPPING_ABROAD]', '[SHIPPING_D_A]', '[CURRENCY]', '[BACK]', '[DATE]', '[TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[PREVIOUS]', '[NEXT]', '[OUT_OF]', '[OF]', '[TEXT_OUT_OF]', '[TEXT_OF]', '[TXT_ITEM]', '[TXT_SKU]', '[TXT_STOCK]', '[TXT_PRICE]', '[TXT_TAX_RATE]', '[TXT_SHIPPING]', '[TXT_FIELD_1]', '[TXT_FIELD_2]', '[TXT_FIELD_3]', '[TXT_FULL_DESC]', '[TXT_SHIPPING_COST]', '[TXT_DOMESTIC]', '[TXT_ABROAD]', '[TXT_BACK]');
-	if (isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
+	if (isset($users[$uid]['username']) AND !empty($users[$uid]['username'])) {
 		$values = array($MOD_BAKERY['TXT_ADD_TO_CART'], PAGE_TITLE, $thumb, $thumbs, $image, $images, $title, ITEM_ID, stripslashes($item['sku']), $stock, $price, stripslashes($item['tax_rate']), stripslashes($item['shipping']), stripslashes($item['definable_field_0']), stripslashes($item['definable_field_1']), stripslashes($item['definable_field_2']), $option, stripslashes($item['description']), $item['full_desc'], $setting_continue_url, $setting_shipping_domestic, $setting_shipping_abroad, $setting_shipping_d_a, $setting_shop_currency, $page_link, $item_date, $item_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $previous_link, $next_link, $out_of, $of,  $TEXT['OUT_OF'], $TEXT['OF'], $MOD_BAKERY['TXT_ITEM'], $MOD_BAKERY['TXT_SKU'], $MOD_BAKERY['TXT_STOCK'], $MOD_BAKERY['TXT_PRICE'], $MOD_BAKERY['TXT_TAX_RATE'], $MOD_BAKERY['TXT_SHIPPING'], $setting_definable_field_0, $setting_definable_field_1, $setting_definable_field_2, $MOD_BAKERY['TXT_FULL_DESC'], $MOD_BAKERY['TXT_SHIPPING_COST'], $MOD_BAKERY['TXT_DOMESTIC'], $MOD_BAKERY['TXT_ABROAD'], $TEXT['BACK']);
 	} else {
 		$values = array($MOD_BAKERY['TXT_ADD_TO_CART'], PAGE_TITLE, $thumb, $thumbs, $image, $images, $title, ITEM_ID, stripslashes($item['sku']), $stock, $price, stripslashes($item['tax_rate']), stripslashes($item['shipping']), stripslashes($item['definable_field_0']), stripslashes($item['definable_field_1']), stripslashes($item['definable_field_2']), $option, stripslashes($item['description']), $item['full_desc'], $setting_continue_url, $setting_shipping_domestic, $setting_shipping_abroad, $setting_shipping_d_a, $setting_shop_currency, $page_link, $item_date, $item_time, '', '', '', '', $previous_link, $next_link, $out_of, $of, $TEXT['OUT_OF'], $TEXT['OF'], $MOD_BAKERY['TXT_ITEM'], $MOD_BAKERY['TXT_SKU'], $MOD_BAKERY['TXT_STOCK'], $MOD_BAKERY['TXT_PRICE'], $MOD_BAKERY['TXT_TAX_RATE'], $MOD_BAKERY['TXT_SHIPPING'], $setting_definable_field_0, $setting_definable_field_1, $setting_definable_field_2, $MOD_BAKERY['TXT_FULL_DESC'], $MOD_BAKERY['TXT_SHIPPING_COST'], $MOD_BAKERY['TXT_DOMESTIC'], $MOD_BAKERY['TXT_ABROAD'], $TEXT['BACK']);

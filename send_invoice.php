@@ -71,7 +71,7 @@ $query_customer = $database->query("SELECT invoice_id, sent_invoices, invoice, s
 if ($query_customer->numRows() > 0) {
 	$customer = $query_customer->fetchRow();
 
-	if ($customer['invoice'] != '') {
+	if (!empty($customer['invoice'])) {
 		// Convert string to array
 		$invoice       = stripslashes($customer['invoice']);
 		$sent_invoices = stripslashes($customer['sent_invoices']);		

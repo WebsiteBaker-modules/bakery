@@ -77,6 +77,7 @@ if (!empty($_POST['images'])) {
 		$image = array_map('strip_tags', $image);
 		$image = array_map('addslashes', $image);
 		// Sanitize vars
+		$image['attribute']    = $image['attribute'] == ''      ? 0 : $image['attribute'];
 		$image['active']       = empty($image['active'])        ? 0 : 1;
 		$image['delete_image'] = empty($image['delete_image'])  ? false : $image['delete_image'];
 		// Rejoin images array
@@ -92,10 +93,11 @@ $maxwidth     = strip_tags($admin->get_post('maxwidth'));
 $attribute_id = $admin->add_slashes(strip_tags($admin->get_post('attribute_id')));
 $ia_operator  = $admin->add_slashes(strip_tags($admin->get_post('ia_operator')));
 $ia_price     = $admin->add_slashes(strip_tags($admin->get_post('ia_price')));
+$ia_price     = empty($ia_price) ? 0 : $ia_price;
 $assign_id    = $admin->add_slashes(strip_tags($admin->get_post('assign_id')));
 
 // Validate the title field
-if ($admin->get_post('title') == '') {
+if (empty($admin->get_post('title'))) {
 	// Put item data into the session var to prepopulate the text fields after the error message
 	$_SESSION['bakery']['item']['title']             = $title;
 	$_SESSION['bakery']['item']['sku']               = $sku;
@@ -160,7 +162,7 @@ $item_link = str_replace(PAGE_SPACER.PAGE_SPACER.PAGE_SPACER, PAGE_SPACER, $item
 $return_to_options = false;
 
 // Either insert or update item attribut...
-if (isset($_POST['save_attribute']) AND $_POST['save_attribute'] != '') {
+if (!empty($_POST['save_attribute'])) {
 
 	// Get option_id from the attributes table
 	$query_attributes = $database->query("SELECT option_id FROM ".TABLE_PREFIX."mod_bakery_attributes WHERE attribute_id = '$attribute_id'");
@@ -333,7 +335,7 @@ $resize = $database->get_one("SELECT resize FROM ".TABLE_PREFIX."mod_bakery_page
 
 // Loop through the uploaded image(s)
 for ($i = 0; $i < $num_images; $i++) {
-	if (isset($_FILES['image']['tmp_name'][$i]) AND $_FILES['image']['tmp_name'][$i] != '') {
+	if (isset($_FILES['image']['tmp_name'][$i]) AND !empty($_FILES['image']['tmp_name'][$i])) {
 
 		// Get real filename and set new filename
 		$file       = $_FILES['image']['name'][$i];

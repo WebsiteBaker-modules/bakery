@@ -40,7 +40,7 @@ $_POST = array_map('strip_tags', $_POST);
 foreach ($_POST as $field => $value) {
 	// Except of these fields...
 	if ($field != 'cust_tax_no' && (strpos($field, 'company') === false)) {
-		if ($value == '') {
+		if (empty($value)) {
 			$blanks[] = $field;
 		}
 	}

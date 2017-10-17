@@ -116,7 +116,7 @@ $post_data = array(
 );
 $n = sizeof($items);
 for ($i = 1; $i <= $n; $i++) {
-	$attribut = $items[$i]['html_show_attribute'] != '' ? ' ('.$items[$i]['html_show_attribute'].')' : '';
+	$attribut = !empty($items[$i]['html_show_attribute']) ? ' ('.$items[$i]['html_show_attribute'].')' : '';
 	$post_data['item_name_'.$i] = $items[$i]['name'].$attribut;
 	$post_data['amount_'.$i]    = $items[$i]['price'];
 	$post_data['quantity_'.$i]  = $items[$i]['quantity'];

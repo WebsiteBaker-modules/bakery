@@ -65,7 +65,7 @@ function sendMail($transaction_id) {
 	$query_customer = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_customer WHERE transaction_id = '$transaction_id'");
 	if ($query_customer->numRows() > 0) {
 		$customer = $query_customer->fetchRow();
-		if ($customer['invoice'] != '') {
+		if (!empty($customer['invoice'])) {
 			// Convert string to array
 			$invoice = stripslashes($customer['invoice']);
 			$invoice_array = explode('&&&&&', $invoice);

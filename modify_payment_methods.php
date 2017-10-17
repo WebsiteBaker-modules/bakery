@@ -203,7 +203,7 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
 			$field = $fetch_payment_methods['field_'.$i];
 			$txt_index = "TXT_".strtoupper($field);
 			$value = $fetch_payment_methods['value_'.$i];
-			if ($field != '' && $field != 'invoice_template' && $field != 'invoice_alert' && $field != 'reminder_alert' ) {
+			if (!empty($field) && $field != 'invoice_template' && $field != 'invoice_alert' && $field != 'reminder_alert' ) {
 				$no_setting = false;
 				$setting_table .= '<tr>';
 				$setting_table .= '<td width="30%" align="right" valign="top">'.$MOD_BAKERY[$payment_method][$txt_index].':</td>';
@@ -249,7 +249,7 @@ $payment_method = isset($_GET['payment_method']) ? strip_tags($_GET['payment_met
 	echo $setting_table;
 	
 	// Show payment method notice if exists
-	if (isset($MOD_BAKERY[$payment_method]['TXT_NOTICE']) && $MOD_BAKERY[$payment_method]['TXT_NOTICE'] != '') {
+	if (isset($MOD_BAKERY[$payment_method]['TXT_NOTICE']) && !empty($MOD_BAKERY[$payment_method]['TXT_NOTICE'])) {
 		echo '<tr valign="top">';
 		echo '<td width="30%" height="32" align="right"><strong>'.$MOD_BAKERY['TXT_NOTICE'].':</strong></td>';
 		echo '<td height="32" colspan="4"><p style="width: 97%; margin: 0; padding: 3px; border: solid 1px #FFD700; background-color: #FFFFDD;">'.$MOD_BAKERY[$payment_method]['TXT_NOTICE'].'</p></td>';

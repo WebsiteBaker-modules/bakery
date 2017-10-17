@@ -59,7 +59,7 @@ if ($query_continue_url->numRows() > 0) {
 $query_customer = $database->query("SELECT invoice_id, invoice FROM ".TABLE_PREFIX."mod_bakery_customer WHERE submitted != 'no' ORDER BY order_id DESC LIMIT 1");
 if ($query_customer->numRows() > 0) {
 	$customer = $query_customer->fetchRow();
-	if ($customer['invoice'] != '') {
+	if (!empty($customer['invoice'])) {
 		// Convert string to array
 		$invoice       = stripslashes($customer['invoice']);
 		$invoice_array = explode("&&&&&", $invoice);
@@ -110,7 +110,7 @@ if ($general_settings['stock_mode'] == "number") {
 		$stock = $item['stock'];
 	}
 // Display text message	
-} elseif (is_numeric($general_settings['stock_limit']) && $general_settings['stock_limit'] != '') {
+} elseif (is_numeric($general_settings['stock_limit']) && !empty($general_settings['stock_limit'])) {
 	if ($item['stock'] < 1) {
 		$stock = $MOD_BAKERY['TXT_OUT_OF_STOCK'];
 	} elseif ($item['stock'] > $general_settings['stock_limit']) {

@@ -53,7 +53,7 @@ foreach ($vars as $var) {
 $invoice = $database->get_one("SELECT invoice FROM ".TABLE_PREFIX."mod_bakery_customer WHERE order_id = '$order_id'");
 
 // Convert invoice data string to an array
-if ($invoice != '') {
+if (!empty($invoice)) {
 	$invoice       = stripslashes($invoice);
 	$invoice_array = explode('&&&&&', $invoice);
 
@@ -104,12 +104,13 @@ $update_string = implode($updates, ', ');
 // ****************
 
 // Get general settings
-$query_general_settings = $database->query("SELECT shop_country, state_field, zip_location FROM ".TABLE_PREFIX."mod_bakery_general_settings");
+$query_general_settings = $database->query("SELECT shop_country, state_field, zip_location, hide_country FROM ".TABLE_PREFIX."mod_bakery_general_settings");
 if ($query_general_settings->numRows() > 0) {
 	$general_settings = $query_general_settings->fetchRow();
 	$setting_shop_country = stripslashes($general_settings['shop_country']);
 	$setting_state_field  = stripslashes($general_settings['state_field']);
 	$setting_zip_location = stripslashes($general_settings['zip_location']);
+	$setting_hide_country = stripslashes($general_settings['hide_country']);
 }
 
 // Get charset
@@ -159,30 +160,40 @@ if (empty($cust_company)) {
 	$cust_company       = $cust_company.'<br />';
 }
 
+// Prepare field customer country
+if ($setting_hide_country == 'hide' && $setting_shop_country == $cust_country) {
+	$email_cust_country_name = '';
+	$cust_country_name       = '';
+}
+else {
+	$email_cust_country_name = "\n\t".$cust_country_name;
+	$cust_country_name       = '<br />'.$cust_country_name;
+}
+
 // Show address with state field
 if (!empty($cust_state)) {
 	if ($setting_zip_location == 'end') {
 		// Show zip at the end of address
-		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city, $cust_state $cust_zip<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city.", ".$cust_state.' '.$cust_zip."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";	
+		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city, $cust_state $cust_zip$cust_country_name<br /><br />$cust_phone<br />$cust_email";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city.", ".$cust_state.' '.$cust_zip.$cust_country_name."\n\n\t".$cust_phone."\n";	
 	}
 	else {
 		// Show zip inside of address
-		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_country-$cust_zip $cust_city<br />$cust_state<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_country."-".$cust_zip.' '.$cust_city."\n\t".$cust_state."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
+		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_zip $cust_city<br />$cust_state$cust_country_name<br /><br />$cust_phone<br />$cust_email";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_zip.' '.$cust_city."\n\t".$cust_state.$cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 }
 // Show address w/o state field	
 else {
 	if ($setting_zip_location == 'end') {
 		// Show zip at the end of address
-		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city<br />$cust_country-$cust_zip<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city."\n\t".$cust_country."-".$cust_zip."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
+		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_city<br />$cust_country-$cust_zip$cust_country_name<br /><br />$cust_phone<br />$cust_email";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_city."\n\t".$cust_country."-".$cust_zip.$cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 	else {	
 		// Show zip inside of address
-		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_country-$cust_zip $cust_city<br />$cust_country_name<br /><br />$cust_phone<br />$cust_email";
-		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_country."-".$cust_zip.' '.$cust_city."\n\t".$cust_country_name."\n\n\t".$cust_phone."\n";
+		$cust_address = $cust_company."$cust_name<br />$cust_street<br />$cust_zip $cust_city$cust_country_name<br /><br />$cust_phone<br />$cust_email";
+		$email_cust_address = "\t".$email_cust_company.$cust_name."\n\t".$cust_street."\n\t".$cust_zip.' '.$cust_city.$cust_country_name."\n\n\t".$cust_phone."\n";
 	}
 }
 
@@ -229,30 +240,40 @@ if (!empty($ship_first_name) && !empty($ship_last_name) && !empty($ship_street) 
 		$ship_company       = $ship_company.'<br />';
 	}
 
+	// Prepare field shipping country
+	if ($setting_hide_country == 'hide' && $setting_shop_country == $ship_country) {
+		$email_ship_country_name = '';
+		$ship_country_name       = '';
+	}
+	else {
+		$email_ship_country_name = "\n\t".$ship_country_name;
+		$ship_country_name       = '<br />'.$ship_country_name;
+	}
+
 	// Show address with state field
 	if (!empty($ship_state)) {
 		if ($setting_zip_location == 'end') {
 			// Show zip at the end of address
-			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city, $ship_state $ship_zip<br />$ship_country_name";
+			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city, $ship_state $ship_zip$ship_country_name";
 			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city.", ".$ship_state.' '.$ship_zip."\n";
 		}
 		else {
 			// Show zip inside of address
-			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_country-$ship_zip $ship_city<br />$ship_state<br />$ship_country_name";
-			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_country."-".$ship_zip.' '.$ship_city."\n\t".$ship_state."\n\t".$ship_country_name."\n";		
+			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_country-$ship_zip $ship_city<br />$ship_state$ship_country_name";
+			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_country."-".$ship_zip.' '.$ship_city."\n\t".$ship_state.$ship_country_name."\n";		
 		}
 	}
 	// Show address w/o state field	
 	else {
 		if ($setting_zip_location == 'end') {
 			// Show zip at the end of address
-			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city<br />$ship_country-$ship_zip<br />$ship_country_name";
-			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city."\n\t".$ship_country."-".$ship_zip."\n\t".$ship_country_name."\n";
+			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_city<br />$ship_country-$ship_zip$ship_country_name";
+			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_city."\n\t".$ship_country."-".$ship_zip.$ship_country_name."\n";
 		}
 		else {	
 			// Show zip inside of address
-			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_country-$ship_zip $ship_city<br />$ship_country_name";
-			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_country."-".$ship_zip.' '.$ship_city."\n\t".$ship_country_name."\n";		
+			$ship_address = $ship_company."$ship_name<br />$ship_street<br />$ship_country-$ship_zip $ship_city$ship_country_name";
+			$email_ship_address = "\t".$email_ship_company.$ship_name."\n\t".$ship_street."\n\t".$ship_country."-".$ship_zip.' '.$ship_city.$ship_country_name."\n";		
 		}
 	}
 

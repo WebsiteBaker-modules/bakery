@@ -24,9 +24,9 @@ $update_when_modified = true; // Tells script to update when this page was last 
 require(WB_PATH.'/modules/admin.php');
 
 
-if ($_POST['option_name'] != '') {
+if (!empty($_POST['option_name'])) {
 	// Insert new option name into db
-	if ($_POST['option_id'] == '') {
+	if (empty($_POST['option_id'])) {
 		$option_name = $admin->add_slashes(strip_tags($_POST['option_name']));
 		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_options (option_name) VALUES ('$option_name')");
 	}

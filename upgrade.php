@@ -260,7 +260,7 @@ if ($module_version < 0.70) {
 	// Get "old" settings to insert them into the new general_settings table
 	if ($settingstable = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_settings ORDER BY section_id DESC LIMIT 1")) {
 		$settings = $settingstable->fetchRow();
-		if ($settings['section_id'] == '') {
+		if (empty($settings['section_id'])) {
 			echo '<span class="warn">No old settings in database to insert into general_settings table</span><br />';
 		}
 		else {
@@ -287,9 +287,9 @@ if ($module_version < 0.70) {
 	$tax_included = $settings['tax_included'];
 	$shipping_domestic = $settings['shipping_domestic'];
 	$shipping_abroad = $settings['shipping_abroad'];
-	if ($settings['shipping_method'] == '') {$shipping_method = "flat"; } else {$shipping_method = $settings['shipping_method']; }
-	if ($settings['free_shipping'] == '') {$settings['free_shipping'] = 0; } else {$free_shipping = $settings['free_shipping']; }
-	if ($settings['free_shipping_msg'] == '') {$settings['free_shipping_msg'] = "all"; } else {$free_shipping_msg = $settings['free_shipping_msg']; }
+	if (empty($settings['shipping_method'])) {$shipping_method = "flat"; } else {$shipping_method = $settings['shipping_method']; }
+	if (empty($settings['free_shipping'])) {$settings['free_shipping'] = 0; } else {$free_shipping = $settings['free_shipping']; }
+	if (empty($settings['free_shipping_msg'])) {$settings['free_shipping_msg'] = "all"; } else {$free_shipping_msg = $settings['free_shipping_msg']; }
 	$email_subject_advance = $settings['email_subject_advance'];
 	$email_pay_advance = $settings['email_pay_advance'];
 	$email_subject_paypal = $settings['email_subject_paypal'];
@@ -310,8 +310,8 @@ if ($module_version < 0.70) {
 	// Insert default settings
 	
 	// Set default page_settings 
-	if ($settings['page_offline'] == '') { $page_offline = "no"; } else {$page_offline = $settings['page_offline']; }
-	if ($settings['offline_text'] == '') {
+	if (empty($settings['page_offline'])) { $page_offline = "no"; } else {$page_offline = $settings['page_offline']; }
+	if (empty($settings['offline_text'])) {
 		if (LANGUAGE_LOADED) {
 			include(WB_PATH.'/modules/bakery/languages/EN.php');
 			if (file_exists(WB_PATH.'/modules/bakery/languages/'.LANGUAGE.'.php')) {
@@ -500,7 +500,7 @@ if ($module_version < 0.80) {
 	// Get "old" settings
 	if ($settingstable = $database->query("SELECT tax_rate FROM ".TABLE_PREFIX."mod_bakery_general_settings")) {
 		$settings = $settingstable->fetchRow();
-		if ($settings['tax_rate'] == '') {
+		if (empty($settings['tax_rate'])) {
 			echo '<span class="warn">No old tax_rate setting in database to insert into items table</span><br />';
 		}
 		else {
@@ -1619,6 +1619,133 @@ if ($module_version < 1.79) {
 	}
 }
 
+
+
+
+// UPGRADE TO VERSION 1.80
+// ************************
+
+if ($module_version < 1.80) {
+
+	// Titel: Upgrading to
+	echo'<h3>Upgrading to version 1.80 or later:</h3>';
+
+	// Add default values to the CUSTOMER table to make it compatible with mysql save mode
+	$sql = "ALTER TABLE `".TABLE_PREFIX."mod_bakery_customer`
+			CHANGE `order_date` `order_date` INT(11) NOT NULL DEFAULT '0',
+			CHANGE `shipping_fee` `shipping_fee` DECIMAL(9,2) NOT NULL DEFAULT '0.00',
+			CHANGE `sales_tax` `sales_tax` DECIMAL(9,2) NOT NULL DEFAULT '0.00',
+			CHANGE `user_id` `user_id` INT(6) NOT NULL DEFAULT '0',
+			CHANGE `cust_company` `cust_company` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `cust_first_name` `cust_first_name` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `cust_last_name` `cust_last_name` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `cust_tax_no` `cust_tax_no` VARCHAR(11) NULL DEFAULT NULL,
+			CHANGE `cust_street` `cust_street` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `cust_city` `cust_city` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `cust_state` `cust_state` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `cust_country` `cust_country` VARCHAR(2) NULL DEFAULT NULL,
+			CHANGE `cust_zip` `cust_zip` VARCHAR(10) NULL DEFAULT NULL,
+			CHANGE `cust_email` `cust_email` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `cust_phone` `cust_phone` VARCHAR(20) NULL DEFAULT NULL,
+			CHANGE `ship_company` `ship_company` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `ship_first_name` `ship_first_name` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `ship_last_name` `ship_last_name` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `ship_street` `ship_street` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `ship_city` `ship_city` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `ship_state` `ship_state` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `ship_country` `ship_country` VARCHAR(2) NULL DEFAULT NULL,
+			CHANGE `ship_zip` `ship_zip` VARCHAR(10) NULL DEFAULT NULL,
+			CHANGE `invoice_id` `invoice_id` INT(6) NOT NULL DEFAULT '0',
+			CHANGE `invoice` `invoice` TEXT NULL DEFAULT NULL;";
+	if ($database->query($sql)) {
+		echo '<span class="good">Added default values to the '.TABLE_PREFIX.'mod_bakery_customer table successfully</span><br />';
+	} else {
+		echo '<span class="bad">'.$database->get_error().'</span><br />';
+	}
+
+	// Add default values to the GENERAL SETTINGS table to make it compatible with mysql save mode
+	$sql = "ALTER TABLE `".TABLE_PREFIX."mod_bakery_general_settings`
+			CHANGE `shop_name` `shop_name` VARCHAR(100) NULL DEFAULT NULL,
+			CHANGE `shop_email` `shop_email` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `tac_url` `tac_url` VARCHAR(255) NULL DEFAULT NULL,
+			CHANGE `shop_state` `shop_state` VARCHAR(5) NULL DEFAULT NULL,
+			CHANGE `company_field` `company_field` ENUM('show','hide') NULL DEFAULT 'hide',
+			CHANGE `state_field` `state_field` ENUM('show','hide') NULL DEFAULT 'show',
+			CHANGE `tax_no_field` `tax_no_field` ENUM('show','hide') NULL DEFAULT 'hide',
+			CHANGE `tax_group` `tax_group` VARCHAR(255) NULL DEFAULT NULL,
+			CHANGE `zip_location` `zip_location` ENUM('inside','end') NOT NULL DEFAULT 'inside',
+			CHANGE `cust_msg` `cust_msg` ENUM('show','hide') NOT NULL DEFAULT 'hide',
+			CHANGE `definable_field_0` `definable_field_0` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `definable_field_1` `definable_field_1` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `definable_field_2` `definable_field_2` VARCHAR(50) NULL DEFAULT NULL,
+			CHANGE `shipping_zone` `shipping_zone` DECIMAL(6,2) NOT NULL DEFAULT '0.00',
+			CHANGE `zone_countries` `zone_countries` TEXT NULL DEFAULT NULL;";
+	if ($database->query($sql)) {
+		echo '<span class="good">Added default values to the '.TABLE_PREFIX.'mod_general_settings table successfully</span><br />';
+	} else {
+		echo '<span class="bad">'.$database->get_error().'</span><br />';
+	}
+
+	// Add default values to the PAGE SETTINGS table to make it compatible with mysql save mode
+	$sql = "ALTER TABLE `".TABLE_PREFIX."mod_bakery_page_settings`
+			CHANGE `offline_text` `offline_text` TINYTEXT NULL DEFAULT NULL,
+			CHANGE `continue_url` `continue_url` INT(11) NULL DEFAULT NULL,
+			CHANGE `header` `header` TEXT NULL DEFAULT NULL,
+			CHANGE `item_loop` `item_loop` TEXT NULL DEFAULT NULL,
+			CHANGE `footer` `footer` TEXT NULL DEFAULT NULL,
+			CHANGE `item_header` `item_header` TEXT NULL DEFAULT NULL,
+			CHANGE `item_footer` `item_footer` TEXT NULL DEFAULT NULL;";
+	if ($database->query($sql)) {
+		echo '<span class="good">Added default values to the '.TABLE_PREFIX.'mod_bakery_page_settings table successfully</span><br />';
+	} else {
+		echo '<span class="bad">'.$database->get_error().'</span><br />';
+	}
+
+	// Add default values to the PAYMENT METHODS table to make it compatible with mysql save mode
+	$sql = "ALTER TABLE `".TABLE_PREFIX."mod_bakery_payment_methods`
+			CHANGE `value_1` `value_1` TEXT NULL DEFAULT NULL,
+			CHANGE `value_2` `value_2` TEXT NULL DEFAULT NULL,
+			CHANGE `value_3` `value_3` TEXT NULL DEFAULT NULL,
+			CHANGE `value_4` `value_4` TEXT NULL DEFAULT NULL,
+			CHANGE `value_5` `value_5` TEXT NULL DEFAULT NULL,
+			CHANGE `value_6` `value_6` TEXT NULL DEFAULT NULL;";
+	if ($database->query($sql)) {
+		echo '<span class="good">Added default values to the '.TABLE_PREFIX.'mod_bakery_payment_methods table successfully</span><br />';
+	} else {
+		echo '<span class="bad">'.$database->get_error().'</span><br />';
+	}
+
+	// Add default values to the ITEMS table to make it compatible with mysql save mode
+	$sql = "ALTER TABLE `".TABLE_PREFIX."mod_bakery_items`
+			CHANGE `title` `title` VARCHAR(255) NULL DEFAULT NULL,
+			CHANGE `sku` `sku` VARCHAR(20) NULL DEFAULT NULL,
+			CHANGE `stock` `stock` VARCHAR(20) NULL DEFAULT NULL,
+			CHANGE `price` `price` DECIMAL(9,2) NOT NULL DEFAULT '0.00',
+			CHANGE `shipping` `shipping` DECIMAL(9,2) NOT NULL DEFAULT '0.00',
+			CHANGE `tax_rate` `tax_rate` DECIMAL(5,2) NOT NULL DEFAULT '0.00',
+			CHANGE `definable_field_0` `definable_field_0` VARCHAR(150) NULL DEFAULT NULL,
+			CHANGE `definable_field_1` `definable_field_1` VARCHAR(150) NULL DEFAULT NULL,
+			CHANGE `definable_field_2` `definable_field_2` VARCHAR(150) NULL DEFAULT NULL,
+			CHANGE `link` `link` TEXT NULL DEFAULT NULL,
+			CHANGE `description` `description` TEXT NULL DEFAULT NULL,
+			CHANGE `full_desc` `full_desc` TEXT NULL DEFAULT NULL;";
+	if ($database->query($sql)) {
+		echo '<span class="good">Added default values to the '.TABLE_PREFIX.'mod_bakery_items table successfully</span><br />';
+	} else {
+		echo '<span class="bad">'.$database->get_error().'</span><br />';
+	}
+
+	// Add default values to the IMAGES table to make it compatible with mysql save mode
+	$sql = "ALTER TABLE `".TABLE_PREFIX."mod_bakery_images`
+			CHANGE `alt` `alt` VARCHAR(255) NULL DEFAULT NULL,
+			CHANGE `title` `title` VARCHAR(255) NULL DEFAULT NULL,
+			CHANGE `caption` `caption` TEXT NULL DEFAULT NULL;";
+	if ($database->query($sql)) {
+		echo '<span class="good">Added default values to the '.TABLE_PREFIX.'mod_bakery_images table successfully</span><br />';
+	} else {
+		echo '<span class="bad">'.$database->get_error().'</span><br />';
+	}
+}
 
 
 

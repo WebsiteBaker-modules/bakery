@@ -24,9 +24,9 @@ $update_when_modified = true; // Tells script to update when this page was last 
 require(WB_PATH.'/modules/admin.php');
 
 
-if ($_POST['attribute_name'] != '') {
+if (!empty($_POST['attribute_name'])) {
 	// Insert new attribute name into db
-	if ($_POST['attribute_id'] == '') {
+	if (empty($_POST['attribute_id'])) {
 		$option_id = $admin->add_slashes(strip_tags($_POST['option_id']));
 		$attribute_name = $admin->add_slashes(strip_tags($_POST['attribute_name']));
 		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_attributes (option_id, attribute_name) VALUES ('$option_id', '$attribute_name')");

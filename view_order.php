@@ -62,7 +62,7 @@ if (LANGUAGE_LOADED) {
 $query_customer = $database->query("SELECT invoice_id, invoice FROM ".TABLE_PREFIX."mod_bakery_customer WHERE order_id = '$order_id'");
 if ($query_customer->numRows() > 0) {
 	$customer = $query_customer->fetchRow();
-	if ($customer['invoice'] != '') {
+	if (!empty($customer['invoice'])) {
 		// Convert string to array
 		$invoice = stripslashes($customer['invoice']);
 		$invoice_array = explode("&&&&&", $invoice);
@@ -82,11 +82,11 @@ if ($query_customer->numRows() > 0) {
 
 		// If given get customer tax no
 		$cust_tax_no      = isset($invoice_array[15]) ? $invoice_array[15] : '';
-		$display_tax_no   = $cust_tax_no == ''        ? 'none'             : 'table-row';
+		$display_tax_no   = empty($cust_tax_no)       ? 'none'             : 'table-row';
 
 		// If given get customers message
 		$cust_msg         = isset($invoice_array[16]) ? nl2br($invoice_array[16]) : '';
-		$display_cust_msg = $cust_msg == ''           ? 'none'                    : 'table-row';
+		$display_cust_msg = empty($cust_msg)          ? 'none'                    : 'table-row';
 
 		// Change frontend classes (eg. mod_bakery_anything_f) to backend classes (eg. mod_bakery_anything_b)
 		$html_item_list = str_replace("_f'", "_b'", $html_item_list);

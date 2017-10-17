@@ -130,7 +130,7 @@ if (is_string($payment_status) && is_string($payment_method)) {
 			$query_customer = $database->query("SELECT invoice FROM ".TABLE_PREFIX."mod_bakery_customer WHERE order_id = '$order_id'");
 			if ($query_customer->numRows() > 0) {
 				$customer = $query_customer->fetchRow();
-				if ($customer['invoice'] != '') {
+				if (!empty($customer['invoice'])) {
 					// Convert string to array
 					$invoice = stripslashes($customer['invoice']);
 					$invoice_array = explode('&&&&&', $invoice);

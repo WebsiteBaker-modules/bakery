@@ -175,15 +175,15 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], "MSIE")) {
 }
 
 // Check submitted POST/GET vars
-if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // normally POST, GET for MiniCart
-   isset($_POST['add_to_cart'])    && ($_POST['add_to_cart']    != '') ||
-   isset($_POST['update_cart'])    && ($_POST['update_cart']    != '') ||
-   isset($_POST['submit_order'])   && ($_POST['submit_order']   != '') ||
-   isset($_POST['hide_ship_form']) && ($_POST['hide_ship_form'] != '') ||
-   isset($_POST['add_ship_form'])  && ($_POST['add_ship_form']  != '')) {
+if (isset($_REQUEST['view_cart'])  && !empty($_REQUEST['view_cart'])   || // normally POST, GET for MiniCart
+   isset($_POST['add_to_cart'])    && !empty($_POST['add_to_cart'])    ||
+   isset($_POST['update_cart'])    && !empty($_POST['update_cart'])    ||
+   isset($_POST['submit_order'])   && !empty($_POST['submit_order'])   ||
+   isset($_POST['hide_ship_form']) && !empty($_POST['hide_ship_form']) ||
+   isset($_POST['add_ship_form'])  && !empty($_POST['add_ship_form'])) {
 
 	// Check order id
-	if (!isset($_SESSION['bakery']['order_id']) || ($_SESSION['bakery']['order_id'] == '')) {
+	if (empty($_SESSION['bakery']['order_id'])) {
 		$now = time();
 		$database->query("INSERT INTO ".TABLE_PREFIX."mod_bakery_customer (order_date) VALUES ('$now')");
 		$order_id = $database->get_one("SELECT LAST_INSERT_ID()");
@@ -207,7 +207,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 						$item = $query_items->fetchRow();
 						$stock = stripslashes($item['stock']);
 						// Only use stock admin if stock is not blank
-						if (is_numeric($stock) && $stock != '') {
+						if (is_numeric($stock) && !empty($stock)) {
 							// Update stock to required quantity
 							$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_items SET stock = stock + '$quantity' WHERE item_id = '$item_id'");
 						}
@@ -229,7 +229,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 
 
 	// PUT ITEM INTO THE CART
-	if (isset($_POST['add_to_cart']) && ($_POST['add_to_cart'] != '')) {
+	if (isset($_POST['add_to_cart']) && !empty($_POST['add_to_cart'])) {
 		
 		// Get item ID and quantity ( -> $value)
 		$sql_result1 = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id'");
@@ -272,7 +272,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 				$quantity = $value;
 
 				// Only use stock admin if stock is not blank
-				if (is_numeric($stock) && $stock != '') {
+				if (is_numeric($stock) && !empty($stock)) {
 					// If item is short of stock show error message
 					if ($setting_out_of_stock_orders) {
 
@@ -321,7 +321,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 
 
 	// UPDATE CART
-	elseif (isset($_POST['update_cart']) && ($_POST['update_cart'] != '')) {
+	elseif (isset($_POST['update_cart']) && !empty($_POST['update_cart'])) {
 	
 		// Update quantities in db
 		foreach ($_POST['quantity'] as $item_id => $attributes) {
@@ -337,7 +337,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 				$stock = stripslashes($item['stock']);
 
 				// Only use stock admin if stock is not blank
-				if (is_numeric($stock) && $stock != '') {
+				if (is_numeric($stock) && !empty($stock)) {
 					// If item is short of stock show error message
 					if ($setting_out_of_stock_orders) {
 
@@ -362,7 +362,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 						// Query current item quantity 
 						$query_order = $database->query("SELECT quantity FROM ".TABLE_PREFIX."mod_bakery_order WHERE order_id = '$order_id' AND item_id = '$item_id' AND attributes = '$attributes'");
 						$order = $query_order->fetchRow();
-						$quantity_current = stripslashes($order['quantity']);
+						$quantity_current = (int)stripslashes($order['quantity']);
 						// Calculate difference
 						$quantity_diff = $quantity - $quantity_current;
 						// If item is short of stock...
@@ -427,7 +427,7 @@ if (isset($_REQUEST['view_cart'])  && ($_REQUEST['view_cart']   != '') || // nor
 //  SHOW ADDRESS FORM FOR MODIFYING
 //  *******************************
 
-elseif (isset($_POST['modify_address']) && isset($_SESSION['bakery']['order_id']) && ($_SESSION['bakery']['order_id'] != '')) {
+elseif (isset($_POST['modify_address']) && isset($_SESSION['bakery']['order_id']) && !empty($_SESSION['bakery']['order_id'])) {
 	include('view_form.php');
 	echo $end_of_wrapper;  // End of bakery wrapper
 	return;
@@ -438,7 +438,7 @@ elseif (isset($_POST['modify_address']) && isset($_SESSION['bakery']['order_id']
 //  CHECK ADDRESS FORM, SAVE CUSTOMER DATA, THEN SHOW PAYMENT METHODS
 //  *****************************************************************
 
-elseif (isset($_POST['save_form']) && isset($_SESSION['bakery']['order_id']) && ($_SESSION['bakery']['order_id'] != '')) {
+elseif (isset($_POST['save_form']) && isset($_SESSION['bakery']['order_id']) && !empty($_SESSION['bakery']['order_id'])) {
 	include('save_form.php');
 	echo $end_of_wrapper;  // End of bakery wrapper
 	return;
@@ -449,7 +449,7 @@ elseif (isset($_POST['save_form']) && isset($_SESSION['bakery']['order_id']) && 
 //  SHOW PAYMENT METHODS
 //  ********************
 
-elseif (isset($_POST['pay_methods']) && isset($_SESSION['bakery']['order_id']) && ($_SESSION['bakery']['order_id'] != '')) {
+elseif (isset($_POST['pay_methods']) && isset($_SESSION['bakery']['order_id']) && !empty($_SESSION['bakery']['order_id'])) {
 	include('view_pay_methods.php');
 	echo $end_of_wrapper;  // End of bakery wrapper
 	return;
@@ -460,7 +460,7 @@ elseif (isset($_POST['pay_methods']) && isset($_SESSION['bakery']['order_id']) &
 //  CANCEL ORDER
 //  ************
 
-elseif (isset($_POST['cancel_order']) && isset($_SESSION['bakery']['order_id']) && ($_SESSION['bakery']['order_id'] != '')) {
+elseif (isset($_POST['cancel_order']) && isset($_SESSION['bakery']['order_id']) && !empty($_SESSION['bakery']['order_id'])) {
 
 	// Get order id
 	$order_id = $_SESSION['bakery']['order_id'];
@@ -475,7 +475,7 @@ elseif (isset($_POST['cancel_order']) && isset($_SESSION['bakery']['order_id']) 
 			$item = $query_items->fetchRow();
 			$stock = stripslashes($item['stock']);
 			// Only use stock admin if stock is not blank
-			if (is_numeric($stock) && $stock != '') {
+			if (is_numeric($stock) && !empty($stock)) {
 				// Update stock to required quantity
 				$database->query("UPDATE ".TABLE_PREFIX."mod_bakery_items SET stock = stock + '$quantity' WHERE item_id = '$item_id'");
 			}
@@ -502,7 +502,7 @@ elseif (isset($_POST['cancel_order']) && isset($_SESSION['bakery']['order_id']) 
 // VIEW SUMMARY PAGE
 // *****************
 
-elseif (isset($_POST['summary']) && isset($_SESSION['bakery']['order_id']) && ($_SESSION['bakery']['order_id'] != '')) {
+elseif (isset($_POST['summary']) && isset($_SESSION['bakery']['order_id']) && !empty($_SESSION['bakery']['order_id'])) {
 	// View payment methods
 	include('view_summary.php');
 	echo $end_of_wrapper;  // End of bakery wrapper
@@ -514,7 +514,7 @@ elseif (isset($_POST['summary']) && isset($_SESSION['bakery']['order_id']) && ($
 // SUBMIT FINAL ORDER
 // ******************
 
-elseif (isset($_POST['checkout']) && isset($_SESSION['bakery']['order_id']) && ($_SESSION['bakery']['order_id'] != '')) {
+elseif (isset($_POST['checkout']) && isset($_SESSION['bakery']['order_id']) && !empty($_SESSION['bakery']['order_id'])) {
 	$payment_method = $_SESSION['bakery']['payment_method'];
 	if (is_file(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/check_payment.php')) {
 		include(WB_PATH.'/modules/bakery/payment_methods/'.$payment_method.'/check_payment.php');

@@ -96,12 +96,12 @@ $query_customer = $database->query("SELECT invoice_id, invoice FROM ".TABLE_PREF
 if ($query_customer->numRows() > 0) {
 	$customer = $query_customer->fetchRow();
 
-	if ($customer['invoice'] != '') {
+	if (!empty($customer['invoice'])) {
 		// Convert string to array
-		$invoice = stripslashes($customer['invoice']);
+		$invoice       = stripslashes($customer['invoice']);
 		$invoice_array = explode('&&&&&', $invoice);
 		// Chop off phone number and email from customer address
-		$invoice_address = explode('<br /><br />', $invoice_array[4]);
+		$invoice_address      = explode('<br /><br />', $invoice_array[4]);
 		$invoice_cust_address = explode('<br /><br />', $invoice_array[5]);
 		// If given get customer tax no
 		$cust_tax_no = !empty($invoice_array[15]) ? $invoice_array[15] : ' &#8212; ';

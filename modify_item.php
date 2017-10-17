@@ -175,7 +175,7 @@ if (isset($_SESSION['bakery']['item']) && is_array($_SESSION['bakery']['item']))
 	<?php
 	// Generate the required adaptable text fields
 	for ($i=0; $i<=3; $i++) {
-		if (isset($fetch_settings['definable_field_'.$i]) && $fetch_settings['definable_field_'.$i] != '') {
+		if (isset($fetch_settings['definable_field_'.$i]) && !empty($fetch_settings['definable_field_'.$i])) {
 			?>
 			<tr>
 				<td width="20%" align="right"><?php echo $fetch_settings['definable_field_'.$i]; ?>:</td>

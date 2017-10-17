@@ -25,6 +25,24 @@
  
 	DEVELOPMENT HISTORY:
 
+   v1.83  (Christoph Marti; 05/30/2017)
+	 + [stock.php] Fixed typo in ternary operator (thanks to ICE)
+
+   v1.82  (Christoph Marti; 05/17/2017)
+	 + [save_item.php] Fixed db error in strict mode when saving an item with no image item_attribute_id
+	   (thanks to jacobi22)
+
+   v1.81  (Christoph Marti; 05/16/2017)
+	 + [modify_order.php] Fixed options of shipping state select
+	 + [save_order.php] Fixed setting "hide country name", if customer and shop country match (reported by paulchen)
+	 + [save_order.php] Fixed state select if setting "display shipping form" is always
+
+   v1.80  (Christoph Marti; 05/12/2017)
+	 + Fixed some warnings about a non-numeric value
+	 + Replaced check for an empty string by the function empty()
+	 + Fixed incompatibilities with mysql save mode (requested by gemnb, thanks to jacobi22)
+	   Basically set default values for most database fields
+
    v1.79  (Christoph Marti; 04/01/2017)
 	 + [save_form.php] Added slash as accepted char to the street address field (reported by fischstäbchenbrenner)
 	 + [save_form.php] Added dot as accepted char to the company address field (reported by Broem)
@@ -722,7 +740,7 @@
 $module_directory   = 'bakery';
 $module_name        = 'Bakery';
 $module_function    = 'page';
-$module_version     = '1.79';
+$module_version     = '1.83';
 $module_platform    = '2.7';
 $module_author      = 'Christoph Marti';
 $module_license     = 'GNU General Public License';

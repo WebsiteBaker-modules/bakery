@@ -27,7 +27,7 @@ function check_vat($vat, $tax_group) {
 	}
 
 	// No check if vat number string has been left empty
-    if ($vat == '') {
+    if (empty($vat)) {
         return true;
 	}
 
@@ -45,7 +45,7 @@ function check_vat($vat, $tax_group) {
     }
     
     // Number part can not be empty
-    if ($vat_no == '') {
+    if (empty($vat_no)) {
     	return false;
     }
 

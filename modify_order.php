@@ -144,7 +144,7 @@ if ($query_customer->numRows() > 0) {
 
 			// Include state file depending on selected customer country
 			if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.$cust_country.'.php')) {
-				require_once(WB_PATH.'/modules/bakery/languages/states/'.$cust_country.'.php');
+				require(WB_PATH.'/modules/bakery/languages/states/'.$cust_country.'.php');
 
 				// State dropdown menu
 				echo '<tr><td width="25%" align="right">'.$MOD_BAKERY['TXT_CUST_STATE'].':</td><td colspan="4"><select name="cust_state" style="width: 98%">';
@@ -159,7 +159,7 @@ if ($query_customer->numRows() > 0) {
 					echo '>'.$state.'</option>'."\n";
 				}
 				echo '</select></td></tr>'."\n";
-				unset($MOD_BAKERY['TXT_STATE_NAME'], $MOD_BAKERY['TXT_STATE_CODE'][$n]);
+				unset($MOD_BAKERY['TXT_STATE_NAME'], $MOD_BAKERY['TXT_STATE_CODE']);
 			}
 		}
 
@@ -218,7 +218,7 @@ if ($query_customer->numRows() > 0) {
 
 			// Include state file depending on selected shipping country
 			if (file_exists(WB_PATH.'/modules/bakery/languages/states/'.$ship_country.'.php')) {
-				require_once(WB_PATH.'/modules/bakery/languages/states/'.$ship_country.'.php');
+				require(WB_PATH.'/modules/bakery/languages/states/'.$ship_country.'.php');
 
 				// State dropdown menu
 				echo '<tr><td width="25%" align="right">'.$MOD_BAKERY['TXT_CUST_STATE'].':</td><td colspan="4"><select name="ship_state" style="width: 98%">';
@@ -233,7 +233,7 @@ if ($query_customer->numRows() > 0) {
 					echo '>'.$state.'</option>'."\n";
 				}
 				echo '</select></td></tr>'."\n";
-				unset($MOD_BAKERY['TXT_STATE_NAME'], $MOD_BAKERY['TXT_STATE_CODE'][$n]);
+				unset($MOD_BAKERY['TXT_STATE_NAME'], $MOD_BAKERY['TXT_STATE_CODE']);
 			}
 		}
 
