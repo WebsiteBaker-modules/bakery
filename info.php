@@ -24,6 +24,9 @@
  -----------------------------------------------------------------------------------------
  
 	DEVELOPMENT HISTORY:
+	
+   v.1.84  	(Florian Meerwinck; 03/29/2018)
+   ! fix security issue in view.php (non-validated post values), thanks to Tonke Hanebuth / perComp Verlag GmbH
 
    v1.83  (Christoph Marti; 05/30/2017)
 	 + [stock.php] Fixed typo in ternary operator (thanks to ICE)
@@ -740,7 +743,7 @@
 $module_directory   = 'bakery';
 $module_name        = 'Bakery';
 $module_function    = 'page';
-$module_version     = '1.83';
+$module_version     = '1.84';
 $module_platform    = '2.7';
 $module_author      = 'Christoph Marti';
 $module_license     = 'GNU General Public License';

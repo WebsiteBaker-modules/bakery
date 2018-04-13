@@ -241,10 +241,10 @@ if (isset($_REQUEST['view_cart'])  && !empty($_REQUEST['view_cart'])   || // nor
 			}
 			if (substr($field,0,4) == "item" && $value > 0) {
 				// Get item_id
-				$item_id = substr($field,4,strlen($field)-4);
+				$item_id = intval(substr($field,4,strlen($field)-4)); // th 28.03.2018 - input validation: $item_id
 				// Get item attributes and make comma separated string
 				if (isset($_POST['attribute'][0])) {
-					$attributes = implode(",", $_POST['attribute']);
+					$attributes = implode(",", array_map('intval', $_POST['attribute'])); // th 28.03.2018 - input validation: $attributes
 				} else {
 				// If no attribute is given set it to "none"
 					$attributes = "none";
@@ -269,7 +269,7 @@ if (isset($_REQUEST['view_cart'])  && !empty($_REQUEST['view_cart'])   || // nor
 				$price    = $row2['price'];
 				$tax_rate = $row2['tax_rate'];
 				$stock    = $row2['stock'];
-				$quantity = $value;
+				$value = intval($value); $quantity = $value; // th 28.03.2018 - input validation: $quantity, $value
 
 				// Only use stock admin if stock is not blank
 				if (is_numeric($stock) && !empty($stock)) {
@@ -326,8 +326,8 @@ if (isset($_REQUEST['view_cart'])  && !empty($_REQUEST['view_cart'])   || // nor
 		// Update quantities in db
 		foreach ($_POST['quantity'] as $item_id => $attributes) {
 			foreach ($_POST['quantity'][$item_id] as $attributes => $quantity) {
-				$item_id = strip_tags($item_id);
-				$attributes = strip_tags($attributes);
+				$item_id = intval(strip_tags($item_id)); // th 28.03.2018 - input validation: $item_id
+				$attributes = strip_tags($attributes); if ($attributes != "none") $attributes = preg_replace("/[^0-9\,]/", '', ($attributes)); // th 28.03.2018 - input validation: $attributes
 				$quantity = abs(strip_tags($quantity));
 
 				// Query item stock
